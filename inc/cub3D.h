@@ -68,8 +68,8 @@ typedef struct s_game
 	mlx_image_t	*mlx_img;
 	t_player	*player;
 }				t_game;
-// ---------------------------------------------------------- //
 
+// ---------------------------------------------------------- //
 // ------------------------- PARSING ------------------------ //
 char	**parse(int argc, char **argv);
 void	ft_verif_map(char **map);
