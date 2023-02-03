@@ -14,7 +14,16 @@ typedef struct s_game t_game;
 typedef struct s_map t_map;
 typedef struct s_player t_player;
 typedef struct s_vec t_vec;
+typedef struct s_texture t_texture;
 typedef struct s_color t_color;
+
+typedef struct s_texture
+{
+	char	*N;
+	char	*S;
+	char	*E;
+	char	*W;
+}	t_texture;
 
 typedef struct s_color
 {
@@ -38,11 +47,12 @@ typedef struct s_player
 
 typedef struct s_game
 {
-
+	t_map	*map;
 }	t_game;
-
-
+// ---------------------------------------------------------- //
+// ------------------------- PARSING ------------------------ //
 char	**parse(int argc, char **argv);
 void	ft_verif_map(char **map);
+// ---------------------------------------------------------- //
 
 #endif
