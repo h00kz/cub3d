@@ -2,9 +2,19 @@
 
 int main(int argc, char **argv)
 {
-	char **map;
+	t_game	*game;
 
-	map = parse(argc, argv);
-	ft_verif_map(map);
+	// char	**map;
 
+	// map = parse(argc, argv);
+	// ft_verif_map(map);
+	(void)argc;
+	(void)argv;
+	game = init_game();
+	game->last_time = mlx_get_time();
+	input_handler(game);
+	render(game);
+	update(game);
+	mlx_terminate(game->mlx);
+	return (0);
 }

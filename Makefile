@@ -1,9 +1,17 @@
 SRC					= src/main.c \
-					  src/parsing/parsing.c
+					  src/graphics/rect.c \
+					  src/graphics/map.c \
+					  src/graphics/player.c \
+					  src/graphics/dda.c \
+					  src/graphics/ray.c \
+					  src/utils/color.c \
+					  src/parsing/parsing.c \
+					  src/inits/game_init.c \
+					  src/logics/game_logic.c \
 
 LIBFT				= libft/
 MLX42				= MLX42/
-CFLAGS				=  -g -ldl -lglfw -pthread -lm -Werror -Wextra -Wall
+CFLAGS				=  -g -ldl -lglfw -pthread -lm #-Werror -Wextra -Wall
 NAME				= cub3D
 LIB					= libft/libft.a MLX42/libmlx42.a
 INCLUDE				= inc/
