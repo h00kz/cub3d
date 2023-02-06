@@ -16,12 +16,17 @@
 # define FALSE 0
 # define PI 3.14159265
 # define TWO_PI 6.28318530
-# define WIN_WIDTH 1720
-# define WIN_HEIGHT 1024
+# define WIN_WIDTH 1600
+# define WIN_HALF_W (floor(WIN_WIDTH / 2))
+# define WIN_HEIGHT 900
+# define WIN_HALF_H (floor(WIN_HEIGHT / 2))
 # define MAP_TILE 64
-# define MINIMAP_SCALE_FACTOR 1
+# define MINIMAP_SCALE_FACTOR 0.2
 # define FOV_ANGLE (60 * (PI / 180.0))
+# define HALF_FOV (FOV_ANGLE / 2)
 # define NB_RAYS WIN_WIDTH
+# define DELTA_ANGLE (FOV_ANGLE / NB_RAYS)
+# define SCREEN_DIST (floor(WIN_WIDTH / 2) / tan(HALF_FOV))
 
 // ----------------------- STRUCTS ------------------------- //
 typedef struct s_game t_game;
@@ -37,9 +42,10 @@ typedef struct s_color t_color;
 
 typedef struct s_texture
 {
-	char	*path;
-	float	width;
-	float	height;
+	mlx_image_t	tex_img;
+	t_vec		*size;
+	t_vec		*pos;
+	char		*path;
 }	t_texture;
 
 typedef struct s_wall
@@ -48,7 +54,7 @@ typedef struct s_wall
 	t_texture	*S;
 	t_texture	*E;
 	t_texture	*W;
-}			t_wall;
+}	t_wall;
 
 typedef struct s_color
 {
@@ -56,27 +62,20 @@ typedef struct s_color
 	int	g;
 	int	b;
 	int	a;
-}		t_color;
+}	t_color;
 
 typedef struct s_vec
 {
 	float	x;
 	float	y;
-}			t_vec;
-
-typedef struct s_vec_int
-{
-	int	x;
-	int	y;
-}			t_vec_int;
-
+}	t_vec;
 
 typedef struct s_rect
 {
 	t_vec	position;
 	t_vec	size;
 	t_color color;
-}			t_rect;
+}	t_rect;
 
 typedef struct s_ray
 {
@@ -90,7 +89,7 @@ typedef struct s_ray
 	int			ray_face_down;
 	int			ray_face_left;
 	int			ray_face_right;
-}				t_ray;
+}	t_ray;
 
 typedef struct s_interc
 {
@@ -107,7 +106,7 @@ typedef struct s_interc
 	t_vec		*to_check;
 	t_vec		*interc;
 	t_vec		*step;
-}				t_interc;
+}	t_interc;
 
 typedef struct s_map
 {
@@ -115,7 +114,7 @@ typedef struct s_map
 	t_color		*floor;
 	t_color		*cell;
 	int			map_tab[10][10]; // A CHANGER
-}				t_map;
+}	t_map;
 
 typedef struct s_player
 {
@@ -129,7 +128,7 @@ typedef struct s_player
 	float	turn_speed;
 	int		minimap_w;
 	int		minimap_h;
-}			t_player;
+}	t_player;
 
 typedef struct s_game
 {
@@ -140,20 +139,27 @@ typedef struct s_game
 	t_interc	interct;
 	t_interc	ray_inter_v;
 	t_interc	ray_inter_h;
+	int			debug_render_rays;
 	double		last_time;
 	double		current_time;
 	int			frame_count;
-}				t_game;
+}	t_game;
 
-// ---------------------------------------------------------- //
-
-void		input_handler(t_game *game);
-void		update(t_game *game);
-void		render(t_game *game);
+// -------------------------- INITS ------------------------- //
 t_game		*init_game();
 t_map		*init_map();
 t_player	*init_player();
 t_ray		*init_rays(int nb_rays);
+
+// ------------------------- RENDERS ------------------------ //
+void		render_minimap_player(t_game *game);
+void		render_ray(t_game *game);
+
+// ------------------------ GAMELGCS ------------MINIMAP_SCALE_FACTOR----------- //
+
+void		input_handler(t_game *game);
+void		update(t_game *game);
+void		render(t_game *game);
 
 void		cast_all_rays(t_game *game);
 float		distance_ab(t_vec a, t_vec b);
@@ -163,8 +169,6 @@ void		draw_rect(t_game *game, t_vec pos, t_vec size, int color);
 void		render_minimap(t_game *game);
 int			get_collision(t_game *game, t_vec pos);
 int			is_in_map(t_vec pos);
-void		render_minimap_player(t_game *game);
-void		render_ray(t_game *game);
 void		move_minimap_player(t_game *game);
 
 float		normalize_angle(float *angle);
@@ -173,6 +177,5 @@ int			rgba2int(int r, int g, int b, int a);
 // ------------------------- PARSING ------------------------ //
 char		**parse(int argc, char **argv);
 void		ft_verif_map(char **map);
-// ---------------------------------------------------------- //
 
 #endif

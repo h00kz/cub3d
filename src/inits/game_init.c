@@ -19,5 +19,6 @@ t_game	*init_game()
 	game->map = init_map();
 	game->last_time = mlx_get_time();
 	game->frame_count = 0;
+	game->debug_render_rays = FALSE;
 	return (game);
 }

@@ -1,4 +1,4 @@
-#include "../../inc/cub3D.h"
+#include "cub3D.h"
 
 void	hook(void* param)
 {
@@ -11,11 +11,14 @@ void	hook(void* param)
 	move_minimap_player(game);
 	render_minimap_player(game);
 	cast_all_rays(game);
-	render_ray(game);
+	if (game->debug_render_rays == TRUE)
+		render_ray(game);
 	if (game->current_time - game->last_time >= 1.0)
 	{
-		printf("\nwallhitx:%2f\twallhity:%2f\tdis:%2f\n", game->player->rays[WIN_WIDTH / 2].wallhit_x, game->player->rays[WIN_WIDTH / 2].wallhit_y, game->player->rays[WIN_WIDTH / 2].distance);
-		// printf("\nFPS:%d\n", game->frame_count);
+		printf("screen_dist:%f\n", SCREEN_DIST);
+		if (mlx_is_key_down(game->mlx, MLX_KEY_K))
+			game->debug_render_rays = !game->debug_render_rays;
+		printf("\nFPS:%d\n", game->frame_count);
 		game->frame_count = 0;
 		game->last_time = game->current_time;
 	}
@@ -27,6 +30,12 @@ void	hook(void* param)
 		game->player->walk_dir->x = -1;
 	else
 		game->player->walk_dir->x = 0;
+	if (mlx_is_key_down(game->mlx, MLX_KEY_Q))
+		game->player->walk_dir->y = -1;
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_E))
+		game->player->walk_dir->y = 1;
+	else
+		game->player->walk_dir->y = 0;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 		game->player->turn_dir->x = -1;
 	else if (mlx_is_key_down(game->mlx, MLX_KEY_D))
@@ -42,6 +51,7 @@ void	input_handler(t_game *game)
 
 void	update(t_game *game)
 {
+
 	mlx_loop(game->mlx);
 }
 

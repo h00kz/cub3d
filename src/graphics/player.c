@@ -15,9 +15,9 @@ t_player	*init_player()
 	player->walk_dir->y = 0;
 	player->turn_dir->x = 0;
 	player->turn_dir->y = 0;
-	player->rot_angle = 2 / PI;
-	player->walk_speed = 100;
-	player->turn_speed = 45 * (PI / 180.0);
+	player->rot_angle = 2.0 / PI;
+	player->walk_speed = 100.0 * MINIMAP_SCALE_FACTOR;
+	player->turn_speed = 180.0 * (PI / 180.0);
 	return (player);
 }
 
@@ -27,27 +27,37 @@ void	render_minimap_player(t_game *game)
 	t_vec	pos_offset;
 
 	pos_offset = *(game->player->position);
-	pos_offset.x -= 5/2;
-	pos_offset.y -= 5/2;
+	pos_offset.x -= (5 / 2) * MINIMAP_SCALE_FACTOR;
+	pos_offset.y -= (5 / 2) * MINIMAP_SCALE_FACTOR;
 	end_line.x = (game->player->position->x) + cos(game->player->rot_angle) * (40 * MINIMAP_SCALE_FACTOR);
 	end_line.y = (game->player->position->y) + sin(game->player->rot_angle) * (40 * MINIMAP_SCALE_FACTOR);
 	draw_line(game, game->player->position, &end_line, 0);
-	draw_rect(game, pos_offset, (t_vec){5, 5}, rgba2int(10, 230, 12, 255));
+	draw_rect(game, pos_offset, (t_vec){5 * MINIMAP_SCALE_FACTOR, 5 * MINIMAP_SCALE_FACTOR}, rgba2int(10, 230, 12, 255));
 }
 
 void	move_minimap_player(t_game *game)
 {
-	float	move_step;
-	t_vec	new_pos;
+	float	move_step_lr;
+	float	move_step_fb;
+	t_vec	new_pos_fb;
+	t_vec	new_pos_lr;
 
 	normalize_angle(&(game->player->rot_angle));
 	game->player->rot_angle += game->player->turn_dir->x * game->player->turn_speed * game->mlx->delta_time;
-	move_step = game->player->walk_dir->x * game->player->walk_speed * game->mlx->delta_time;
-	new_pos.x = game->player->position->x + cos(game->player->rot_angle) * move_step;
-	new_pos.y = game->player->position->y + sin(game->player->rot_angle) * move_step;
-	if (!get_collision(game, new_pos))
+	move_step_fb = game->player->walk_dir->x * game->player->walk_speed * game->mlx->delta_time;
+	move_step_lr = game->player->walk_dir->y * game->player->walk_speed * game->mlx->delta_time;
+	new_pos_lr.x = game->player->position->x + cos(game->player->rot_angle + (PI / 2.0)) * move_step_lr;
+	new_pos_lr.y = game->player->position->y + sin(game->player->rot_angle + (PI / 2.0)) * move_step_lr;
+	if (!get_collision(game, new_pos_lr))
 	{
-		game->player->position->x = new_pos.x;
-		game->player->position->y = new_pos.y;
+		game->player->position->x = new_pos_lr.x;
+		game->player->position->y = new_pos_lr.y;
+	}
+	new_pos_fb.x = game->player->position->x + cos(game->player->rot_angle) * move_step_fb;
+	new_pos_fb.y = game->player->position->y + sin(game->player->rot_angle) * move_step_fb;
+	if (!get_collision(game, new_pos_fb))
+	{
+		game->player->position->x = new_pos_fb.x;
+		game->player->position->y = new_pos_fb.y;
 	}
 }

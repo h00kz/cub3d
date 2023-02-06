@@ -26,11 +26,11 @@ int	get_collision(t_game *game, t_vec pos)
 	int	map_x_idx;
 	int	map_y_idx;
 
-	if (pos.x < 0 || pos.x > 10 * MAP_TILE * MINIMAP_SCALE_FACTOR || \
-		pos.y < 0 || pos.y > 10 * MAP_TILE * MINIMAP_SCALE_FACTOR)
+	if (pos.x < 0 || pos.x > 10 * (MAP_TILE * MINIMAP_SCALE_FACTOR) || \
+		pos.y < 0 || pos.y > 10 * (MAP_TILE * MINIMAP_SCALE_FACTOR))
 		return (TRUE);
-	map_x_idx = floor(pos.x / MAP_TILE);
-	map_y_idx = floor(pos.y / MAP_TILE);
+	map_x_idx = floor(pos.x / (MAP_TILE * MINIMAP_SCALE_FACTOR));
+	map_y_idx = floor(pos.y / (MAP_TILE * MINIMAP_SCALE_FACTOR));
 	return (game->map->map_tab[map_y_idx][map_x_idx] != 0);
 }
 
