@@ -22,8 +22,6 @@
 # define MINIMAP_SCALE_FACTOR 1
 # define FOV_ANGLE (60 * (PI / 180.0))
 # define NB_RAYS WIN_WIDTH
-# define DIST_PROJ_PLANE ((WIN_WIDTH / 2) / tan(FOV_ANGLE / 2))
-
 
 // ----------------------- STRUCTS ------------------------- //
 typedef struct s_game t_game;

@@ -21,11 +21,12 @@ t_ray	*init_rays(int nb_rays)
 static void	reset_ray(t_interc *hv)
 {
 	hv->found_wall_hit = FALSE;
-	hv->wall_hit_x = 0;
-	hv->wall_hit_y = 0;
-	hv->next_touch->x = 0;
-	hv->next_touch->y = 0;
-	hv->wall_content = 0;
+	hv->wall_hit_x = 0.0;
+	hv->wall_hit_y = 0.0;
+	hv->next_touch->x = 0.0;
+	hv->next_touch->y = 0.0;
+	hv->wall_content = 0.0;
+	hv->hit_distance = 0.0;
 }
 
 void	vertical_interc(t_game *game, float ray_angle, int ray_id)
@@ -135,9 +136,9 @@ void	render_ray(t_game *game)
 	i = 0;
 	while (i < NB_RAYS)
 	{
-		end_line.x = game->player->rays[WIN_WIDTH/2].wallhit_x;
-		end_line.y = game->player->rays[WIN_WIDTH/2].wallhit_y;
-		draw_line(game, game->player->position, &end_line, 0);
+		end_line.x = game->player->rays[i].wallhit_x;
+		end_line.y = game->player->rays[i].wallhit_y;
+		draw_line(game, game->player->position, &end_line, rgba2int(220, 10, 10, 255));
 		i++;
 	}
 }

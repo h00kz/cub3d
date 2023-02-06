@@ -7,11 +7,11 @@ t_map	*init_map()
 	int map_tmp[10][10] = {
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 		{1, 0, 0, 0, 0, 0, 0, 1, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 1, 0, 1},
-		{1, 0, 1, 1, 0, 0, 0, 1, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 1, 1, 1, 1, 0, 0, 1},
+		{1, 0, 0, 1, 0, 0, 1, 0, 0, 1},
 		{1, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 1, 1, 0, 0, 1, 0, 1},
+		{1, 0, 0, 1, 1, 0, 0, 1, 1, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 1, 0, 0, 0, 0, 0, 0, 1},
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -29,8 +29,8 @@ int	get_collision(t_game *game, t_vec pos)
 	if (pos.x < 0 || pos.x > 10 * MAP_TILE * MINIMAP_SCALE_FACTOR || \
 		pos.y < 0 || pos.y > 10 * MAP_TILE * MINIMAP_SCALE_FACTOR)
 		return (TRUE);
-	map_x_idx = (int)floor(pos.x / MAP_TILE);
-	map_y_idx = (int)floor(pos.y / MAP_TILE);
+	map_x_idx = floor(pos.x / MAP_TILE);
+	map_y_idx = floor(pos.y / MAP_TILE);
 	return (game->map->map_tab[map_y_idx][map_x_idx] != 0);
 }
 

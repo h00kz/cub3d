@@ -15,7 +15,7 @@ static void draw_pixel(uint8_t* pixel, uint32_t color)
 
 float	distance_ab(t_vec a, t_vec b)
 {
-	return (sqrt((b.x - a.x) * (b.x - a.x) - (b.y - a.y) * (b.y - a.y)));
+	return (sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y)));
 }
 
 void put_pixel(mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color)
