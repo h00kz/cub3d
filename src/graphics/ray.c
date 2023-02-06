@@ -95,7 +95,7 @@ static void	put_on_rays_struct(t_interc hv, t_game *game, int tf, int ray_id)
 	game->player->rays[ray_id].was_hit_vertical = tf;
 }
 
-static void	take_ray_infos(t_game *game, float ray_angle, int ray_id)
+static void	take_smallest_r_infos(t_game *game, float ray_angle, int ray_id)
 {	
 	if (game->ray_inter_h.found_wall_hit)
 		game->ray_inter_h.hit_distance = distance_ab(*(game->player->position), (t_vec){game->ray_inter_h.wall_hit_x, game->ray_inter_h.wall_hit_y});
@@ -124,7 +124,7 @@ void	cast_ray(t_game *game, float ray_angle, int ray_id)
 	game->interct.is_ray_fac_left = !game->interct.is_ray_fac_right;
 	horizontal_interc(game, ray_angle, ray_id);
 	vertical_interc(game, ray_angle, ray_id);
-	take_ray_infos(game, ray_angle, ray_id);
+	take_smallest_r_infos(game, ray_angle, ray_id);
 }
 
 void	render_ray(t_game *game)
