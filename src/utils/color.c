@@ -20,7 +20,7 @@ float	distance_ab(t_vec a, t_vec b)
 
 void put_pixel(mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color)
 {
-	if (x > 0 && x <= WIN_WIDTH && y > 0 && y <= WIN_HEIGHT)
+	if (x > 0 && x < WIN_WIDTH && y > 0 && y < WIN_HEIGHT)
 	{
 		uint8_t* pixelstart = &image->pixels[(y * image->width + x) * sizeof(int32_t)];
 		draw_pixel(pixelstart, color);

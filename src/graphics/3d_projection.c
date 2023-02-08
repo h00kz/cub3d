@@ -14,8 +14,8 @@ void	render_3d(t_game *game)
 	color = 0;
 	while (i < NB_RAYS)
 	{
-		perp_dist = game->player->rays[i].distance * cos(game->player->rays[i].ray_angle - game->player->rot_angle);
-		h_proj_wall = (MAP_TILE / fabs(perp_dist)) * SCREEN_DIST;
+		perp_dist = game->player->rays[i].distance * cos(game->player->rays[i].ray_angle - game->player->rot_angle + TWO_PI);
+		h_proj_wall = (MAP_TILE / perp_dist) * SCREEN_DIST;
 		wall_top_pixel = (WIN_HEIGHT / 2) - ((int)h_proj_wall / 2);
 		if (wall_top_pixel < 0)
 			wall_top_pixel = 0;

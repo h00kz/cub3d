@@ -18,8 +18,8 @@ void	hook(void* param)
 	// if (game->current_time - game->last_time >= 1.0)
 	// {
 	// 	// printf("screen_dist:%f\n", SCREEN_DIST);
-	// 	// if (mlx_is_key_down(game->mlx, MLX_KEY_K))
-	// 	// 	game->debug_render_rays = !game->debug_render_rays;
+	// 	if (mlx_is_key_down(game->mlx, MLX_KEY_K))
+	// 		game->debug_render_rays = !game->debug_render_rays;
 	// 	printf("\nFPS:%d\n", game->frame_count);
 	// 	game->frame_count = 0;
 	// 	game->last_time = game->current_time;
