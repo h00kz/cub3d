@@ -54,13 +54,13 @@ void	render_3d(t_game *game)
 			color = rgba2int(201, 0, 0, 255);
 		y = -1;
 		while (++y < wall_top_pixel)
-			put_pixel(game->mlx_img, i, y,  average_color(rgba2int(0,0,0,255), rgba2int(game->map->floor->r,game->map->floor->g,game->map->floor->b, 255), perp_dist / 1500.0));
+			put_pixel(game->mlx_img, i, y, rgba2int(game->map->floor->r,game->map->floor->g,game->map->floor->b, 255));
 		y = wall_top_pixel - 1;
 		while (++y < wall_bottom_pixel)
-			put_pixel(game->mlx_img, i, y , average_color(rgba2int(0,0,0,255), color, perp_dist / 1500.0));
+			put_pixel(game->mlx_img, i, y , average_color(rgba2int(0,0,0,255), color, perp_dist / 1200.0));
 		y = WIN_HEIGHT + 1;
 		while (--y >= wall_bottom_pixel)
-			put_pixel(game->mlx_img, i, y, average_color(rgba2int(0,0,0,255), rgba2int(game->map->cell->r,game->map->cell->g,game->map->cell->b, 255), perp_dist / 1500.0));
+			put_pixel(game->mlx_img, i, y, rgba2int(game->map->cell->r,game->map->cell->g,game->map->cell->b, 255));
 		i++;
 	}
 }
