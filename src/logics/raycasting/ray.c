@@ -31,14 +31,14 @@ static void	reset_ray(t_interc *hv)
 
 void	vertical_wall_hits(t_game *game)
 {
-	while (is_in_map(*(game->ray_inter_v.next_touch)))
+	while (is_in_map(game, *(game->ray_inter_v.next_touch)))
 	{
 		if (game->interct.is_ray_fac_left)
 			game->ray_inter_v.to_check->x = game->ray_inter_v.next_touch->x - 1;
 		else
 			game->ray_inter_v.to_check->x = game->ray_inter_v.next_touch->x;
 		game->ray_inter_v.to_check->y = game->ray_inter_v.next_touch->y;
-		if (get_collision(game, *(game->ray_inter_v.to_check)))
+		if (!get_collision(game, *(game->ray_inter_v.to_check)))
 		{
 			game->ray_inter_v.wall_hit_x = game->ray_inter_v.next_touch->x;
 			game->ray_inter_v.wall_hit_y = game->ray_inter_v.next_touch->y;
@@ -52,14 +52,14 @@ void	vertical_wall_hits(t_game *game)
 
 void	horizontal_wall_hits(t_game *game)
 {
-	while (is_in_map(*(game->ray_inter_h.next_touch)))
+	while (is_in_map(game, *(game->ray_inter_h.next_touch)))
 	{
 		if (game->interct.is_ray_fac_up)
 			game->ray_inter_h.to_check->y = game->ray_inter_h.next_touch->y - 1;
 		else
 			game->ray_inter_h.to_check->y = game->ray_inter_h.next_touch->y;
 		game->ray_inter_h.to_check->x = game->ray_inter_h.next_touch->x;
-		if (get_collision(game, *(game->ray_inter_h.to_check)))
+		if (!get_collision(game, *(game->ray_inter_h.to_check)))
 		{
 			game->ray_inter_h.wall_hit_x = game->ray_inter_h.next_touch->x;
 			game->ray_inter_h.wall_hit_y = game->ray_inter_h.next_touch->y;

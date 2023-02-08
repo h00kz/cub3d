@@ -24,13 +24,7 @@ int main(int argc, char **argv)
 {
 	t_game	*game;
 
-	game = init_game();
-	game->map->map = parse(argc, argv, game);
-	game->map->map = ft_verif_map(game->map->map);
-	game->map->height = get_height(game->map->map);
-	game->map->width = get_width(game->map->map);
-	game->last_time = mlx_get_time();
-	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
+	game = init_game(argc, argv);
 	input_handler(game);
 	render(game);
 	update(game);

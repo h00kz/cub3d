@@ -10,7 +10,7 @@ void	ft_get_rgb(char *line, t_color *color)
 	i++;
 	while ((line[i] >= 9 && line[i] <= 13) || line[i] == 32)
 		i++;
-	if (line[i] <= '0' || line[i] >= '9')
+	if (line[i] < '0' || line[i] > '9')
 		printf("error\n");
 	color->r = ft_atoi(&line[i]);
 	if (color->r > 255)
