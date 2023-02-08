@@ -1,5 +1,6 @@
 SRC					= src/main.c \
 					  src/graphics/rect.c \
+					  src/graphics/3d_projection.c \
 					  src/graphics/map.c \
 					  src/graphics/player.c \
 					  src/graphics/dda.c \

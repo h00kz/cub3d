@@ -9,15 +9,15 @@ t_player	*init_player()
 	player->walk_dir = ft_calloc(1, sizeof(t_vec));
 	player->turn_dir = ft_calloc(1, sizeof(t_vec));
 	player->rays = init_rays(NB_RAYS);
-	player->position->x = (10 * MAP_TILE / 2) * MINIMAP_SCALE_FACTOR;
-	player->position->y = (10 * MAP_TILE / 2) * MINIMAP_SCALE_FACTOR;
+	player->position->x = (20 * MAP_TILE / 2) * MINIMAP_SCALE_FACTOR;
+	player->position->y = (20 * MAP_TILE / 2) * MINIMAP_SCALE_FACTOR;
 	player->walk_dir->x = 0;
 	player->walk_dir->y = 0;
 	player->turn_dir->x = 0;
 	player->turn_dir->y = 0;
-	player->rot_angle = 2.0 / PI;
-	player->walk_speed = 100.0 * MINIMAP_SCALE_FACTOR;
-	player->turn_speed = 180.0 * (PI / 180.0);
+	player->rot_angle = -90.0 * (PI / 180.0);
+	player->walk_speed = 100.0;
+	player->turn_speed = 90.0 * (PI / 180.0);
 	return (player);
 }
 

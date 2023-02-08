@@ -21,12 +21,12 @@
 # define WIN_HEIGHT 900
 # define WIN_HALF_H (floor(WIN_HEIGHT / 2))
 # define MAP_TILE 64
-# define MINIMAP_SCALE_FACTOR 0.2
-# define FOV_ANGLE (60 * (PI / 180.0))
+# define MINIMAP_SCALE_FACTOR 1
+# define FOV_ANGLE (90 * (PI / 180.0))
 # define HALF_FOV (FOV_ANGLE / 2)
 # define NB_RAYS WIN_WIDTH
 # define DELTA_ANGLE (FOV_ANGLE / NB_RAYS)
-# define SCREEN_DIST (floor(WIN_WIDTH / 2) / tan(HALF_FOV))
+# define SCREEN_DIST (WIN_HALF_W / tan(HALF_FOV))
 
 // ----------------------- STRUCTS ------------------------- //
 typedef struct s_game t_game;
@@ -113,7 +113,7 @@ typedef struct s_map
 	t_wall		**wall_texture;
 	t_color		*floor;
 	t_color		*cell;
-	int			map_tab[10][10]; // A CHANGER
+	int			map_tab[20][20]; // A CHANGER
 }	t_map;
 
 typedef struct s_player
@@ -135,6 +135,7 @@ typedef struct s_game
 	t_map		*map;
 	mlx_t		*mlx;
 	mlx_image_t	*mlx_img;
+	mlx_image_t	*minimap;
 	t_player	*player;
 	t_interc	interct;
 	t_interc	ray_inter_v;
@@ -154,6 +155,8 @@ t_ray		*init_rays(int nb_rays);
 // ------------------------- RENDERS ------------------------ //
 void		render_minimap_player(t_game *game);
 void		render_ray(t_game *game);
+void		render_3d(t_game *game);
+
 
 // ------------------------ GAMELGCS ------------MINIMAP_SCALE_FACTOR----------- //
 

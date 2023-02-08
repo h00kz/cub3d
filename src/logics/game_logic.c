@@ -7,21 +7,23 @@ void	hook(void* param)
 	game = param;
 	game->current_time = mlx_get_time();
 	game->frame_count++;
-	render_minimap(game);
 	move_minimap_player(game);
-	render_minimap_player(game);
 	cast_all_rays(game);
-	if (game->debug_render_rays == TRUE)
-		render_ray(game);
-	if (game->current_time - game->last_time >= 1.0)
-	{
-		printf("screen_dist:%f\n", SCREEN_DIST);
-		if (mlx_is_key_down(game->mlx, MLX_KEY_K))
-			game->debug_render_rays = !game->debug_render_rays;
-		printf("\nFPS:%d\n", game->frame_count);
-		game->frame_count = 0;
-		game->last_time = game->current_time;
-	}
+	draw_rect(game, (t_vec){0,0}, (t_vec){WIN_WIDTH, WIN_HEIGHT}, rgba2int(0,0,0,255));
+	render_3d(game);
+	// render_minimap(game);
+	// render_minimap_player(game);
+	// if (game->debug_render_rays == TRUE)
+	// 	render_ray(game);
+	// if (game->current_time - game->last_time >= 1.0)
+	// {
+	// 	// printf("screen_dist:%f\n", SCREEN_DIST);
+	// 	// if (mlx_is_key_down(game->mlx, MLX_KEY_K))
+	// 	// 	game->debug_render_rays = !game->debug_render_rays;
+	// 	printf("\nFPS:%d\n", game->frame_count);
+	// 	game->frame_count = 0;
+	// 	game->last_time = game->current_time;
+	// }
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
