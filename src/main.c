@@ -29,6 +29,7 @@ int main(int argc, char **argv)
 	game->map->map = ft_verif_map(game->map->map);
 	game->map->height = get_height(game->map->map);
 	game->map->width = get_width(game->map->map);
+	check_player_pos(game->map->map);
 	game->last_time = mlx_get_time();
 	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	input_handler(game);
