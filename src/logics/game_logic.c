@@ -7,7 +7,7 @@ void	hook(void* param)
 	game = param;
 	game->current_time = mlx_get_time();
 	game->frame_count++;
-	move_minimap_player(game);
+	move_player(game);
 	cast_all_rays(game);
 	draw_rect(game, (t_vec){0,0}, (t_vec){WIN_WIDTH, WIN_HEIGHT}, rgba2int(0,0,0,255));
 	render_3d(game);
@@ -24,6 +24,7 @@ void	hook(void* param)
 	// 	game->frame_count = 0;
 	// 	game->last_time = game->current_time;
 	// }
+
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))

@@ -35,15 +35,25 @@ void	render_minimap_player(t_game *game)
 	draw_rect(game, pos_offset, (t_vec){5 * MINIMAP_SCALE_FACTOR, 5 * MINIMAP_SCALE_FACTOR}, rgba2int(10, 230, 12, 255));
 }
 
-void	move_minimap_player(t_game *game)
+void	move_player(t_game *game)
 {
 	float	move_step_lr;
 	float	move_step_fb;
 	t_vec	new_pos_fb;
 	t_vec	new_pos_lr;
+	int x,y = 0;
+	int	xoffset, yoffset = 0;
+	mlx_get_mouse_pos(game->mlx, &x, &y);
+	xoffset = WIN_HALF_W;
+	yoffset = WIN_HALF_H;
 
+	(void)yoffset;
 	normalize_angle(&(game->player->rot_angle));
-	game->player->rot_angle += game->player->turn_dir->x * game->player->turn_speed * game->mlx->delta_time;
+	// game->player->rot_angle += (xoffset-x) * game->player->turn_speed * game->mlx->delta_time;
+	float mouse_x = x - xoffset;
+	float rot_amount = mouse_x / 2;
+	game->player->rot_angle = rot_amount;
+
 	move_step_fb = game->player->walk_dir->x * game->player->walk_speed * game->mlx->delta_time;
 	move_step_lr = game->player->walk_dir->y * game->player->walk_speed * game->mlx->delta_time;
 	new_pos_lr.x = game->player->position->x + cos(game->player->rot_angle + (PI / 2.0)) * move_step_lr;

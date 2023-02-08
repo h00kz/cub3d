@@ -172,7 +172,7 @@ void		draw_rect(t_game *game, t_vec pos, t_vec size, int color);
 void		render_minimap(t_game *game);
 int			get_collision(t_game *game, t_vec pos);
 int			is_in_map(t_vec pos);
-void		move_minimap_player(t_game *game);
+void		move_player(t_game *game);
 
 float		normalize_angle(float *angle);
 int			rgba2int(int r, int g, int b, int a);
