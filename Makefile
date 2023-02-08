@@ -1,5 +1,15 @@
 SRC					= src/main.c \
-					  src/parsing/parsing.c
+					  src/graphics/rect.c \
+					  src/graphics/3d_projection.c \
+					  src/graphics/map.c \
+					  src/graphics/player.c \
+					  src/graphics/dda.c \
+					  src/logics/raycasting/ray.c \
+					  src/utils/color.c \
+					  src/parsing/parsing.c \
+					  src/parsing/verif_map.c \
+					  src/inits/game_init.c \
+					  src/logics/game_logic.c \
 
 LIBFT				= libft/
 MLX42				= MLX42/
@@ -7,6 +17,7 @@ CFLAGS				=  -g -ldl -lglfw -pthread -lm -Werror -Wextra -Wall
 NAME				= cub3D
 LIB					= libft/libft.a MLX42/libmlx42.a
 INCLUDE				= inc/
+# INCLUDEMLX			= MLX42/
 
 blink				= \033[5m
 NC					= \033[0m
