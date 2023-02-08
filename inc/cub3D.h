@@ -156,25 +156,25 @@ t_ray		*init_rays(int nb_rays);
 void		render_minimap_player(t_game *game);
 void		render_ray(t_game *game);
 void		render_3d(t_game *game);
-
-
-// ------------------------ GAMELGCS ------------MINIMAP_SCALE_FACTOR----------- //
-
-void		input_handler(t_game *game);
-void		update(t_game *game);
-void		render(t_game *game);
-
-void		cast_all_rays(t_game *game);
-float		distance_ab(t_vec a, t_vec b);
+void		render_minimap(t_game *game);
 void		put_pixel(mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color);
 void		draw_line(t_game *game, t_vec *start, t_vec *end, int color);
 void		draw_rect(t_game *game, t_vec pos, t_vec size, int color);
-void		render_minimap(t_game *game);
-int			get_collision(t_game *game, t_vec pos);
-int			is_in_map(t_vec pos);
-void		move_player(t_game *game);
 
+
+// ------------------------ GAMELGCS ----------------------- //
+void		input_handler(t_game *game);
+void		move_player(t_game *game);
+void		update(t_game *game);
+void		render(t_game *game);
+
+// ------------------------ RAYS ----------------------- //
+void		cast_all_rays(t_game *game);
+
+int			is_in_map(t_vec pos);
+int			get_collision(t_game *game, t_vec pos);
 float		normalize_angle(float *angle);
+float		distance_ab(t_vec a, t_vec b);
 int			rgba2int(int r, int g, int b, int a);
 
 // ------------------------- PARSING ------------------------ //
