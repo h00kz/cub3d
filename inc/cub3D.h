@@ -110,10 +110,12 @@ typedef struct s_interc
 
 typedef struct s_map
 {
-	t_wall		**wall_texture;
+	t_wall		*wall_texture;
 	t_color		*floor;
 	t_color		*cell;
-	int			map_tab[20][20]; // A CHANGER
+	int			height;
+	int			width;
+	char		**map;
 }	t_map;
 
 typedef struct s_player
@@ -178,7 +180,8 @@ float		normalize_angle(float *angle);
 int			rgba2int(int r, int g, int b, int a);
 
 // ------------------------- PARSING ------------------------ //
-char		**parse(int argc, char **argv);
-void		ft_verif_map(char **map);
+
+char		**parse(int argc, char **argv, t_game *game);
+char		**ft_verif_map(char **map);
 
 #endif
