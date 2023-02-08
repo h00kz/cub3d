@@ -12,6 +12,7 @@ int main(int argc, char **argv)
 	(void)argv;
 	game = init_game();
 	game->last_time = mlx_get_time();
+	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	input_handler(game);
 	render(game);
 	update(game);

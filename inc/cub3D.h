@@ -22,7 +22,7 @@
 # define WIN_HALF_H (floor(WIN_HEIGHT / 2))
 # define MAP_TILE 64
 # define MINIMAP_SCALE_FACTOR 1
-# define FOV_ANGLE (90 * (PI / 180.0))
+# define FOV_ANGLE (60 * (PI / 180.0))
 # define HALF_FOV (FOV_ANGLE / 2)
 # define NB_RAYS WIN_WIDTH
 # define DELTA_ANGLE (FOV_ANGLE / NB_RAYS)

@@ -15,7 +15,7 @@ void	render_3d(t_game *game)
 	while (i < NB_RAYS)
 	{
 		perp_dist = game->player->rays[i].distance * cos(game->player->rays[i].ray_angle - game->player->rot_angle);
-		h_proj_wall = (MAP_TILE / perp_dist) * SCREEN_DIST;
+		h_proj_wall = (MAP_TILE / fabs(perp_dist)) * SCREEN_DIST;
 		wall_top_pixel = (WIN_HEIGHT / 2) - ((int)h_proj_wall / 2);
 		if (wall_top_pixel < 0)
 			wall_top_pixel = 0;
@@ -37,7 +37,7 @@ void	render_3d(t_game *game)
 		while (++y < wall_bottom_pixel)
 			put_pixel(game->mlx_img, i, y , color);
 		y = WIN_HEIGHT + 1;
-		while (--y > wall_bottom_pixel)
+		while (--y >= wall_bottom_pixel)
 			put_pixel(game->mlx_img, i, y, rgba2int(102,51,0,255));
 		i++;
 	}

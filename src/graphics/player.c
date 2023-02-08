@@ -51,8 +51,8 @@ void	move_player(t_game *game)
 	normalize_angle(&(game->player->rot_angle));
 	// game->player->rot_angle += (xoffset-x) * game->player->turn_speed * game->mlx->delta_time;
 	float mouse_x = x - xoffset;
-	float rot_amount = mouse_x / 2;
-	game->player->rot_angle = rot_amount;
+	game->player->rot_angle += (mouse_x * 0.001);
+	mlx_set_mouse_pos(game->mlx, xoffset, yoffset);
 
 	move_step_fb = game->player->walk_dir->x * game->player->walk_speed * game->mlx->delta_time;
 	move_step_lr = game->player->walk_dir->y * game->player->walk_speed * game->mlx->delta_time;
