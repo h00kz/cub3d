@@ -42,10 +42,10 @@ typedef struct s_color t_color;
 
 typedef struct s_texture
 {
-	mlx_image_t	tex_img;
-	t_vec		*size;
-	t_vec		*pos;
-	char		*path;
+	mlx_texture_t	tex_img;
+	t_vec			*size;
+	t_vec			*pos;
+	char			*path;
 }	t_texture;
 
 typedef struct s_wall
@@ -124,12 +124,13 @@ typedef struct s_player
 	t_vec	*walk_dir;
 	t_vec	*turn_dir;
 	t_ray	*rays;
+	char	dir;
 	float	fov_angle;
 	float	rot_angle;
 	float	walk_speed;
 	float	turn_speed;
-	int		minimap_w;
-	int		minimap_h;
+	// int		minimap_w;
+	// int		minimap_h;
 }	t_player;
 
 typedef struct s_game
@@ -149,10 +150,13 @@ typedef struct s_game
 }	t_game;
 
 // -------------------------- INITS ------------------------- //
-t_game		*init_game();
+t_game		*init_game(int ac, char **av);
 t_map		*init_map();
 t_player	*init_player();
 t_ray		*init_rays(int nb_rays);
+float		set_player_dir(char dir);
+char		get_player_pos(char **map, t_vec *pos);
+
 
 // ------------------------- RENDERS ------------------------ //
 void		render_minimap_player(t_game *game);
@@ -173,11 +177,14 @@ void		render(t_game *game);
 // ------------------------ RAYS ----------------------- //
 void		cast_all_rays(t_game *game);
 
-int			is_in_map(t_vec pos);
+int			is_in_map(t_game *game, t_vec pos);
 int			get_collision(t_game *game, t_vec pos);
 float		normalize_angle(float *angle);
 float		distance_ab(t_vec a, t_vec b);
 int			rgba2int(int r, int g, int b, int a);
+
+int			get_height(char **map);
+int			get_width(char **map);
 
 // ------------------------- PARSING ------------------------ //
 

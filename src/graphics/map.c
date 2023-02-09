@@ -21,17 +21,17 @@ int	get_collision(t_game *game, t_vec pos)
 	int	map_x_idx;
 	int	map_y_idx;
 
-	if (pos.x < 0 || pos.x > 20 * (MAP_TILE) || \
-		pos.y < 0 || pos.y > 20 * (MAP_TILE))
+	if (pos.x < 0 || pos.x > game->map->width * (MAP_TILE) || \
+		pos.y < 0 || pos.y > game->map->height * (MAP_TILE))
 		return (TRUE);
 	map_x_idx = floor(pos.x / (MAP_TILE));
 	map_y_idx = floor(pos.y / (MAP_TILE));
-	return (game->map->map[map_y_idx][map_x_idx] != '0');
+	return (game->map->map[map_y_idx][map_x_idx] != '1');
 }
 
-int	is_in_map(t_vec pos)
+int	is_in_map(t_game *game, t_vec pos)
 {
-	return (pos.x >= 0 && pos.x < 20 * MAP_TILE && pos.y >= 0 && pos.y < 20 * MAP_TILE);
+	return (pos.x >= 0 && pos.x < game->map->width * MAP_TILE && pos.y >= 0 && pos.y < game->map->height * MAP_TILE);
 }
 
 void	render_minimap(t_game *game)
@@ -40,10 +40,10 @@ void	render_minimap(t_game *game)
 	int y;
 
 	y = 0;
-	while (y < 20)
+	while (y < game->map->height)
 	{
 		x = 0;
-		while (x < 20)
+		while (x < game->map->width)
 		{
 			int tilex = x * MAP_TILE;
 			int tiley = y * MAP_TILE;
