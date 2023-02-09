@@ -23,7 +23,6 @@ int get_height(char **map)
 int main(int argc, char **argv)
 {
 	t_game	*game;
-
 	game = init_game(argc, argv);
 	input_handler(game);
 	render(game);
