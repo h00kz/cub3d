@@ -183,5 +183,6 @@ int			rgba2int(int r, int g, int b, int a);
 
 char		**parse(int argc, char **argv, t_game *game);
 char		**ft_verif_map(char **map);
+void		check_player_pos(char **map);
 
 #endif
