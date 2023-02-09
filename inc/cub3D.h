@@ -42,10 +42,10 @@ typedef struct s_color t_color;
 
 typedef struct s_texture
 {
-	mlx_image_t	tex_img;
-	t_vec		*size;
-	t_vec		*pos;
-	char		*path;
+	mlx_texture_t	tex_img;
+	t_vec			*size;
+	t_vec			*pos;
+	char			*path;
 }	t_texture;
 
 typedef struct s_wall

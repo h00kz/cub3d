@@ -6,6 +6,7 @@ SRC					= src/main.c \
 					  src/graphics/dda.c \
 					  src/logics/raycasting/ray.c \
 					  src/utils/color.c \
+					  src/utils/pixel_utils.c \
 					  src/parsing/parsing.c \
 					  src/parsing/verif_map.c \
 					  src/inits/game_init.c \
