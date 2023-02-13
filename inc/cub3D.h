@@ -169,9 +169,9 @@ void		draw_rect(t_game *game, t_vec pos, t_vec size, int color);
 int			average_color(int start_color, int end_color, float f);
 
 // ------------------------ GAMELGCS ----------------------- //
+void		game_routine(void *param);
 void		input_handler(t_game *game);
 void		move_player(t_game *game);
-void		update(t_game *game);
 void		render(t_game *game);
 
 // ------------------------ RAYS ----------------------- //

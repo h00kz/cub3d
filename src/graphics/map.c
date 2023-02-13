@@ -31,7 +31,8 @@ int	get_collision(t_game *game, t_vec pos)
 
 int	is_in_map(t_game *game, t_vec pos)
 {
-	return (pos.x >= 0 && pos.x < game->map->width * MAP_TILE && pos.y >= 0 && pos.y < game->map->height * MAP_TILE);
+	return (pos.x >= 0 && pos.x < game->map->width * MAP_TILE && \
+			pos.y >= 0 && pos.y < game->map->height * MAP_TILE);
 }
 
 void	render_minimap(t_game *game)
