@@ -12,8 +12,8 @@ t_player	*init_player(t_game *game)
 	player->turn_dir = ft_calloc(1, sizeof(t_vec));
 	player->rays = init_rays(NB_RAYS);
 	player->dir = get_player_pos(game->map->map, &pos);
-	player->position->x = (MAP_TILE * (pos.x)) + MAP_TILE / 2;
-	player->position->y = (MAP_TILE * (pos.y)) + MAP_TILE / 2;
+	player->position->x = (MINIMAP_TILE * (pos.x)) + MINIMAP_TILE / 2;
+	player->position->y = (MINIMAP_TILE * (pos.y)) + MINIMAP_TILE / 2;
 	player->walk_dir->x = 0;
 	player->walk_dir->y = 0;
 	player->turn_dir->x = 0;
@@ -83,19 +83,19 @@ void	move_player(t_game *game)
 	t_vec	new_pos_lr;
 
 	// BONUS SOURIS
-	int x,y = 0;
-	int	xoffset, yoffset = 0;
-	mlx_get_mouse_pos(game->mlx, &x, &y);
-	xoffset = WIN_HALF_W;
-	yoffset = WIN_HALF_H;
-	(void)yoffset;
-	normalize_angle(&(game->player->rot_angle));
-	float mouse_x = x - xoffset;
-	game->player->rot_angle += (mouse_x * 0.001);
-	mlx_set_mouse_pos(game->mlx, xoffset, yoffset);
+	// int x,y = 0;
+	// int	xoffset, yoffset = 0;
+	// mlx_get_mouse_pos(game->mlx, &x, &y);
+	// xoffset = WIN_HALF_W;
+	// yoffset = WIN_HALF_H;
+	// (void)yoffset;
+	// normalize_angle(&(game->player->rot_angle));
+	// float mouse_x = x - xoffset;
+	// game->player->rot_angle += (mouse_x * 0.001);
+	// mlx_set_mouse_pos(game->mlx, xoffset, yoffset);
 
 	// MANDATORY (sans mouse)
-	// game->player->rot_angle += game->player->turn_dir->x * game->player->turn_speed * game->mlx->delta_time;
+	game->player->rot_angle += game->player->turn_dir->x * game->player->turn_speed * game->mlx->delta_time;
 
 	move_step_fb = game->player->walk_dir->x * game->player->walk_speed * game->mlx->delta_time;
 	move_step_lr = game->player->walk_dir->y * game->player->walk_speed * game->mlx->delta_time;

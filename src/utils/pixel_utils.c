@@ -12,7 +12,12 @@ void put_pixel(mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color)
 {
 	if (x > 0 && x < WIN_WIDTH && y > 0 && y < WIN_HEIGHT)
 	{
-		uint8_t* pixelstart = &image->pixels[(y * image->width + x) * sizeof(int32_t)];
+		uint8_t* pixelstart = &image->pixels[(y * image->width + x) * sizeof(uint32_t)];
 		draw_pixel(pixelstart, color);
 	}
+}
+
+uint32_t	get_pixel(mlx_texture_t *texture, uint32_t x, uint32_t y)
+{
+	return (((uint32_t *)texture->pixels)[(y * texture->width + x)]);
 }

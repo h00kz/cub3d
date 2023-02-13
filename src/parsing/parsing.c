@@ -52,16 +52,16 @@ void	ft_get_info_map(char *file, t_game *game)
 		{
 			if (line[i + 1] == 'O')
 			{
-				game->map->wall_texture->N->path = ft_strdup(&line[i]);
-				game->map->wall_texture->N->path = ft_strtrim(game->map->wall_texture->N->path, " ");
+				game->map->wall_texture->N->path = ft_strdup(&line[i + 3]);
+				game->map->wall_texture->N->path = ft_strtrim(game->map->wall_texture->N->path, " \n");
 			}
 		}
 		else if (line[i] == 'S')
 		{
 			if (line[i + 1] == 'O')
 			{
-				game->map->wall_texture->S->path = ft_strdup(&line[i]);
-				game->map->wall_texture->S->path = ft_strtrim(game->map->wall_texture->S->path, " ");
+				game->map->wall_texture->S->path = ft_strdup(&line[i + 3]);
+				game->map->wall_texture->S->path = ft_strtrim(game->map->wall_texture->S->path, " \n");
 
 			}
 		}
@@ -69,16 +69,16 @@ void	ft_get_info_map(char *file, t_game *game)
 		{
 			if (line[i + 1] == 'E')
 			{
-				game->map->wall_texture->W->path = ft_strdup(&line[i]);
-				game->map->wall_texture->W->path = ft_strtrim(game->map->wall_texture->W->path, " ");
+				game->map->wall_texture->W->path = ft_strdup(&line[i + 3]);
+				game->map->wall_texture->W->path = ft_strtrim(game->map->wall_texture->W->path, " \n");
 			}
 		}
 		else if (line[i] == 'E')
 		{
 			if (line[i + 1] == 'A')
 			{
-				game->map->wall_texture->E->path = ft_strdup(&line[i]);
-				game->map->wall_texture->E->path = ft_strtrim(game->map->wall_texture->E->path, " ");
+				game->map->wall_texture->E->path = ft_strdup(&line[i + 3]);
+				game->map->wall_texture->E->path = ft_strtrim(game->map->wall_texture->E->path, " \n");
 			}
 		}
 		else if (line[i] == 'F')

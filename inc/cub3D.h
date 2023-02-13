@@ -17,11 +17,12 @@
 # define PI 3.14159265
 # define TWO_PI 6.28318530
 # define WIN_WIDTH 1600
-# define WIN_HALF_W (floor(WIN_WIDTH / 2))
+# define WIN_HALF_W (WIN_WIDTH / 2)
 # define WIN_HEIGHT 900
-# define WIN_HALF_H (floor(WIN_HEIGHT / 2))
-# define MAP_TILE 64
+# define WIN_HALF_H (WIN_HEIGHT / 2)
 # define MINIMAP_SCALE_FACTOR 1
+# define MINIMAP_TILE 64 * MINIMAP_SCALE_FACTOR
+# define MAP_TILE 64
 # define FOV_ANGLE (60 * (PI / 180.0))
 # define HALF_FOV (FOV_ANGLE / 2)
 # define NB_RAYS WIN_WIDTH
@@ -42,9 +43,7 @@ typedef struct s_color t_color;
 
 typedef struct s_texture
 {
-	mlx_texture_t	tex_img;
-	t_vec			*size;
-	t_vec			*pos;
+	mlx_texture_t	*tex_img;
 	char			*path;
 }	t_texture;
 
@@ -163,10 +162,11 @@ void		render_minimap_player(t_game *game);
 void		render_ray(t_game *game);
 void		render_3d(t_game *game);
 void		render_minimap(t_game *game);
+uint32_t	get_pixel(mlx_texture_t* texture, uint32_t x, uint32_t y);
 void		put_pixel(mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color);
 void		draw_line(t_game *game, t_vec *start, t_vec *end, int color);
 void		draw_rect(t_game *game, t_vec pos, t_vec size, int color);
-
+int			average_color(int start_color, int end_color, float f);
 
 // ------------------------ GAMELGCS ----------------------- //
 void		input_handler(t_game *game);
@@ -190,6 +190,5 @@ int			get_width(char **map);
 
 char		**parse(int argc, char **argv, t_game *game);
 char		**ft_verif_map(char **map);
-void		check_player_pos(char **map);
 
 #endif

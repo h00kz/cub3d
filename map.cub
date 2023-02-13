@@ -1,15 +1,17 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
-F 30,30,120
-C 10,210,10
+NO ./bricksx64_NORTH.png
+SO ./bricksx64_SOUTH.png
+WE ./bricksx64_OUEST.png
+EA ./bricksx64_EST.png
+C 128,191,255
+F 77,72,58
+
+
 
 
 
 
             1111111111111
-            1W00000000001
+            1S00000000001
             1000000000001
             1000000000001
             1000000000001
