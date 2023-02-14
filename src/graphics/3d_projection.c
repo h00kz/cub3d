@@ -8,6 +8,8 @@ void draw_walls(t_game *game, int pos_xy[2], float perp_dist, t_vec wall_pixels)
 	int x;
 	int y;
 
+	if (pos_xy[1] <= 0 || pos_xy[1] >= WIN_HEIGHT)
+		return ;
 	ray = &game->player->rays[pos_xy[0]];
 	texture = get_wall_texture(game, ray);
 	y = get_wall_texture_y(wall_pixels, pos_xy[1], ray, texture);
