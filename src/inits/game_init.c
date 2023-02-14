@@ -26,6 +26,7 @@ t_game	*init_game(int ac, char **av)
 	printf("S_Path:%s\n", game->map->wall_texture->S->path);
 	printf("E_Path:%s\n", game->map->wall_texture->E->path);
 	printf("W_Path:%s\n", game->map->wall_texture->W->path);
+	check_player_pos(game);
 	game->map->width = get_width(game->map->map);
 	game->map->height = get_height(game->map->map);
 	game->player = init_player(game);

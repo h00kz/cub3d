@@ -9,12 +9,13 @@ SRC					= src/main.c \
 					  src/utils/pixel_utils.c \
 					  src/parsing/parsing.c \
 					  src/parsing/verif_map.c \
+					  src/parsing/check_player_pos.c \
 					  src/inits/game_init.c \
 					  src/logics/game_logic.c \
 
 LIBFT				= libft/
 MLX42				= MLX42/
-CFLAGS				=  -g -ldl -lglfw -pthread -lm -Werror -Wextra -Wall
+CFLAGS				=  -g -ldl -lglfw -pthread -lm 
 NAME				= cub3D
 LIB					= libft/libft.a MLX42/libmlx42.a
 INCLUDE				= inc/

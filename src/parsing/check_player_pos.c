@@ -1,19 +1,20 @@
 #include "../../inc/cub3D.h"
 
-void	check_player_pos(char **map)
+void	check_player_pos(t_game *game)
 {
-	int i;
-	int j;
-	int count;
+	int	i;
+	int	j;
+	int	count;
 
 	i = 0;
 	count = 0;
-	while (map[i])
+	while (game->map->map[i])
 	{
 		j = 0;
-		while (map[i][j])
+		while (game->map->map[i][j])
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'O' || map[i][j] == 'E' || map[i][j] == 'S')
+			if (game->map->map[i][j] != ' ' \
+				&& game->map->map[i][j] != '1' && game->map->map[i][j] != '0')
 				count++;
 			j++;
 		}

@@ -2,7 +2,7 @@
 
 int	ft_map_length(char **map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map[i])
@@ -12,7 +12,7 @@ int	ft_map_length(char **map)
 
 int	ft_find_big_line(char **map)
 {
-	int i;
+	int	i;
 	int	len;
 
 	i = 0;
@@ -26,13 +26,12 @@ int	ft_find_big_line(char **map)
 	return (len);
 }
 
-
 int	ft_check_map_close(char **map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
-	i = 0;	
+	i = 0;
 	while (map[i])
 	{
 		j = 0;
@@ -40,13 +39,13 @@ int	ft_check_map_close(char **map)
 		{
 			if (map[i][j] == ' ')
 			{
-				if (map[i + 1][j] == '0')
+				if (map[i + 1][j] != '1' && map[i + 1][j] != ' ')
 					return (0);
-				if (map[i][j - 1] == '0')
+				if (map[i - 1][j] != '1' && map[i - 1][j] != ' ')
 					return (0);
-				if (map[i - 1][j] == '0')
+				if (map[i][j + 1] != '1' && map[i][j + 1] != ' ')
 					return (0);
-				if (map[i][j + 1] == '0')
+				if (map[i][j - 1] != '1' && map[i][j - 1] != ' ')
 					return (0);
 			}
 			j++;
@@ -56,31 +55,37 @@ int	ft_check_map_close(char **map)
 	return (1);
 }
 
-
-
-char	**ft_verif_map(char **map)
-{	
-	int i;
-	int j;
-	int l;
-	int k;
-	char **new_map;
+char	**ft_calloc_map(char **map)
+{
+	char	**new_map;
+	int		i;
 
 	i = 0;
-	j = 0;
 	new_map = ft_calloc(sizeof(char *), (ft_map_length(map) + 5));
 	while (i < (ft_map_length(map) + 4))
 	{
 		new_map[i] = ft_calloc(sizeof(char), ft_find_big_line(map) + 4);
 		i++;
 	}
-	i = 0;
+	return (new_map);
+}
+
+void	fill_first_line(char **map, char **new_map)
+{
+	int	j;
+
 	j = 0;
 	while (j <= ft_find_big_line(map) + 2)
 	{
 		new_map[0][j] = '1';
 		j++;
 	}
+}
+
+void	fill_first_space_line(char **map, char **new_map)
+{
+	int	j;
+
 	j = 0;
 	while (j <= ft_find_big_line(map) + 2)
 	{
@@ -90,12 +95,24 @@ char	**ft_verif_map(char **map)
 			new_map[1][j] = ' ';
 		j++;
 	}
+}
+
+void	fill_last_line(char **map, char **new_map)
+{
+	int	j;
+
 	j = 0;
 	while (j <= ft_find_big_line(map) + 2)
 	{
 		new_map[ft_map_length(map) + 3][j] = '1';
 		j++;
 	}
+}
+
+void	fill_last_space_line(char **map, char **new_map)
+{
+	int	j;
+
 	j = 0;
 	while (j <= ft_find_big_line(map) + 2)
 	{
@@ -105,6 +122,13 @@ char	**ft_verif_map(char **map)
 			new_map[ft_map_length(map) + 2][j] = ' ';
 		j++;
 	}
+}
+
+void	fill_line_border(char **map, char **new_map)
+{
+	int	i;
+	int	j;
+
 	i = 2;
 	j = 0;
 	while (i <= ft_map_length(map) + 1)
@@ -115,6 +139,15 @@ char	**ft_verif_map(char **map)
 		new_map[i][ft_find_big_line(map) + 1] = ' ';
 		i++;
 	}
+}
+
+void	fill_tab(char **map, char **new_map)
+{
+	int	i;
+	int	j;
+	int	k;
+	int	l;
+
 	i = 2;
 	k = 0;
 	while (map[k])
@@ -124,27 +157,34 @@ char	**ft_verif_map(char **map)
 		while (new_map[i][j] != '1')
 		{
 			if (j - 2 >= (int)ft_strlen(map[k]) || map[k][j - 2] == '\n')
-			{
-				new_map[i][j] = ' ';
-				j++;
-			}
+				new_map[i][j++] = ' ';
 			else
-			{
-				new_map[i][j] = map[k][l];
-				j++;
-				l++;
-			}
+				new_map[i][j++] = map[k][l++];
 		}
 		i++;
 		k++;
 	}
-	i = -1;
+}
+
+char	**ft_verif_map(char **map)
+{	
+	int		i;
+	char	**new_map;
+
+	i = 0;
+	new_map = ft_calloc_map(map);
+	fill_first_line(map, new_map);
+	fill_first_space_line(map, new_map);
+	fill_last_line(map, new_map);
+	fill_last_space_line(map, new_map);
+	fill_line_border(map, new_map);
+	fill_tab(map, new_map);
 	while (map[++i])
 		free(map[i]);
 	free(map);
 	if (ft_check_map_close(new_map) == 0)
 	{
-		printf("map error not close\n");
+		printf("map error\n");
 		exit (0);
 	}
 	return (new_map);

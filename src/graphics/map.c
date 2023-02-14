@@ -6,10 +6,10 @@ t_map	*init_map()
 
 	map = ft_calloc(1, sizeof(t_map));
 	map->wall_texture = malloc(sizeof(t_wall) * 1);
-	map->wall_texture->S = malloc(sizeof(t_texture) * 1);
-	map->wall_texture->N = malloc(sizeof(t_texture) * 1);
-	map->wall_texture->E = malloc(sizeof(t_texture) * 1);
-	map->wall_texture->W = malloc(sizeof(t_texture) * 1);
+	map->wall_texture->S = ft_calloc(sizeof(t_texture), 1);
+	map->wall_texture->N = ft_calloc(sizeof(t_texture), 1);
+	map->wall_texture->E = ft_calloc(sizeof(t_texture), 1);
+	map->wall_texture->W = ft_calloc(sizeof(t_texture), 1);
 	map->map = ft_calloc(sizeof(char), 1);
 	map->floor = ft_calloc(sizeof(t_color), 1);
 	map->cell = ft_calloc(sizeof(t_color), 1);
