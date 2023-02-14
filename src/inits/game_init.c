@@ -18,6 +18,7 @@ t_game	*init_game(int ac, char **av)
 	game->map = init_map();
 	game->map->map = parse(ac, av, game);
 	game->map->map = ft_verif_map(game->map->map);
+	check_player_pos(game);
 	game->map->width = get_width(game->map->map);
 	game->map->height = get_height(game->map->map);
 	game->player = init_player(game);
