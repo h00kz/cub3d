@@ -12,6 +12,12 @@ SRC					= src/main.c \
 					  src/parsing/check_player_pos.c \
 					  src/inits/game_init.c \
 					  src/logics/game_logic.c \
+					  src/parsing/skip_char.c \
+					  src/parsing/fill_line.c \
+					  src/parsing/map_info.c \
+					  src/parsing/get_info.c \
+					  src/parsing/check_c_f.c \
+					  src/parsing/check_texture.c \
 
 LIBFT				= libft/
 MLX42				= MLX42/

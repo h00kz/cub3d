@@ -1,31 +1,5 @@
 #include "../../inc/cub3D.h"
 
-int	ft_map_length(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-		i++;
-	return (i);
-}
-
-int	ft_find_big_line(char **map)
-{
-	int	i;
-	int	len;
-
-	i = 0;
-	len = 0;
-	while (map[i])
-	{
-		if (len < (int)ft_strlen(map[i]))
-			len = ft_strlen(map[i]);
-		i++;
-	}
-	return (len);
-}
-
 int	ft_check_map_close(char **map)
 {
 	int	i;
@@ -68,77 +42,6 @@ char	**ft_calloc_map(char **map)
 		i++;
 	}
 	return (new_map);
-}
-
-void	fill_first_line(char **map, char **new_map)
-{
-	int	j;
-
-	j = 0;
-	while (j <= ft_find_big_line(map) + 2)
-	{
-		new_map[0][j] = '1';
-		j++;
-	}
-}
-
-void	fill_first_space_line(char **map, char **new_map)
-{
-	int	j;
-
-	j = 0;
-	while (j <= ft_find_big_line(map) + 2)
-	{
-		if (j == 0 || j == ft_find_big_line(map) + 2)
-			new_map[1][j] = '1';
-		else
-			new_map[1][j] = ' ';
-		j++;
-	}
-}
-
-void	fill_last_line(char **map, char **new_map)
-{
-	int	j;
-
-	j = 0;
-	while (j <= ft_find_big_line(map) + 2)
-	{
-		new_map[ft_map_length(map) + 3][j] = '1';
-		j++;
-	}
-}
-
-void	fill_last_space_line(char **map, char **new_map)
-{
-	int	j;
-
-	j = 0;
-	while (j <= ft_find_big_line(map) + 2)
-	{
-		if (j == 0 || j == ft_find_big_line(map) + 2)
-			new_map[ft_map_length(map) + 2][j] = '1';
-		else
-			new_map[ft_map_length(map) + 2][j] = ' ';
-		j++;
-	}
-}
-
-void	fill_line_border(char **map, char **new_map)
-{
-	int	i;
-	int	j;
-
-	i = 2;
-	j = 0;
-	while (i <= ft_map_length(map) + 1)
-	{
-		new_map[i][0] = '1';
-		new_map[i][1] = ' ';
-		new_map[i][ft_find_big_line(map) + 2] = '1';
-		new_map[i][ft_find_big_line(map) + 1] = ' ';
-		i++;
-	}
 }
 
 void	fill_tab(char **map, char **new_map)
