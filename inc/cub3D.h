@@ -166,7 +166,7 @@ uint32_t	get_pixel(mlx_texture_t* texture, uint32_t x, uint32_t y);
 void		put_pixel(mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color);
 void		draw_line(t_game *game, t_vec *start, t_vec *end, int color);
 void		draw_rect(t_game *game, t_vec pos, t_vec size, int color);
-int			average_color(int start_color, int end_color, float f);
+int32_t		average_color(int start_color, int end_color, float f);
 
 // ------------------------ GAMELGCS ----------------------- //
 void		game_routine(void *param);

@@ -2,10 +2,10 @@
 
 static void draw_pixel(uint8_t* pixel, uint32_t color)
 {
-	*(pixel++) = (uint8_t)(color >> 24);
-	*(pixel++) = (uint8_t)(color >> 16);
+	*(pixel++) = (uint8_t)(color & 0xff);
 	*(pixel++) = (uint8_t)(color >> 8);
-	*(pixel++) = (uint8_t)(color & 0xFF);
+	*(pixel++) = (uint8_t)(color >> 16);
+	*(pixel++) = (uint8_t)(color >> 24);
 }
 
 void put_pixel(mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color)

@@ -47,13 +47,8 @@ void	render(t_game *game)
 	game->current_time = mlx_get_time();
 	game->frame_count++;
 
-	if (game->debug_render_rays == TRUE)
-		render_ray(game);
 	if (game->current_time - game->last_time >= 1.0)
 	{
-		// printf("screen_dist:%f\n", SCREEN_DIST);
-		if (mlx_is_key_down(game->mlx, MLX_KEY_K))
-			game->debug_render_rays = !game->debug_render_rays;
 		printf("FPS:%d\n", game->frame_count);
 		game->frame_count = 0;
 		game->last_time = game->current_time;
