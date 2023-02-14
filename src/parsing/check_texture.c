@@ -10,7 +10,7 @@ void	ft_check_n(char *line, t_game *game)
 		if (game->map->wall_texture->N->path)
 			printf("error\n");
 		ft_skip_whitespace(line, &i);
-		i += 2;
+		i++;
 		ft_skip_whitespace_newline(line, &i);
 		if (line[i] == '\0')
 			printf("error\n");
@@ -38,7 +38,7 @@ void	ft_check_s(char *line, t_game *game)
 			printf("error\n");
 		while ((line[i] >= 9 && line[i] <= 13) || line[i] == 32)
 			i++;
-		i += 2;
+		i++;
 		ft_skip_whitespace_newline(line, &i);
 		if (line[i] == '\0')
 			printf("error\n");
@@ -67,7 +67,7 @@ void	ft_check_w(char *line, t_game *game)
 			printf("error\n");
 		while ((line[i] >= 9 && line[i] <= 13) || line[i] == 32)
 			i++;
-		i += 2;
+		i++;
 		ft_skip_whitespace_newline(line, &i);
 		if (line[i] == '\0')
 			printf("error\n");
@@ -96,7 +96,7 @@ void	ft_check_e(char *line, t_game *game)
 			printf("error\n");
 		while ((line[i] >= 9 && line[i] <= 13) || line[i] == 32)
 			i++;
-		i += 2;
+		i++;
 		ft_skip_whitespace_newline(line, &i);
 		if (line[i] == '\0')
 			printf("error\n");
