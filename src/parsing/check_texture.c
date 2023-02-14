@@ -25,6 +25,7 @@ void	ft_check_n(char *line, t_game *game)
 	}
 	else
 		printf("error");
+	printf("%s\n",game->map->wall_texture->N->path );
 }
 
 void	ft_check_s(char *line, t_game *game)
