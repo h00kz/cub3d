@@ -21,17 +21,18 @@ int	get_collision(t_game *game, t_vec pos)
 	int	map_x_idx;
 	int	map_y_idx;
 
-	if (pos.x < 0 || pos.x > game->map->width * (MAP_TILE) || \
-		pos.y < 0 || pos.y > game->map->height * (MAP_TILE))
+	if (pos.x < 0 || pos.x > game->map->width * (MAP_TILE * MINIMAP_SCALE_FACTOR) || \
+		pos.y < 0 || pos.y > game->map->height * (MAP_TILE * MINIMAP_SCALE_FACTOR))
 		return (TRUE);
-	map_x_idx = floor(pos.x / (MAP_TILE));
-	map_y_idx = floor(pos.y / (MAP_TILE));
+	map_x_idx = floor(pos.x / (MAP_TILE * MINIMAP_SCALE_FACTOR));
+	map_y_idx = floor(pos.y / (MAP_TILE * MINIMAP_SCALE_FACTOR));
 	return (game->map->map[map_y_idx][map_x_idx] != '1');
 }
 
 int	is_in_map(t_game *game, t_vec pos)
 {
-	return (pos.x >= 0 && pos.x < game->map->width * MAP_TILE && pos.y >= 0 && pos.y < game->map->height * MAP_TILE);
+	return (pos.x >= 0 && pos.x < game->map->width * MAP_TILE && \
+			pos.y >= 0 && pos.y < game->map->height * MAP_TILE);
 }
 
 void	render_minimap(t_game *game)
@@ -49,7 +50,7 @@ void	render_minimap(t_game *game)
 			int tiley = y * MAP_TILE;
 			int tilec = game->map->map[y][x] != '1' ? rgba2int(0xff, 0xff, 0xff, 0xff) : rgba2int(0, 0, 0, 0xff);
 			draw_rect(game, (t_vec){tilex * MINIMAP_SCALE_FACTOR, tiley * MINIMAP_SCALE_FACTOR}, \
-							(t_vec){MAP_TILE * MINIMAP_SCALE_FACTOR, MAP_TILE * MINIMAP_SCALE_FACTOR}, tilec);
+							(t_vec){MINIMAP_TILE, MINIMAP_TILE}, tilec);
 			x++;
 		}
 		y++;

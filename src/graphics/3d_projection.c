@@ -1,66 +1,68 @@
 #include "../../inc/cub3D.h"
 
-
-int	average_color(int start_color, int end_color, float f)
+void	draw_walls(t_game *game, int pos_xy[2], float perp_dist, t_vec wall_pixels)
 {
-	int	new_color;
-	int tmp;
-	int i;
+	int				color;
+	t_ray 			*ray;
+	mlx_texture_t 	*texture;
+	int				x;
+	int				y;
 
-	i = 0;
-	if (f < 0 || f > 1)
-		return (start_color);
-	new_color = 0;
-	while (i < 4)
+	(void)perp_dist;
+	ray = &game->player->rays[pos_xy[0]];
+	if (!ray->was_hit_vertical)
 	{
-		tmp = ((start_color >> (8 * i)) & 0xff) * f + ((end_color >> (8 * i)) & 0xff) * (1.0 - f);
-		if (tmp > 255)
-			tmp = 0;
-		new_color += tmp << (i * 8);
-		i++;
+		if (ray->ray_face_up)
+		{
+			texture = game->map->wall_texture->N->tex_img;
+			y = (wall_pixels.x - pos_xy[1]) / (wall_pixels.x - wall_pixels.y) * texture->height;
+			x = (int)(ray->wallhit_x / MAP_TILE * texture->width) % texture->width;
+		}
+		else
+		{
+			texture = game->map->wall_texture->S->tex_img;
+			y = (wall_pixels.x - pos_xy[1]) / (wall_pixels.x - wall_pixels.y) * texture->height;
+			x = (texture->width - 1) - (int)(ray->wallhit_x / MAP_TILE * texture->width) % texture->width;
+		}
 	}
-	return (new_color);
+	else
+	{
+		if (ray->ray_face_right)
+		{
+			texture = game->map->wall_texture->E->tex_img;
+			y = (wall_pixels.x - pos_xy[1]) / (wall_pixels.x - wall_pixels.y) * texture->height;
+			x = (int)(ray->wallhit_y / MAP_TILE * texture->width) % texture->width;
+		}
+		else
+		{
+			texture = game->map->wall_texture->W->tex_img;
+			y = (wall_pixels.x - pos_xy[1]) / (wall_pixels.x - wall_pixels.y) * texture->height;
+			x = (texture->width - 1) - (int)(ray->wallhit_y / MAP_TILE * texture->width) % texture->width;
+		}
+	}
+	color = get_pixel(texture, x, y);
+	// put_pixel(game->mlx_img, pos_xy[0], pos_xy[1], average_color(rgba2int(0,0,0,255), color, perp_dist / 1000.0)); //BONUS
+	put_pixel(game->mlx_img, pos_xy[0], pos_xy[1], color);
 }
 
 void	render_3d(t_game *game)
 {
-	int		i;
-	int		y;
-	int		color;
+	int		pos_xy[2];
 	float	perp_dist;
 	float	h_proj_wall;
-	int		wall_top_pixel;
-	int		wall_bottom_pixel;
+	t_vec	wall_pos_pixel;
 
-	i = 0;
-	color = 0;
-	while (i < NB_RAYS)
+	pos_xy[0] = 0;
+	while (pos_xy[0] < NB_RAYS)
 	{
-		perp_dist = game->player->rays[i].distance * cos(game->player->rays[i].ray_angle - game->player->rot_angle + TWO_PI);
+		perp_dist = game->player->rays[pos_xy[0]].distance * \
+					cos(game->player->rays[pos_xy[0]].ray_angle - game->player->rot_angle);
 		h_proj_wall = (MAP_TILE / perp_dist) * SCREEN_DIST;
-		wall_top_pixel = (WIN_HEIGHT / 2) - ((int)h_proj_wall / 2);
-		if (wall_top_pixel < 0)
-			wall_top_pixel = 0;
-		wall_bottom_pixel = (WIN_HEIGHT / 2) + ((int)h_proj_wall / 2);
-		if (wall_bottom_pixel > WIN_HEIGHT)
-			wall_bottom_pixel = WIN_HEIGHT;
-		if (game->player->rays[i].ray_face_up && !game->player->rays[i].was_hit_vertical)
-			color = rgba2int(255, 36, 36, 255);
-		else if (game->player->rays[i].ray_face_down && !game->player->rays[i].was_hit_vertical)
-			color = rgba2int(255, 242, 46, 255);
-		else if (game->player->rays[i].ray_face_right && game->player->rays[i].was_hit_vertical)
-			color = rgba2int(0, 155, 5, 255);
-		else if (game->player->rays[i].ray_face_left && game->player->rays[i].was_hit_vertical)
-			color = rgba2int(201, 0, 0, 255);
-		y = -1;
-		while (++y < wall_top_pixel)
-			put_pixel(game->mlx_img, i, y, rgba2int(game->map->floor->r,game->map->floor->g,game->map->floor->b, 255));
-		y = wall_top_pixel - 1;
-		while (++y < wall_bottom_pixel)
-			put_pixel(game->mlx_img, i, y , average_color(rgba2int(0,0,0,255), color, perp_dist / 1200.0));
-		y = WIN_HEIGHT + 1;
-		while (--y >= wall_bottom_pixel)
-			put_pixel(game->mlx_img, i, y, rgba2int(game->map->cell->r,game->map->cell->g,game->map->cell->b, 255));
-		i++;
+		wall_pos_pixel.x = (WIN_HEIGHT / 2) - ((int)h_proj_wall / 2);
+		wall_pos_pixel.y = (WIN_HEIGHT / 2) + ((int)h_proj_wall / 2);
+		pos_xy[1] = wall_pos_pixel.x - 1;
+		while (++(pos_xy[1]) < wall_pos_pixel.y)
+			draw_walls(game, pos_xy, perp_dist, wall_pos_pixel);
+		pos_xy[0]++;
 	}
 }

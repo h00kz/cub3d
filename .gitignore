@@ -1,6 +1,5 @@
 *.o
 *.a
 cub3D
-.vscode/settings.json
+.vscode
 map.cub
- 

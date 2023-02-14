@@ -18,6 +18,14 @@ t_game	*init_game(int ac, char **av)
 	game->map = init_map();
 	game->map->map = parse(ac, av, game);
 	game->map->map = ft_verif_map(game->map->map);
+	game->map->wall_texture->N->tex_img = mlx_load_png(game->map->wall_texture->N->path);
+	game->map->wall_texture->S->tex_img = mlx_load_png(game->map->wall_texture->S->path);
+	game->map->wall_texture->E->tex_img = mlx_load_png(game->map->wall_texture->E->path);
+	game->map->wall_texture->W->tex_img = mlx_load_png(game->map->wall_texture->W->path);
+	printf("N_Path:%s\n", game->map->wall_texture->N->path);
+	printf("S_Path:%s\n", game->map->wall_texture->S->path);
+	printf("E_Path:%s\n", game->map->wall_texture->E->path);
+	printf("W_Path:%s\n", game->map->wall_texture->W->path);
 	check_player_pos(game);
 	game->map->width = get_width(game->map->map);
 	game->map->height = get_height(game->map->map);

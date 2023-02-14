@@ -74,15 +74,15 @@ void	horizontal_wall_hits(t_game *game)
 void	vertical_interc(t_game *game, float ray_angle)
 {
 	reset_ray(&game->ray_inter_v);
-	game->ray_inter_v.interc->x = floor(game->player->position->x / (MAP_TILE)) * (MAP_TILE);
+	game->ray_inter_v.interc->x = floor(game->player->position->x / (MAP_TILE * MINIMAP_SCALE_FACTOR)) * (MAP_TILE * MINIMAP_SCALE_FACTOR);
 	if (game->interct.is_ray_fac_right)
-		game->ray_inter_v.interc->x += (MAP_TILE);
+		game->ray_inter_v.interc->x += (MAP_TILE * MINIMAP_SCALE_FACTOR);
 	game->ray_inter_v.interc->y = game->player->position->y + \
 		(game->ray_inter_v.interc->x - game->player->position->x) * tan(ray_angle);
-	game->ray_inter_v.step->x = (MAP_TILE);
+	game->ray_inter_v.step->x = (MAP_TILE * MINIMAP_SCALE_FACTOR);
 	if (game->interct.is_ray_fac_left)
 		game->ray_inter_v.step->x *= -1;
-	game->ray_inter_v.step->y = (MAP_TILE) * tan(ray_angle);
+	game->ray_inter_v.step->y = (MAP_TILE * MINIMAP_SCALE_FACTOR) * tan(ray_angle);
 	if ((game->interct.is_ray_fac_up && game->ray_inter_v.step->y > 0) ||
 		(game->interct.is_ray_fac_down && game->ray_inter_v.step->y < 0))
 		game->ray_inter_v.step->y *= -1;
@@ -94,15 +94,15 @@ void	vertical_interc(t_game *game, float ray_angle)
 void	horizontal_interc(t_game *game, float ray_angle)
 {
 	reset_ray(&game->ray_inter_h);
-	game->ray_inter_h.interc->y = floor(game->player->position->y / (MAP_TILE)) * (MAP_TILE);
+	game->ray_inter_h.interc->y = floor(game->player->position->y / (MAP_TILE * MINIMAP_SCALE_FACTOR)) * (MAP_TILE * MINIMAP_SCALE_FACTOR);
 	if (game->interct.is_ray_fac_down)
-		game->ray_inter_h.interc->y += MAP_TILE;
+		game->ray_inter_h.interc->y += MAP_TILE * MINIMAP_SCALE_FACTOR;
 	game->ray_inter_h.interc->x = game->player->position->x + \
 		(game->ray_inter_h.interc->y - game->player->position->y) / tan(ray_angle);
-	game->ray_inter_h.step->y = MAP_TILE;
+	game->ray_inter_h.step->y = MAP_TILE * MINIMAP_SCALE_FACTOR;
 	if (game->interct.is_ray_fac_up)
 		game->ray_inter_h.step->y *= -1;
-	game->ray_inter_h.step->x = (MAP_TILE) / tan(ray_angle);
+	game->ray_inter_h.step->x = (MAP_TILE * MINIMAP_SCALE_FACTOR) / tan(ray_angle);
 	if ((game->interct.is_ray_fac_left && game->ray_inter_h.step->x > 0) ||
 		(game->interct.is_ray_fac_right && game->ray_inter_h.step->x < 0))
 		game->ray_inter_h.step->x *= -1;
