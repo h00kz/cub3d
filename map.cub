@@ -1,6 +1,6 @@
-NO ./nfour.png
-SO ./N_minecraft.png
-WE ./oui.png
+NO ./bricksx64_NORTH.png
+SO ./bricksx64_SOUTH.png
+WE ./bricksx64_OUEST.png
 EA ./bricksx64_EST.png
 C 128,191,255
 F 77,72,58

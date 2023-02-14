@@ -95,7 +95,7 @@ void	move_player(t_game *game)
 	// mlx_set_mouse_pos(game->mlx, xoffset, yoffset);
 
 	// MANDATORY (sans mouse)
-	game->player->rot_angle += game->player->turn_dir->x * game->player->turn_speed * game->mlx->delta_time;
+	game->player->rot_angle += (game->player->turn_dir->x * game->player->turn_speed) * game->mlx->delta_time;
 
 	move_step_fb = game->player->walk_dir->x * game->player->walk_speed * game->mlx->delta_time;
 	move_step_lr = game->player->walk_dir->y * game->player->walk_speed * game->mlx->delta_time;
