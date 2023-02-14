@@ -191,5 +191,31 @@ int			get_width(char **map);
 char		**parse(int argc, char **argv, t_game *game);
 char		**ft_verif_map(char **map);
 void		check_player_pos(t_game *game);
+void		ft_skip_whitespace(char *line, int *i);
+void		ft_skip_whitespace_newline(char *line, int *i);
+void		ft_skip_number(char *line, int *i);
+void		fill_first_line(char **map, char **new_map);
+void		fill_first_space_line(char **map, char **new_map);
+void		fill_last_line(char **map, char **new_map);
+void		fill_last_space_line(char **map, char **new_map);
+void		fill_line_border(char **map, char **new_map);
+int			ft_map_length(char **map);
+int			ft_find_big_line(char **map);
+void		ft_check_n(char *line, t_game *game);
+void		ft_check_s(char *line, t_game *game);
+void		ft_check_w(char *line, t_game *game);
+void		ft_check_e(char *line, t_game *game);
+void		ft_check_empty_args(t_game *game);
+void		ft_check_f_next(char **check);
+void		ft_check_f(char *line, t_game *game);
+void		ft_check_c_next(char **check);
+void		ft_check_c(char *line, t_game *game);
+void		ft_get_rgb(char *line, t_color *color);
+void		ft_get_info_map(char *file, t_game *game);
+void		ft_get_map(char *filename, char **map);
+void		ft_check_texture(char *line, int i, t_game *game);
+void		ft_check_rgb(char *line, int i, t_game *game);
+
+
 
 #endif
