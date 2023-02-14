@@ -190,6 +190,6 @@ int			get_width(char **map);
 
 char		**parse(int argc, char **argv, t_game *game);
 char		**ft_verif_map(char **map);
-void		check_player_pos(char **map);
+void		check_player_pos(t_game *game);
 
 #endif
