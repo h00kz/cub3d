@@ -149,42 +149,48 @@ typedef struct s_game
 }	t_game;
 
 // -------------------------- INITS ------------------------- //
-t_game		*init_game(int ac, char **av);
-t_map		*init_map();
-t_player	*init_player();
-t_ray		*init_rays(int nb_rays);
-float		set_player_dir(char dir);
-char		get_player_pos(char **map, t_vec *pos);
+t_game			*init_game(int ac, char **av);
+t_map			*init_map();
+t_player		*init_player();
+t_ray			*init_rays(int nb_rays);
+float			set_player_dir(char dir);
+char			get_player_pos(char **map, t_vec *pos);
 
 
 // ------------------------- RENDERS ------------------------ //
-void		render_minimap_player(t_game *game);
-void		render_ray(t_game *game);
-void		render_3d(t_game *game);
-void		render_minimap(t_game *game);
-uint32_t	get_pixel(mlx_texture_t* texture, uint32_t x, uint32_t y);
-void		put_pixel(mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color);
-void		draw_line(t_game *game, t_vec *start, t_vec *end, int color);
-void		draw_rect(t_game *game, t_vec pos, t_vec size, int color);
-int32_t		average_color(int start_color, int end_color, float f);
+void			render_minimap_player(t_game *game);
+void			render_ray(t_game *game);
+void			render_3d(t_game *game);
+void			draw_walls(t_game *game, int pos_xy[2], float perp_dist, t_vec wall_pixels);
+mlx_texture_t	*get_wall_texture(t_game *game, t_ray *ray);
+int				get_wall_texture_y(t_vec wall_pixels, int pos_y, t_ray *ray, mlx_texture_t *texture);
+int				get_wall_texture_x(t_ray *ray, mlx_texture_t *texture);
+t_vec			get_wall_position_pixels(float h_proj_wall);
+void			draw_vertical_strip(t_game *game, int pos_xy[2], float perp_dist, t_vec wall_pixels);
+
+void			render_minimap(t_game *game);
+uint32_t		get_pixel(mlx_texture_t* texture, uint32_t x, uint32_t y);
+void			put_pixel(mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color);
+void			draw_line(t_game *game, t_vec *start, t_vec *end, int color);
+void			draw_rect(t_game *game, t_vec pos, t_vec size, int color);
+int32_t			average_color(int start_color, int end_color, float f);
 
 // ------------------------ GAMELGCS ----------------------- //
-void		game_routine(void *param);
-void		input_handler(t_game *game);
-void		move_player(t_game *game);
-void		render(t_game *game);
+void			game_routine(void *param);
+void			input_handler(t_game *game);
+void			move_player(t_game *game);
+void			render(t_game *game);
 
 // ------------------------ RAYS ----------------------- //
-void		cast_all_rays(t_game *game);
+void			cast_all_rays(t_game *game);
 
-int			is_in_map(t_game *game, t_vec pos);
-int			get_collision(t_game *game, t_vec pos);
-float		normalize_angle(float *angle);
-float		distance_ab(t_vec a, t_vec b);
-int			rgba2int(int r, int g, int b, int a);
-
-int			get_height(char **map);
-int			get_width(char **map);
+int				is_in_map(t_game *game, t_vec pos);
+int				get_collision(t_game *game, t_vec pos);
+float			normalize_angle(float *angle);
+float			distance_ab(t_vec a, t_vec b);
+int				rgba2int(int r, int g, int b, int a);
+int				get_height(char **map);
+int				get_width(char **map);
 
 // ------------------------- PARSING ------------------------ //
 
