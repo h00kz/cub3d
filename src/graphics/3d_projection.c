@@ -14,7 +14,6 @@ void draw_walls(t_game *game, int pos_xy[2], float perp_dist, t_vec wall_pixels)
 	x = get_wall_texture_x(ray, texture);
 	color = get_pixel(texture, x, y);
 	put_pixel(game->mlx_img, pos_xy[0], pos_xy[1], color);
-
 }
 
 void render_3d(t_game *game)
@@ -63,9 +62,19 @@ int get_wall_texture_y(t_vec wall_pixels, int pos_y, t_ray *ray, mlx_texture_t *
 int get_wall_texture_x(t_ray *ray, mlx_texture_t *texture)
 {
 	if (!ray->was_hit_vertical)
-		return ((int)(ray->wallhit_x / MAP_TILE * texture->width) % texture->width);
+	{
+		if (ray->ray_face_up)
+			return ((int)(ray->wallhit_x / MAP_TILE * texture->width) % texture->width);
+		else
+			return ((MAP_TILE - 1) - (int)(ray->wallhit_x) % MAP_TILE);
+	}
 	else
-		return ((int)(ray->wallhit_y / MAP_TILE * texture->width) % texture->width);
+	{
+		if (ray->ray_face_right)
+			return ((int)(ray->wallhit_y / MAP_TILE * texture->width) % texture->width);
+		else
+			return ((MAP_TILE - 1) - (int)(ray->wallhit_y) % MAP_TILE);
+	}
 }
 
 t_vec get_wall_position_pixels(float h_proj_wall)
