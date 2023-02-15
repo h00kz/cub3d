@@ -97,31 +97,6 @@ void	ft_error_next(int msg, t_game *game)
 		ft_free2(game);
 	}
 }
-void	ft_free_split(char **strs)
-{
-	int	i;
-
-	i = 0;
-	if (!strs)
-		return ;
-	while (strs[i])
-	{
-		free(strs[i]);
-		i++;
-	}
-}
-
-void	ft_free3(t_game *game)
-{
-	free(game->player->position);
-	free(game->player->rays);
-	free(game->player->turn_dir);
-	free(game->player->walk_dir);
-	free(game->player);
-	ft_free_split(game->map->map);
-
-	ft_free2(game);
-}
 
 void	ft_error(int msg, t_game *game)
 {
