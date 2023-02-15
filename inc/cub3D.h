@@ -126,8 +126,6 @@ typedef struct s_player
 	float	rot_angle;
 	float	walk_speed;
 	float	turn_speed;
-	// int		minimap_w;
-	// int		minimap_h;
 }	t_player;
 
 typedef struct s_game
@@ -140,16 +138,14 @@ typedef struct s_game
 	t_interc	interct;
 	t_interc	ray_inter_v;
 	t_interc	ray_inter_h;
-	int			debug_render_rays;
 	double		last_time;
 	double		current_time;
-	int			frame_count;
 }	t_game;
 
 // -------------------------- INITS ------------------------- //
 t_game			*init_game(int ac, char **av);
 t_map			*init_map();
-t_player		*init_player();
+t_player		*init_player(t_game *game);
 t_ray			*init_rays(int nb_rays);
 float			set_player_dir(char dir);
 char			get_player_pos(char **map, t_vec *pos);
@@ -157,7 +153,6 @@ char			get_player_pos(char **map, t_vec *pos);
 
 // ------------------------- RENDERS ------------------------ //
 void			render_minimap_player(t_game *game);
-void			render_ray(t_game *game);
 void			render_3d(t_game *game);
 void			draw_walls(t_game *game, int pos_xy[2], t_vec wall_pixels);
 mlx_texture_t	*get_wall_texture(t_game *game, t_ray *ray);
@@ -191,43 +186,43 @@ void			horizontal_wall_hits(t_game *game);
 void			horizontal_interc(t_game *game, float ray_angle);
 void			vertical_wall_hits(t_game *game);
 void			vertical_interc(t_game *game, float ray_angle);
-
+void			reset_ray(t_interc *hv);
+void			put_on_rays_struct(t_interc hv, t_game *game, int was_hit_v, int ray_id);
+void			take_smallest_r_infos(t_game *game, float ray_angle, int ray_id);
 
 // ------------------------- PARSING ------------------------ //
 int				get_height(char **map);
 int				get_width(char **map);
-char		**parse(int argc, char **argv, t_game *game);
-char		**ft_verif_map(char **map);
-void		check_player_pos(t_game *game);
-void		ft_skip_whitespace(char *line, int *i);
-void		ft_skip_whitespace_newline(char *line, int *i);
-void		ft_skip_number(char *line, int *i);
-void		fill_first_line(char **map, char **new_map);
-void		fill_first_space_line(char **map, char **new_map);
-void		fill_last_line(char **map, char **new_map);
-void		fill_last_space_line(char **map, char **new_map);
-void		fill_line_border(char **map, char **new_map);
-int			ft_map_length(char **map);
-int			ft_find_big_line(char **map);
-void		ft_check_n(char *line, t_game *game);
-void		ft_check_s(char *line, t_game *game);
-void		ft_check_w(char *line, t_game *game);
-void		ft_check_e(char *line, t_game *game);
-void		ft_check_empty_args(t_game *game);
-void		ft_check_f_next(char **check, t_game *game, char *line);
-void		ft_check_f(char *line, t_game *game);
-void		ft_check_c_next(char **check, t_game *game, char *line);
-void		ft_check_c(char *line, t_game *game);
-void		ft_get_rgb(char *line, t_color *color, t_game *game);
-void		ft_get_info_map(char *file, t_game *game);
-void		ft_get_map(char *filename, char **map);
-void		ft_check_texture(char *line, int i, t_game *game);
-void		ft_check_rgb(char *line, int i, t_game *game);
-void		ft_error(int msg, t_game *game);
-
-void	reset_ray(t_interc *hv);
-void	put_on_rays_struct(t_interc hv, t_game *game, int was_hit_v, int ray_id);
-void	take_smallest_r_infos(t_game *game, float ray_angle, int ray_id);
-
+char			**parse(int argc, char **argv, t_game *game);
+char			**ft_verif_map(char **map);
+void			check_player_pos(t_game *game);
+void			ft_skip_whitespace(char *line, int *i);
+void			ft_skip_whitespace_newline(char *line, int *i);
+void			ft_skip_number(char *line, int *i);
+void			fill_first_line(char **map, char **new_map);
+void			fill_first_space_line(char **map, char **new_map);
+void			fill_last_line(char **map, char **new_map);
+void			fill_last_space_line(char **map, char **new_map);
+void			fill_line_border(char **map, char **new_map);
+int				ft_map_length(char **map);
+int				ft_find_big_line(char **map);
+void			ft_check_n(char *line, t_game *game);
+void			ft_check_s(char *line, t_game *game);
+void			ft_check_w(char *line, t_game *game);
+void			ft_check_e(char *line, t_game *game);
+void			ft_check_empty_args(t_game *game);
+void			ft_check_f_next(char **check, t_game *game);
+void			ft_check_f(char *line, t_game *game);
+void			ft_check_c_next(char **check);
+void			ft_check_c(char *line);
+void			ft_get_rgb(char *line, t_color *color);
+void			ft_get_info_map(char *file, t_game *game);
+void			ft_get_map(char *filename, char **map);
+void			ft_check_texture(char *line, int i, t_game *game);
+void			ft_check_rgb(char *line, int i, t_game *game);
+void			ft_error(int msg, t_game *game);
+void			ft_free2(t_game *game);
+void			ft_free3(t_game *game);
+void			ft_free_split(char **strs);
 
 #endif
