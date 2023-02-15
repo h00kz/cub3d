@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dda.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/15 11:31:50 by jlarrieu          #+#    #+#             */
+/*   Updated: 2023/02/15 11:34:06 by jlarrieu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3D.h"
 
 void	draw_line(t_game *game, t_vec *start, t_vec *end, int color)
@@ -11,7 +23,7 @@ void	draw_line(t_game *game, t_vec *start, t_vec *end, int color)
 	i = 0;
 	delta.x = (end->x - start->x);
 	delta.y = (end->y - start->y);
-	longest_side_len = fmax(fabs(delta.x),fabs(delta.y));
+	longest_side_len = fmax(fabs(delta.x), fabs(delta.y));
 	pos_inc.x = delta.x / longest_side_len;
 	pos_inc.y = delta.y / longest_side_len;
 	current_pos.x = start->x;

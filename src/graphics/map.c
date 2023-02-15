@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/15 11:32:16 by jlarrieu          #+#    #+#             */
+/*   Updated: 2023/02/15 12:44:39 by jlarrieu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3D.h"
 
 t_map	*init_map()
@@ -21,11 +33,11 @@ int	get_collision(t_game *game, t_vec pos)
 	int	map_x_idx;
 	int	map_y_idx;
 
-	if (pos.x < 0 || pos.x > game->map->width * (MAP_TILE * MINIMAP_SCALE_FACTOR) || \
-		pos.y < 0 || pos.y > game->map->height * (MAP_TILE * MINIMAP_SCALE_FACTOR))
+	if (pos.x < 0 || pos.x > game->map->width * (MAP_TILE) || \
+		pos.y < 0 || pos.y > game->map->height * (MAP_TILE))
 		return (TRUE);
-	map_x_idx = floor(pos.x / (MAP_TILE * MINIMAP_SCALE_FACTOR));
-	map_y_idx = floor(pos.y / (MAP_TILE * MINIMAP_SCALE_FACTOR));
+	map_x_idx = floor(pos.x / (MAP_TILE));
+	map_y_idx = floor(pos.y / (MAP_TILE));
 	return (game->map->map[map_y_idx][map_x_idx] != '1');
 }
 
@@ -49,8 +61,8 @@ void	render_minimap(t_game *game)
 			int tilex = x * MAP_TILE;
 			int tiley = y * MAP_TILE;
 			int tilec = game->map->map[y][x] != '1' ? rgba2int(0xff, 0xff, 0xff, 0xff) : rgba2int(0, 0, 0, 0xff);
-			draw_rect(game, (t_vec){tilex * MINIMAP_SCALE_FACTOR, tiley * MINIMAP_SCALE_FACTOR}, \
-							(t_vec){MINIMAP_TILE, MINIMAP_TILE}, tilec);
+			draw_rect(game, (t_vec){tilex, tiley}, \
+							(t_vec){MAP_TILE, MAP_TILE}, tilec);
 			x++;
 		}
 		y++;

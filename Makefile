@@ -1,10 +1,14 @@
 SRC					= src/main.c \
 					  src/graphics/rect.c \
+					  src/graphics/texture/texture.c \
 					  src/graphics/3d_projection.c \
 					  src/graphics/map.c \
 					  src/graphics/player.c \
 					  src/graphics/dda.c \
 					  src/logics/raycasting/ray.c \
+					  src/logics/raycasting/casting.c \
+					  src/logics/raycasting/horizontal.c \
+					  src/logics/raycasting/vertical.c \
 					  src/utils/color.c \
 					  src/utils/pixel_utils.c \
 					  src/parsing/parsing.c \

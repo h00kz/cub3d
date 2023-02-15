@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_logic.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/15 11:39:54 by jlarrieu          #+#    #+#             */
+/*   Updated: 2023/02/15 11:41:49 by jlarrieu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	game_routine(void *param)
 {
 	t_game	*game;
-	
+
 	game = param;
 	input_handler(game);
 	render(game);
@@ -38,15 +50,14 @@ void	render(t_game *game)
 	move_player(game);
 	cast_all_rays(game);
 	draw_rect(game, (t_vec){0, 0}, (t_vec){WIN_WIDTH, WIN_HEIGHT / 2}, \
-			rgba2int(game->map->cell->r, game->map->cell->g, game->map->cell->b, 255));
-	draw_rect(game, (t_vec){0, WIN_HEIGHT / 2}, (t_vec){WIN_WIDTH, WIN_HEIGHT}, \
-			rgba2int(game->map->floor->r, game->map->floor->g, game->map->floor->b, 255));
+	rgba2int(game->map->cell->r, game->map->cell->g, game->map->cell->b, 255));
+	draw_rect(game, (t_vec){0, WIN_HEIGHT / 2}, \
+			(t_vec){WIN_WIDTH, WIN_HEIGHT}, \
+			rgba2int(game->map->floor->r, game->map->floor->g, \
+			game->map->floor->b, 255));
 	render_3d(game);
-	// render_minimap(game);
-	// render_minimap_player(game);
 	game->current_time = mlx_get_time();
 	game->frame_count++;
-
 	if (game->current_time - game->last_time >= 1.0)
 	{
 		printf("FPS:%d\n", game->frame_count);
