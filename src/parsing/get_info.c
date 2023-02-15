@@ -8,7 +8,7 @@ static void	check_rgb(t_game *game, char *line, t_color *color, int *i)
 		free(line);
 		ft_error(5, game);
 	}
-	ft_skip_number(line, &i);
+	ft_skip_number(line, i);
 	(*i)++;
 	color->g = ft_atoi(&line[(*i)]);
 	if (color->g > 255)
@@ -16,7 +16,7 @@ static void	check_rgb(t_game *game, char *line, t_color *color, int *i)
 		free(line);
 		ft_error(5, game);
 	}
-	ft_skip_number(line, &i);
+	ft_skip_number(line, i);
 	(*i)++;
 	color->b = ft_atoi(&line[(*i)]);
 	if (color->b > 255)

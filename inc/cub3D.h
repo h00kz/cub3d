@@ -219,6 +219,7 @@ void			ft_get_map(char *filename, char **map);
 void			ft_check_texture(char *line, int i, t_game *game);
 void			ft_check_rgb(char *line, int i, t_game *game);
 void			ft_error(int msg, t_game *game);
+void			ft_free(t_game *game);
 void			ft_free2(t_game *game);
 void			ft_free3(t_game *game);
 void			ft_free_split(char **strs);
