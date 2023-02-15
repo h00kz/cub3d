@@ -27,7 +27,7 @@ SRC					= src/main.c \
 
 LIBFT				= libft/
 MLX42				= MLX42/
-CFLAGS				=  -g3 -ldl -lglfw -pthread -lm -Werror -Wextra -Wall
+CFLAGS				=  -g3 -ldl -lglfw -pthread -lm -Werror -Wextra -Wall -gdwarf-4
 NAME				= cub3D
 LIB					= libft/libft.a MLX42/libmlx42.a
 INCLUDE				= inc/
