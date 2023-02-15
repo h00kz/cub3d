@@ -22,11 +22,12 @@ SRC					= src/main.c \
 
 LIBFT				= libft/
 MLX42				= MLX42/
-CFLAGS				=  -g -ldl -lglfw -pthread -lm 
+CFLAGS				=  -g3 -ldl -lglfw -pthread -lm -Werror -Wextra -Wall
 NAME				= cub3D
 LIB					= libft/libft.a MLX42/libmlx42.a
 INCLUDE				= inc/
-# INCLUDEMLX			= MLX42/
+INCLUDEMLX			= MLX42/include/MLX42
+OBJ					= $(SRC:.c=.o)
 
 blink				= \033[5m
 NC					= \033[0m
@@ -38,15 +39,19 @@ sgr0				:= $(shell tput sgr0)
 
 all: $(NAME)
 
-$(NAME):
+.c.o: $(SRC)
+	@$(CC) -Iinc/ $(CFLAGS) -c -o $@ $<
+
+$(NAME): $(OBJ)
 	@make -sC $(LIBFT) all
 	@make -sC $(MLX42) all
-	@gcc $(SRC) $(LIB) -o $(NAME) -I$(INCLUDE) $(CFLAGS)
+	@gcc ${OBJ} $(LIB) -o $(NAME) -I$(INCLUDE) -I$(INCLUDEMLX) $(CFLAGS)
 	@printf "[$(green)✔$(sgr0)] $(bold)$(green)Compiling cub3D finished!$(sgr0)\n"
 
 clean:
 	@make -sC $(LIBFT) clean
 	@make -sC $(MLX42) clean
+	@rm -rf $(OBJ)
 
 fclean: clean
 	@rm -rf $(NAME)

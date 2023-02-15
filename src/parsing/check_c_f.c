@@ -29,10 +29,9 @@ void	ft_check_f_next(char **check)
 		printf("error1\n");
 }
 
-void	ft_check_f(char *line, t_game *game)
+void	ft_check_f(char *line)
 {
 	int		i;
-	int		j;
 	char	**check;
 
 	i = 1;
@@ -80,10 +79,9 @@ void	ft_check_c_next(char **check)
 		printf("error\n");
 }
 
-void	ft_check_c(char *line, t_game *game)
+void	ft_check_c(char *line)
 {
 	int		i;
-	int		j;
 	char	**check;
 
 	i = 1;
