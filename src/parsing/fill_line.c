@@ -57,10 +57,8 @@ void	fill_last_space_line(char **map, char **new_map)
 void	fill_line_border(char **map, char **new_map)
 {
 	int	i;
-	int	j;
 
 	i = 2;
-	j = 0;
 	while (i <= ft_map_length(map) + 1)
 	{
 		new_map[i][0] = '1';
