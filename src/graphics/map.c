@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:32:16 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/15 12:44:39 by jlarrieu         ###   ########.fr       */
+/*   Updated: 2023/02/15 14:51:28 by pdubacqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
 
-t_map	*init_map()
+t_map	*init_map(void)
 {
 	t_map	*map;
 
@@ -45,26 +45,4 @@ int	is_in_map(t_game *game, t_vec pos)
 {
 	return (pos.x >= 0 && pos.x < game->map->width * MAP_TILE && \
 			pos.y >= 0 && pos.y < game->map->height * MAP_TILE);
-}
-
-void	render_minimap(t_game *game)
-{
-	int	x;
-	int y;
-
-	y = 0;
-	while (y < game->map->height)
-	{
-		x = 0;
-		while (x < game->map->width)
-		{
-			int tilex = x * MAP_TILE;
-			int tiley = y * MAP_TILE;
-			int tilec = game->map->map[y][x] != '1' ? rgba2int(0xff, 0xff, 0xff, 0xff) : rgba2int(0, 0, 0, 0xff);
-			draw_rect(game, (t_vec){tilex, tiley}, \
-							(t_vec){MAP_TILE, MAP_TILE}, tilec);
-			x++;
-		}
-		y++;
-	}
 }

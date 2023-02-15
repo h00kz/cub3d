@@ -12,7 +12,7 @@ int	get_width(char **map)
 
 int	get_height(char **map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map[i])

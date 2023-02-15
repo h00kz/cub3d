@@ -119,11 +119,11 @@ void	ft_check_e(char *line, t_game *game)
 void	ft_check_empty_args(t_game *game)
 {
 	if (!(game->map->wall_texture->E->path))
-		printf("error\n");
+		ft_error(6, game);
 	if (!(game->map->wall_texture->N->path))
-		printf("error\n");
+		ft_error(6, game);
 	if (!(game->map->wall_texture->S->path))
-		printf("error\n");
+		ft_error(6, game);
 	if (!(game->map->wall_texture->W->path))
-		printf("error\n");
+		ft_error(6, game);
 }
