@@ -4,6 +4,7 @@ SRC					= src/main.c \
 					  src/graphics/3d_projection.c \
 					  src/graphics/map.c \
 					  src/graphics/player.c \
+					  src/graphics/player_move.c \
 					  src/graphics/dda.c \
 					  src/logics/raycasting/ray.c \
 					  src/logics/raycasting/casting.c \

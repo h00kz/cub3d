@@ -1,10 +1,10 @@
-NO ./bricksxsadasdas64_NORTH.png
+NO ./bricksx64_NORTH.png
 SO ./bricksx64_SOUTH.png
 WE ./bricksx64_OUEST.png
 EA ./bricksx64_EST.png
 
-C 128,191,255
-F 123,10,123
+C 30,30,120
+F 20,130,30
 
             1111111111111
             1000000000001
