@@ -190,7 +190,6 @@ void			reset_ray(t_interc *hv);
 void			put_on_rays_struct(t_interc hv, t_game *game, int was_hit_v, int ray_id);
 void			take_smallest_r_infos(t_game *game, float ray_angle, int ray_id);
 
-
 // ------------------------- PARSING ------------------------ //
 int				get_height(char **map);
 int				get_width(char **map);
@@ -225,7 +224,5 @@ void			ft_error(int msg, t_game *game);
 void			ft_free2(t_game *game);
 void			ft_free3(t_game *game);
 void			ft_free_split(char **strs);
-
-
 
 #endif

@@ -17,12 +17,12 @@ void	ft_check_rgb(char *line, int i, t_game *game)
 	if (line[i] == 'F')
 	{
 		ft_check_f(line, game);
-		ft_get_rgb(line, game->map->floor);
+		ft_get_rgb(line, game->map->floor, game);
 	}
 	else if (line[i] == 'C')
 	{
-		ft_check_c(line);
-		ft_get_rgb(line, game->map->cell);
+		ft_check_c(line, game);
+		ft_get_rgb(line, game->map->cell, game);
 	}
 }
 
@@ -54,8 +54,6 @@ char	**ft_parse_next(char *filename)
 	int		i;
 
 	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		printf("error\n");
 	line = get_next_line(fd);
 	ft_count_line(&line, fd, &i);
 	if (line)

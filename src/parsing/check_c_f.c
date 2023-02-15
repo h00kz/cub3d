@@ -1,6 +1,18 @@
 #include "../../inc/cub3D.h"
 
-void	ft_check_f_next(char **check, t_game *game)
+void	ft_free_error(char *line, char **check, t_game *game)
+{
+	int	i;
+
+	i = 0;
+	free(line);
+	while (check[i])
+		free(check[i++]);
+	free(check);
+	ft_error(5, game);
+}
+
+void	ft_check_f_next(char **check, t_game *game, char *line)
 {
 	int	i;
 	int	j;
@@ -15,21 +27,17 @@ void	ft_check_f_next(char **check, t_game *game)
 		{
 			if (check[i][j] <= '9' && check[i][j] >= '0')
 				count++;
-			if ((check[i][j] > '9' || check[i][j] < '0') \
-				&& (check[i][j] != '\n' || check[i][j] != '\0') \
-				&& ((check[i][j] < 9 && check[i][j] > 13) || check[i][j] == 32))
-				ft_error(5, game);
 			j++;
 		}
 		if (count == 0)
-			printf("error1\n");
+			ft_free_error(line, check, game);
 		i++;
 	}
 	if (i != 3)
-		printf("error2\n");
+		ft_free_error(line, check, game);
 }
 
-void	ft_check_f(char *line, t_game *game)
+void	ft_check_f(char *line, t_game *game	)
 {
 	int		i;
 	char	**check;
@@ -39,9 +47,9 @@ void	ft_check_f(char *line, t_game *game)
 			i++;
 	check = ft_split(&line[i], ',');
 	if (check == NULL)
-		printf("error\n");
+		ft_free_error(line, check, game);
 	i = 0;
-	ft_check_f_next(check, game);
+	ft_check_f_next(check, game, line);
 	while (check[i])
 	{
 		free(check[i]);
@@ -50,7 +58,7 @@ void	ft_check_f(char *line, t_game *game)
 	free(check);
 }
 
-void	ft_check_c_next(char **check)
+void	ft_check_c_next(char **check, t_game *game, char *line)
 {
 	int	count;
 	int	i;
@@ -65,21 +73,17 @@ void	ft_check_c_next(char **check)
 		{
 			if (check[i][j] <= '9' && check[i][j] >= '0')
 				count++;
-			if ((check[i][j] > '9' || check[i][j] < '0') \
-				&& (check[i][j] != '\n' || check[i][j] != '\0') \
-				&& ((check[i][j] < 9 && check[i][j] > 13) || check[i][j] == 32))
-				printf("error\n");
 			j++;
 		}
 		if (count == 0)
-			printf("error1\n");
+			ft_free_error(line, check, game);
 		i++;
 	}
 	if (i != 3)
-		printf("error2\n");
+		ft_free_error(line, check, game);
 }
 
-void	ft_check_c(char *line)
+void	ft_check_c(char *line, t_game *game)
 {
 	int		i;
 	char	**check;
@@ -89,9 +93,9 @@ void	ft_check_c(char *line)
 			i++;
 	check = ft_split(&line[i], ',');
 	if (check == NULL)
-		printf("error\n");
+		ft_free_error(line, check, game);
 	i = 0;
-	ft_check_c_next(check);
+	ft_check_c_next(check, game, line);
 	while (check[i])
 	{
 		free(check[i]);

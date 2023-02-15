@@ -1,10 +1,9 @@
 NO ./bricksx64_NORTH
 SO ./N_minecraft.png
 WE ./bricksx64_OUEST.png
-EA ./bricksx64_EST.png
 
-C 128,191,255
-F 123,1qwe,123
+C 128,11,255
+F 123,112,23
 
             1111111111111
             1000000000001

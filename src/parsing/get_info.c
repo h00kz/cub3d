@@ -1,6 +1,6 @@
 #include "../../inc/cub3D.h"
 
-void	ft_get_rgb(char *line, t_color *color)
+void	ft_get_rgb(char *line, t_color *color, t_game *game)
 {
 	int	i;
 
@@ -9,24 +9,39 @@ void	ft_get_rgb(char *line, t_color *color)
 	i++;
 	ft_skip_whitespace(line, &i);
 	if (line[i] < '0' || line[i] > '9')
-		printf("error\n");
+	{
+		free(line);
+		ft_error(5, game);
+	}
 	color->r = ft_atoi(&line[i]);
 	if (color->r > 255)
-		printf("error\n");
+	{
+		free(line);
+		ft_error(5, game);
+	}
 	ft_skip_number(line, &i);
 	i++;
 	color->g = ft_atoi(&line[i]);
 	if (color->g > 255)
-		printf("error\n");
+	{
+		free(line);
+		ft_error(5, game);
+	}
 	ft_skip_number(line, &i);
 	i++;
 	color->b = ft_atoi(&line[i]);
 	if (color->b > 255)
-		printf("error\n");
+	{
+		free(line);
+		ft_error(5, game);
+	}
 	ft_skip_number(line, &i);
 	ft_skip_whitespace(line, &i);
 	if (line[i])
-		printf("error\n");
+	{
+		free(line);
+		ft_error(5, game);
+	}
 }
 
 void	ft_get_info_map(char *file, t_game *game)
