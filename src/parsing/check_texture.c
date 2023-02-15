@@ -8,7 +8,7 @@ void	ft_check_n(char *line, t_game *game)
 	if (line[i + 1] == 'O')
 	{
 		if (game->map->wall_texture->N->path)
-			printf("Error there is already a path\n");
+			ft_error(2, game);
 		ft_skip_whitespace(line, &i);
 		i++;
 		ft_skip_whitespace_newline(line, &i);

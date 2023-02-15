@@ -73,14 +73,14 @@ char	**parse(int argc, char **argv, t_game *game)
 
 	i = 0;
 	if (argc != 2)
-		printf("invalid number of arguments\n");
+		ft_error(0, game);
 	while (argv[1][i])
 		i++;
 	if (i < 4)
-		printf("wrong extension\n");
+		ft_error(1, game);
 	if (argv[1][i - 4] != '.' || argv[1][i - 3] != 'c' \
 		|| argv[1][i - 2] != 'u' || argv[1][i - 1] != 'b')
-		printf("wrong extension\n");
+		ft_error(1, game);
 	ft_get_info_map(argv[1], game);
 	free(game->map->map);
 	map = ft_parse_next(argv[1]);
