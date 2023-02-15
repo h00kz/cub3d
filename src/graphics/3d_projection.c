@@ -68,14 +68,14 @@ int get_wall_texture_x(t_ray *ray, mlx_texture_t *texture)
 		if (ray->ray_face_up)
 			return ((int)(ray->wallhit_x / MAP_TILE * texture->width) % texture->width);
 		else
-			return ((MAP_TILE - 1) - (int)(ray->wallhit_x) % MAP_TILE);
+			return ((texture->width - 1) - (int)(ray->wallhit_x / MAP_TILE * texture->width) % texture->width);
 	}
 	else
 	{
 		if (ray->ray_face_right)
 			return ((int)(ray->wallhit_y / MAP_TILE * texture->width) % texture->width);
 		else
-			return ((MAP_TILE - 1) - (int)(ray->wallhit_y) % MAP_TILE);
+			return ((texture->width - 1) - (int)(ray->wallhit_y / MAP_TILE * texture->width) % texture->width);
 	}
 }
 
