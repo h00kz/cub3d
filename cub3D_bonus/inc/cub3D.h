@@ -171,6 +171,7 @@ void			game_routine(void *param);
 void			input_handler(t_game *game);
 void			move_player(t_game *game);
 void			render(t_game *game);
+void 			look_mouse(t_game *game);
 
 // ------------------------ RAYS ----------------------- //
 void			cast_all_rays(t_game *game);
