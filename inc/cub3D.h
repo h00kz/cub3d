@@ -167,8 +167,8 @@ int				get_wall_texture_y(t_vec wall_pixels, int pos_y, t_ray *ray, mlx_texture_
 int				get_wall_texture_x(t_ray *ray, mlx_texture_t *texture);
 t_vec			get_wall_position_pixels(float h_proj_wall);
 void			draw_vertical_strip(t_game *game, int pos_xy[2], float perp_dist, t_vec wall_pixels);
-
 void			render_minimap(t_game *game);
+
 uint32_t		get_pixel(mlx_texture_t* texture, uint32_t x, uint32_t y);
 void			put_pixel(mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color);
 void			draw_line(t_game *game, t_vec *start, t_vec *end, int color);
@@ -189,11 +189,10 @@ int				get_collision(t_game *game, t_vec pos);
 float			normalize_angle(float *angle);
 float			distance_ab(t_vec a, t_vec b);
 int				rgba2int(int r, int g, int b, int a);
-int				get_height(char **map);
-int				get_width(char **map);
 
 // ------------------------- PARSING ------------------------ //
-
+int				get_height(char **map);
+int				get_width(char **map);
 char		**parse(int argc, char **argv, t_game *game);
 char		**ft_verif_map(char **map);
 void		check_player_pos(t_game *game);
