@@ -1,6 +1,6 @@
 #include "../../inc/cub3D.h"
 
-void	ft_check_f_next(char **check)
+void	ft_check_f_next(char **check, t_game *game)
 {
 	int	i;
 	int	j;
@@ -18,15 +18,15 @@ void	ft_check_f_next(char **check)
 			if ((check[i][j] > '9' || check[i][j] < '0') \
 				&& (check[i][j] != '\n' || check[i][j] != '\0') \
 				&& ((check[i][j] < 9 && check[i][j] > 13) || check[i][j] == 32))
-				printf("error\n");
+				ft_error(5, game);
 			j++;
 		}
 		if (count == 0)
-			printf("error\n");
+			printf("error1\n");
 		i++;
 	}
 	if (i != 3)
-		printf("error1\n");
+		printf("error2\n");
 }
 
 void	ft_check_f(char *line)
@@ -41,7 +41,7 @@ void	ft_check_f(char *line)
 	if (check == NULL)
 		printf("error\n");
 	i = 0;
-	ft_check_f_next(check);
+	ft_check_f_next(check, game);
 	while (check[i])
 	{
 		free(check[i]);
@@ -72,11 +72,11 @@ void	ft_check_c_next(char **check)
 			j++;
 		}
 		if (count == 0)
-			printf("error\n");
+			printf("error1\n");
 		i++;
 	}
 	if (i != 3)
-		printf("error\n");
+		printf("error2\n");
 }
 
 void	ft_check_c(char *line)

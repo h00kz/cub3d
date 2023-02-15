@@ -22,6 +22,20 @@ void	ft_free(t_game *game)
 	free(game);
 }
 
+void	ft_free2(t_game *game)
+{
+	if (game->map->wall_texture->N->path)
+		free(game->map->wall_texture->N->path);
+	if (game->map->wall_texture->S->path)
+		free(game->map->wall_texture->S->path);
+	if (game->map->wall_texture->E->path)
+		free(game->map->wall_texture->E->path);
+	if (game->map->wall_texture->W->path)
+		free(game->map->wall_texture->W->path);
+	ft_free(game);
+}
+
+
 void	ft_error(int msg, t_game *game)
 {
 	printf("Error\n");
@@ -35,8 +49,25 @@ void	ft_error(int msg, t_game *game)
 		printf("Wrong extension\n");
 		ft_free(game);
 	}
-
 	else if (msg == 2)
-		printf("Error there is already a path\n");
+	{
+		printf("There is already a path\n");
+		ft_free2(game);
+	}
+	else if (msg == 3)
+	{
+		printf("No path found\n");
+		ft_free2(game);
+	}
+	else if (msg == 4)
+	{
+		printf("Missing identifier\n");
+		ft_free2(game);
+	}
+	else if (msg == 5)
+	{
+		printf("Not numeric color\n");
+		ft_free2(game);
+	}
 	exit(1);
 }
