@@ -20,8 +20,6 @@
 # define WIN_HALF_W (WIN_WIDTH / 2)
 # define WIN_HEIGHT 900
 # define WIN_HALF_H (WIN_HEIGHT / 2)
-# define MINIMAP_SCALE_FACTOR 1
-# define MINIMAP_TILE 64 * MINIMAP_SCALE_FACTOR
 # define MAP_TILE 64
 # define FOV_ANGLE (60 * (PI / 180.0))
 # define HALF_FOV (FOV_ANGLE / 2)
@@ -183,12 +181,17 @@ void			render(t_game *game);
 
 // ------------------------ RAYS ----------------------- //
 void			cast_all_rays(t_game *game);
-
+void			cast_ray(t_game *game, float ray_angle, int ray_id);
 int				is_in_map(t_game *game, t_vec pos);
 int				get_collision(t_game *game, t_vec pos);
 float			normalize_angle(float *angle);
 float			distance_ab(t_vec a, t_vec b);
 int				rgba2int(int r, int g, int b, int a);
+void			horizontal_wall_hits(t_game *game);
+void			horizontal_interc(t_game *game, float ray_angle);
+void			vertical_wall_hits(t_game *game);
+void			vertical_interc(t_game *game, float ray_angle);
+
 
 // ------------------------- PARSING ------------------------ //
 int				get_height(char **map);
@@ -221,6 +224,10 @@ void		ft_get_map(char *filename, char **map);
 void		ft_check_texture(char *line, int i, t_game *game);
 void		ft_check_rgb(char *line, int i, t_game *game);
 void		ft_error(int msg, t_game *game);
+
+void	reset_ray(t_interc *hv);
+void	put_on_rays_struct(t_interc hv, t_game *game, int was_hit_v, int ray_id);
+void	take_smallest_r_infos(t_game *game, float ray_angle, int ray_id);
 
 
 #endif

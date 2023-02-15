@@ -16,12 +16,12 @@ void	ft_check_rgb(char *line, int i, t_game *game)
 {
 	if (line[i] == 'F')
 	{
-		ft_check_f(line, game);
+		ft_check_f(line);
 		ft_get_rgb(line, game->map->floor);
 	}
 	else if (line[i] == 'C')
 	{
-		ft_check_c(line, game);
+		ft_check_c(line);
 		ft_get_rgb(line, game->map->cell);
 	}
 }

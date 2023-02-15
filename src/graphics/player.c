@@ -12,8 +12,8 @@ t_player	*init_player(t_game *game)
 	player->turn_dir = ft_calloc(1, sizeof(t_vec));
 	player->rays = init_rays(NB_RAYS);
 	player->dir = get_player_pos(game->map->map, &pos);
-	player->position->x = (MINIMAP_TILE * (pos.x)) + MINIMAP_TILE / 2;
-	player->position->y = (MINIMAP_TILE * (pos.y)) + MINIMAP_TILE / 2;
+	player->position->x = (MAP_TILE * (pos.x)) + MAP_TILE / 2;
+	player->position->y = (MAP_TILE * (pos.y)) + MAP_TILE / 2;
 	player->walk_dir->x = 0;
 	player->walk_dir->y = 0;
 	player->turn_dir->x = 0;
@@ -67,12 +67,12 @@ void	render_minimap_player(t_game *game)
 	t_vec	pos_offset;
 
 	pos_offset = *(game->player->position);
-	pos_offset.x -= (5 / 2) * MINIMAP_SCALE_FACTOR;
-	pos_offset.y -= (5 / 2) * MINIMAP_SCALE_FACTOR;
-	end_line.x = (game->player->position->x) + cos(game->player->rot_angle) * (40 * MINIMAP_SCALE_FACTOR);
-	end_line.y = (game->player->position->y) + sin(game->player->rot_angle) * (40 * MINIMAP_SCALE_FACTOR);
+	pos_offset.x -= (5 / 2);
+	pos_offset.y -= (5 / 2);
+	end_line.x = (game->player->position->x) + cos(game->player->rot_angle) * (40);
+	end_line.y = (game->player->position->y) + sin(game->player->rot_angle) * (40);
 	draw_line(game, game->player->position, &end_line, 0);
-	draw_rect(game, pos_offset, (t_vec){5 * MINIMAP_SCALE_FACTOR, 5 * MINIMAP_SCALE_FACTOR}, rgba2int(10, 230, 12, 255));
+	draw_rect(game, pos_offset, (t_vec){5, 5}, rgba2int(10, 230, 12, 255));
 }
 
 void	move_player(t_game *game)
