@@ -215,7 +215,7 @@ void		ft_get_info_map(char *file, t_game *game);
 void		ft_get_map(char *filename, char **map);
 void		ft_check_texture(char *line, int i, t_game *game);
 void		ft_check_rgb(char *line, int i, t_game *game);
-
+void		ft_error(int msg, t_game *game);
 
 
 #endif
