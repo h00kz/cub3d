@@ -1,5 +1,31 @@
 #include "../../inc/cub3D.h"
 
+static void	check_rgb(t_game *game, char *line, t_color *color, int *i)
+{
+	color->r = ft_atoi(&line[(*i)]);
+	if (color->r > 255)
+	{
+		free(line);
+		ft_error(5, game);
+	}
+	ft_skip_number(line, &i);
+	(*i)++;
+	color->g = ft_atoi(&line[(*i)]);
+	if (color->g > 255)
+	{
+		free(line);
+		ft_error(5, game);
+	}
+	ft_skip_number(line, &i);
+	(*i)++;
+	color->b = ft_atoi(&line[(*i)]);
+	if (color->b > 255)
+	{
+		free(line);
+		ft_error(5, game);
+	}
+}
+
 void	ft_get_rgb(char *line, t_color *color, t_game *game)
 {
 	int	i;
@@ -13,28 +39,7 @@ void	ft_get_rgb(char *line, t_color *color, t_game *game)
 		free(line);
 		ft_error(5, game);
 	}
-	color->r = ft_atoi(&line[i]);
-	if (color->r > 255)
-	{
-		free(line);
-		ft_error(5, game);
-	}
-	ft_skip_number(line, &i);
-	i++;
-	color->g = ft_atoi(&line[i]);
-	if (color->g > 255)
-	{
-		free(line);
-		ft_error(5, game);
-	}
-	ft_skip_number(line, &i);
-	i++;
-	color->b = ft_atoi(&line[i]);
-	if (color->b > 255)
-	{
-		free(line);
-		ft_error(5, game);
-	}
+	check_rgb(game, line, color, &i);
 	ft_skip_number(line, &i);
 	ft_skip_whitespace(line, &i);
 	if (line[i])
