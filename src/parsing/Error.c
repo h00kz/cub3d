@@ -43,34 +43,6 @@ void	ft_free2(t_game *game)
 	ft_free(game);
 }
 
-void	ft_error_next(int msg, t_game *game)
-{
-	if (msg == 4)
-	{
-		printf("Missing identifier\n");
-		ft_free2(game);
-	}
-	else if (msg == 5)
-	{
-		printf("Missing number(s) to make a color\n");
-		ft_free2(game);
-	}
-	else if (msg == 5)
-	{
-		printf("Invalid number(s) to make a color\n");
-		ft_free2(game);
-	}
-	else if (msg == 6)
-	{
-		printf("Missing a texture\n");
-		ft_free2(game);
-	}
-	else if (msg == 7)
-	{
-		printf("Invalid map\n");
-		ft_free2(game);
-	}
-}
 void	ft_free_split(char **strs)
 {
 	int	i;
