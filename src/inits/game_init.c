@@ -50,7 +50,7 @@ t_game	*init_game(int ac, char **av)
 	game->map->map = ft_verif_map(game->map->map);
 	if (!game->map->map)
 		ft_error(7, game);
-	load_n_check_texture(game->map->wall_texture);
+	load_n_check_texture(game);
 	check_player_pos(game);
 	ray_interc_init(&game->ray_inter_v, &game->ray_inter_h);
 	game->map->width = get_width(game->map->map);
