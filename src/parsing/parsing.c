@@ -21,7 +21,7 @@ void	ft_check_rgb(char *line, int i, t_game *game)
 	}
 	else if (line[i] == 'C')
 	{
-		ft_check_c(line, game);
+		ft_check_c(line);
 		ft_get_rgb(line, game->map->cell);
 	}
 }
