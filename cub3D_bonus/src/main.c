@@ -27,6 +27,7 @@ int	main(int argc, char **argv)
 	game = init_game(argc, argv);
 	mlx_loop_hook(game->mlx, &game_routine, game);
 	mlx_image_to_window(game->mlx, game->mlx_img, 0, 0);
+	mlx_image_to_window(game->mlx, game->minimap, 10, 10);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
 	ft_free3(game);
