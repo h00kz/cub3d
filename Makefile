@@ -23,6 +23,7 @@ SRC					= src/main.c \
 					  src/parsing/check_c_f.c \
 					  src/parsing/check_texture.c \
 					  src/parsing/Error.c \
+					  src/parsing/Error2.c \
 
 LIBFT				= libft/
 MLX42				= MLX42/
