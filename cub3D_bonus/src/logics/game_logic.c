@@ -6,7 +6,7 @@
 /*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:39:54 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/15 14:23:15 by jlarrieu         ###   ########.fr       */
+/*   Updated: 2023/02/15 20:48:41 by jlarrieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ void	render(t_game *game)
 			rgba2int(game->map->floor->r, game->map->floor->g, \
 			game->map->floor->b, 255));
 	render_3d(game);
+	draw_rect(game, (t_vec){0, 0}, (t_vec){MINIMAP_SIZE + 20, MINIMAP_SIZE + 20}, rgba2int(40,40,40,255));
+	render_minimap(game);
+	render_minimap_player(game);
 	game->current_time = mlx_get_time();
 	frame++;
 	if (game->current_time - game->last_time >= 1.0)

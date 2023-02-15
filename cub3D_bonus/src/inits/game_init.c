@@ -57,6 +57,7 @@ t_game	*init_game(int ac, char **av)
 	game->map->height = get_height(game->map->map);
 	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cub3d", FALSE);
 	game->mlx_img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	game->minimap = mlx_new_image(game->mlx, MINIMAP_SIZE + 10, MINIMAP_SIZE + 10);
 	game->player = init_player(game);
 	game->last_time = mlx_get_time();
 	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);

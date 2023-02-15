@@ -21,6 +21,7 @@
 # define WIN_HEIGHT 900
 # define WIN_HALF_H (WIN_HEIGHT / 2)
 # define MAP_TILE 64
+# define MINIMAP_SIZE 200
 # define FOV_ANGLE (60 * (PI / 180.0))
 # define HALF_FOV (FOV_ANGLE / 2)
 # define NB_RAYS WIN_WIDTH
@@ -153,6 +154,7 @@ char			get_player_pos(char **map, t_vec *pos);
 
 // ------------------------- RENDERS ------------------------ //
 void			render_minimap_player(t_game *game);
+void			render_minimap(t_game *game);
 void			render_3d(t_game *game);
 void			draw_walls(t_game *game, int pos_xy[2], t_vec wall_pixels);
 mlx_texture_t	*get_wall_texture(t_game *game, t_ray *ray);
@@ -163,7 +165,9 @@ void			draw_vertical_strip(t_game *game, int pos_xy[2], t_vec wall_pixels);
 uint32_t		get_pixel(mlx_texture_t* texture, uint32_t x, uint32_t y);
 void			put_pixel(mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color);
 void			draw_line(t_game *game, t_vec *start, t_vec *end, int color);
+void			draw_line_mipmap(t_game *game, t_vec *start, t_vec *end, int color);
 void			draw_rect(t_game *game, t_vec pos, t_vec size, int color);
+void			draw_rect_mipmap(t_game *game, t_vec pos, t_vec size, int color);
 int32_t			average_color(int start_color, int end_color, float f);
 
 // ------------------------ GAMELGCS ----------------------- //

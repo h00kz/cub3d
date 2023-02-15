@@ -60,22 +60,6 @@ char	get_player_pos(char **map, t_vec *pos)
 	return (0);
 }
 
-void	render_minimap_player(t_game *game)
-{
-	t_vec	end_line;
-	t_vec	pos_offset;
-
-	pos_offset = *(game->player->position);
-	pos_offset.x -= (5 / 2);
-	pos_offset.y -= (5 / 2);
-	end_line.x = (game->player->position->x) \
-		+ cos(game->player->rot_angle) * (40);
-	end_line.y = (game->player->position->y) \
-		+ sin(game->player->rot_angle) * (40);
-	draw_line(game, game->player->position, &end_line, 0);
-	draw_rect(game, pos_offset, (t_vec){5, 5}, rgba2int(10, 230, 12, 255));
-}
-
 void	look_mouse(t_game *game)
 {
 	int	x;
@@ -83,8 +67,6 @@ void	look_mouse(t_game *game)
 	int	xoffset;
 	int	yoffset;
 
-	x = 0;
-	y = 0;
 	xoffset = WIN_HALF_W;
 	yoffset = WIN_HALF_H;
 	mlx_get_mouse_pos(game->mlx, &x, &y);
