@@ -28,6 +28,8 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(game->mlx, &game_routine, game);
 	mlx_image_to_window(game->mlx, game->mlx_img, 0, 0);
 	mlx_loop(game->mlx);
+	// free(game->mlx);
 	mlx_terminate(game->mlx);
+	ft_free3(game);
 	return (0);
 }

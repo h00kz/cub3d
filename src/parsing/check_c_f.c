@@ -29,7 +29,7 @@ void	ft_check_f_next(char **check, t_game *game)
 		printf("error2\n");
 }
 
-void	ft_check_f(char *line)
+void	ft_check_f(char *line, t_game *game)
 {
 	int		i;
 	char	**check;

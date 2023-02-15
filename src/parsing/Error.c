@@ -32,9 +32,42 @@ void	ft_free2(t_game *game)
 		free(game->map->wall_texture->E->path);
 	if (game->map->wall_texture->W->path)
 		free(game->map->wall_texture->W->path);
+	if (game->map->wall_texture->N->tex_img)
+		mlx_delete_texture(game->map->wall_texture->N->tex_img);
+	if (game->map->wall_texture->S->tex_img)
+		mlx_delete_texture(game->map->wall_texture->S->tex_img);
+	if (game->map->wall_texture->E->tex_img)
+		mlx_delete_texture(game->map->wall_texture->E->tex_img);
+	if (game->map->wall_texture->W->tex_img)
+		mlx_delete_texture(game->map->wall_texture->W->tex_img);
 	ft_free(game);
 }
 
+void	ft_free_split(char **strs)
+{
+	int	i;
+
+	i = 0;
+	if (!strs)
+		return ;
+	while (strs[i])
+	{
+		free(strs[i]);
+		i++;
+	}
+}
+
+void	ft_free3(t_game *game)
+{
+	free(game->player->position);
+	free(game->player->rays);
+	free(game->player->turn_dir);
+	free(game->player->walk_dir);
+	free(game->player);
+	ft_free_split(game->map->map);
+
+	ft_free2(game);
+}
 
 void	ft_error(int msg, t_game *game)
 {
