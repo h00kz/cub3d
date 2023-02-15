@@ -1,10 +1,8 @@
 #include "../inc/cub3D.h"
 
-int g_gliobal = 12;
-
-int get_width(char **map)
+int	get_width(char **map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map[0][i])
@@ -12,7 +10,7 @@ int get_width(char **map)
 	return (i + 1);
 }
 
-int get_height(char **map)
+int	get_height(char **map)
 {
 	int i;
 
@@ -22,7 +20,7 @@ int get_height(char **map)
 	return (i);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_game	*game;
 
