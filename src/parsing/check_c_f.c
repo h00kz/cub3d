@@ -37,7 +37,7 @@ void	ft_check_f_next(char **check, t_game *game, char *line)
 		ft_free_error(line, check, game);
 }
 
-void	ft_check_f(char *line, t_game *game	)
+void	ft_check_f(char *line, t_game *game)
 {
 	int		i;
 	char	**check;
