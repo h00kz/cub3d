@@ -74,7 +74,7 @@ char	**ft_verif_map(char **map)
 	int		i;
 	char	**new_map;
 
-	i = 0;
+	i = -1;
 	new_map = ft_calloc_map(map);
 	fill_first_line(map, new_map);
 	fill_first_space_line(map, new_map);
@@ -87,8 +87,11 @@ char	**ft_verif_map(char **map)
 	free(map);
 	if (ft_check_map_close(new_map) == 0)
 	{
-		printf("map error\n");
-		exit (0);
+		i = 0;
+		while (new_map[i])
+			free(new_map[i++]);
+		free(new_map);
+		new_map = NULL;
 	}
 	return (new_map);
 }

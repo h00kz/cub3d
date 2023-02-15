@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   3d_projection.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:32:06 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/15 11:32:07 by jlarrieu         ###   ########.fr       */
+/*   Updated: 2023/02/15 14:53:26 by pdubacqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
 
-void draw_walls(t_game *game, int pos_xy[2], t_vec wall_pixels)
+void	draw_walls(t_game *game, int pos_xy[2], t_vec wall_pixels)
 {
 	int				color;
 	t_ray			*ray;
@@ -30,38 +30,36 @@ void draw_walls(t_game *game, int pos_xy[2], t_vec wall_pixels)
 	put_pixel(game->mlx_img, pos_xy[0], pos_xy[1], color);
 }
 
-void render_3d(t_game *game)
+void	render_3d(t_game *game)
 {
 	int		pos_xy[2];
 	float	perp_dist;
 	float	h_proj_wall;
 	t_vec	wall_pos_pixel;
 
-
 	pos_xy[0] = 0;
 	while (pos_xy[0] < NB_RAYS)
 	{
 		perp_dist = game->player->rays[pos_xy[0]].distance * \
-			cos(game->player->rays[pos_xy[0]].ray_angle - game->player->rot_angle);
+			cos(game->player->rays[pos_xy[0]].ray_angle \
+				- game->player->rot_angle);
 		h_proj_wall = (MAP_TILE / perp_dist) * SCREEN_DIST;
 		wall_pos_pixel = get_wall_position_pixels(h_proj_wall);
 		draw_vertical_strip(game, pos_xy, wall_pos_pixel);
 		pos_xy[0]++;
 	}
-
 }
 
-t_vec get_wall_position_pixels(float h_proj_wall)
+t_vec	get_wall_position_pixels(float h_proj_wall)
 {
 	t_vec	wall_pos_pixel;
 
 	wall_pos_pixel.x = (WIN_HEIGHT / 2) - ((int)h_proj_wall / 2);
 	wall_pos_pixel.y = (WIN_HEIGHT / 2) + ((int)h_proj_wall / 2);
 	return (wall_pos_pixel);
-
 }
 
-void draw_vertical_strip(t_game *game, int pos_xy[2], t_vec wall_pixels)
+void	draw_vertical_strip(t_game *game, int pos_xy[2], t_vec wall_pixels)
 {
 	pos_xy[1] = wall_pixels.x - 1;
 	while (++(pos_xy[1]) < wall_pixels.y)
