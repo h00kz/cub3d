@@ -6,7 +6,7 @@
 /*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:32:16 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/16 14:25:35 by jlarrieu         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:24:10 by jlarrieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,7 @@ void	render_minimap(t_game *game)
 		x = ((int)(game->player->position->x) / MAP_TILE) - 3;
 		while (x < ((int)(game->player->position->x) / MAP_TILE) + 4)
 		{
-			t_ray middle_ray = game->player->rays[WIN_HALF_W];
-			if (middle_ray.hit_content == '2')
-				tilec = rgba2int(255, 0, 0, 255);
-			else if (middle_ray.hit_content == '3')
-				tilec = rgba2int(255, 0, 255, 255);
-			else if (y > 0 && x > 0 && y < game->map->height && x < game->map->width && game->map->map[y][x] != '1')
+			if (y > 0 && x > 0 && y < game->map->height && x < game->map->width && game->map->map[y][x] != '1')
 				tilec = rgba2int(game->map->floor->r, game->map->floor->g, game->map->floor->b, 255);
 			else
 				tilec = ~rgba2int(game->map->floor->r, game->map->floor->g, game->map->floor->b, 0);

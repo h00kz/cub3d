@@ -119,15 +119,17 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	t_vec	*position;
-	t_vec	*walk_dir;
-	t_vec	*turn_dir;
-	t_ray	*rays;
-	char	dir;
-	float	fov_angle;
-	float	rot_angle;
-	float	walk_speed;
-	float	turn_speed;
+	t_vec		*position;
+	t_vec		*walk_dir;
+	t_vec		*turn_dir;
+	t_texture	*weapon;
+	t_ray		*rays;
+	int			fire;
+	char		dir;
+	float		fov_angle;
+	float		rot_angle;
+	float		walk_speed;
+	float		turn_speed;
 }	t_player;
 
 typedef struct s_game
@@ -136,6 +138,7 @@ typedef struct s_game
 	mlx_t		*mlx;
 	mlx_image_t	*mlx_img;
 	mlx_image_t	*minimap;
+	mlx_image_t	*weapon;
 	t_player	*player;
 	t_interc	interct;
 	t_interc	ray_inter_v;
@@ -177,6 +180,10 @@ void			input_handler(t_game *game);
 void			move_player(t_game *game);
 void			render(t_game *game);
 void 			look_mouse(t_game *game);
+void			key_hook(mlx_key_data_t keydata, void* param);
+void			mouse_hook(mouse_key_t button, action_t action, \
+					modifier_key_t mods, void* param);
+
 
 // ------------------------ RAYS ----------------------- //
 void			cast_all_rays(t_game *game);
