@@ -6,7 +6,7 @@
 /*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:39:54 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/16 15:12:36 by jlarrieu         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:23:41 by jlarrieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,17 @@ void	game_routine(void *param)
 	game = param;
 	input_handler(game);
 	render(game);
+}
+
+void mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void* param)
+{
+	t_game *game;
+	
+	game = param;
+	(void)mods;
+	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
+		if (game->player->fire == FALSE)
+			game->player->fire = TRUE;
 }
 
 void	input_handler(t_game *game)
@@ -48,6 +59,7 @@ void	input_handler(t_game *game)
 void	render(t_game *game)
 {
 	static int	frame = 0;
+	static int	i_frame = 0;
 
 	move_player(game);
 	cast_all_rays(game);
@@ -62,30 +74,51 @@ void	render(t_game *game)
 	render_minimap(game);
 	render_minimap_player(game);
 	game->current_time = mlx_get_time();
+	if (game->player->fire)
+	{
+		if (!(frame % 2))
+		{
+			mlx_draw_texture(game->weapon, game->player->weapon[i_frame].tex_img, 0, 0);
+			i_frame++;
+		}
+		if (i_frame == 4)
+		{
+			i_frame = 0;
+			mlx_draw_texture(game->weapon, game->player->weapon[i_frame].tex_img, 0, 0);
+			game->player->fire = false;
+		}
+	}
 	frame++;
 	if (game->current_time - game->last_time >= 1.0)
 	{
-		if (mlx_is_key_down(game->mlx, MLX_KEY_F))
-		{
-			if (game->map->map[((int)(game->player->position->y) / MAP_TILE) + 1][((int)(game->player->position->x) / MAP_TILE)] == '2')
-				game->map->map[((int)(game->player->position->y) / MAP_TILE) + 1][((int)(game->player->position->x) / MAP_TILE)] = '3';
-			else if (game->map->map[((int)(game->player->position->y) / MAP_TILE) - 1][((int)(game->player->position->x) / MAP_TILE)] == '2')
-				game->map->map[((int)(game->player->position->y) / MAP_TILE) - 1][((int)(game->player->position->x) / MAP_TILE)] = '3';
-			else if (game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) + 1] == '2')
-				game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) + 1] = '3';
-			else if (game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) - 1] == '2')
-				game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) - 1] = '3';
-			else if (game->map->map[((int)(game->player->position->y) / MAP_TILE) + 1][((int)(game->player->position->x) / MAP_TILE)] == '3')
-				game->map->map[((int)(game->player->position->y) / MAP_TILE) + 1][((int)(game->player->position->x) / MAP_TILE)] = '2';
-			else if (game->map->map[((int)(game->player->position->y) / MAP_TILE) - 1][((int)(game->player->position->x) / MAP_TILE)] == '3')
-				game->map->map[((int)(game->player->position->y) / MAP_TILE) - 1][((int)(game->player->position->x) / MAP_TILE)] = '2';
-			else if (game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) + 1] == '3')
-				game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) + 1] = '2';
-			else if (game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) - 1] == '3')
-				game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) - 1] = '2';
-		}
 		printf("FPS:%d\n", frame);
 		frame = 0;
 		game->last_time = game->current_time;
+	}
+}
+
+void	key_hook(mlx_key_data_t keydata, void* param)
+{
+	t_game *game;
+	
+	game = param;
+	if (keydata.key == MLX_KEY_F && keydata.action == MLX_RELEASE)
+	{
+		if (game->map->map[((int)(game->player->position->y) / MAP_TILE) + 1][((int)(game->player->position->x) / MAP_TILE)] == '2')
+			game->map->map[((int)(game->player->position->y) / MAP_TILE) + 1][((int)(game->player->position->x) / MAP_TILE)] = '3';
+		else if (game->map->map[((int)(game->player->position->y) / MAP_TILE) - 1][((int)(game->player->position->x) / MAP_TILE)] == '2')
+			game->map->map[((int)(game->player->position->y) / MAP_TILE) - 1][((int)(game->player->position->x) / MAP_TILE)] = '3';
+		else if (game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) + 1] == '2')
+			game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) + 1] = '3';
+		else if (game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) - 1] == '2')
+			game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) - 1] = '3';
+		else if (game->map->map[((int)(game->player->position->y) / MAP_TILE) + 1][((int)(game->player->position->x) / MAP_TILE)] == '3')
+			game->map->map[((int)(game->player->position->y) / MAP_TILE) + 1][((int)(game->player->position->x) / MAP_TILE)] = '2';
+		else if (game->map->map[((int)(game->player->position->y) / MAP_TILE) - 1][((int)(game->player->position->x) / MAP_TILE)] == '3')
+			game->map->map[((int)(game->player->position->y) / MAP_TILE) - 1][((int)(game->player->position->x) / MAP_TILE)] = '2';
+		else if (game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) + 1] == '3')
+			game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) + 1] = '2';
+		else if (game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) - 1] == '3')
+			game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) - 1] = '2';
 	}
 }

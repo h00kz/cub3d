@@ -9,6 +9,7 @@ t_player	*init_player(t_game *game)
 	player->position = ft_calloc(1, sizeof(t_vec));
 	player->walk_dir = ft_calloc(1, sizeof(t_vec));
 	player->turn_dir = ft_calloc(1, sizeof(t_vec));
+	player->weapon = ft_calloc(4, sizeof(t_texture));
 	player->rays = init_rays(NB_RAYS);
 	player->dir = get_player_pos(game->map->map, &pos);
 	player->position->x = (MAP_TILE * (pos.x)) + MAP_TILE / 2;
