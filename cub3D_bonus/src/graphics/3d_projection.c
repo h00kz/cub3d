@@ -6,7 +6,7 @@
 /*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:32:06 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/15 15:07:28 by jlarrieu         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:58:00 by jlarrieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	draw_walls(t_game *game, int pos_xy[2], t_vec wall_pixels)
 	if (pos_xy[1] < 0 || pos_xy[1] >= WIN_HEIGHT)
 		return ;
 	ray = &game->player->rays[pos_xy[0]];
+	if (ray->hit_content == '3')
+		return ;
 	texture = get_wall_texture(game, ray);
 	y = get_wall_texture_y(wall_pixels, pos_xy[1], texture);
 	x = get_wall_texture_x(ray, texture);

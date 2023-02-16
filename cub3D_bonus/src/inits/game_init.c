@@ -48,6 +48,8 @@ t_game	*init_game(int ac, char **av)
 	game->map = init_map();
 	game->map->map = parse(ac, av, game);
 	game->map->map = ft_verif_map(game->map->map);
+	// game->map->wall_texture->DOOR->path = ft_strdup("DOOR.png");
+	game->map->wall_texture->DOOR->tex_img = mlx_load_png("DOOR.png");
 	if (!game->map->map)
 		ft_error(7, game);
 	load_n_check_texture(game);
