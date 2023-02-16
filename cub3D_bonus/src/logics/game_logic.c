@@ -6,7 +6,7 @@
 /*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:39:54 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/15 20:48:41 by jlarrieu         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:12:36 by jlarrieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,25 @@ void	render(t_game *game)
 	frame++;
 	if (game->current_time - game->last_time >= 1.0)
 	{
+		if (mlx_is_key_down(game->mlx, MLX_KEY_F))
+		{
+			if (game->map->map[((int)(game->player->position->y) / MAP_TILE) + 1][((int)(game->player->position->x) / MAP_TILE)] == '2')
+				game->map->map[((int)(game->player->position->y) / MAP_TILE) + 1][((int)(game->player->position->x) / MAP_TILE)] = '3';
+			else if (game->map->map[((int)(game->player->position->y) / MAP_TILE) - 1][((int)(game->player->position->x) / MAP_TILE)] == '2')
+				game->map->map[((int)(game->player->position->y) / MAP_TILE) - 1][((int)(game->player->position->x) / MAP_TILE)] = '3';
+			else if (game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) + 1] == '2')
+				game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) + 1] = '3';
+			else if (game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) - 1] == '2')
+				game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) - 1] = '3';
+			else if (game->map->map[((int)(game->player->position->y) / MAP_TILE) + 1][((int)(game->player->position->x) / MAP_TILE)] == '3')
+				game->map->map[((int)(game->player->position->y) / MAP_TILE) + 1][((int)(game->player->position->x) / MAP_TILE)] = '2';
+			else if (game->map->map[((int)(game->player->position->y) / MAP_TILE) - 1][((int)(game->player->position->x) / MAP_TILE)] == '3')
+				game->map->map[((int)(game->player->position->y) / MAP_TILE) - 1][((int)(game->player->position->x) / MAP_TILE)] = '2';
+			else if (game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) + 1] == '3')
+				game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) + 1] = '2';
+			else if (game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) - 1] == '3')
+				game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) - 1] = '2';
+		}
 		printf("FPS:%d\n", frame);
 		frame = 0;
 		game->last_time = game->current_time;

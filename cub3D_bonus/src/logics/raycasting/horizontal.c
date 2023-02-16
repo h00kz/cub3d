@@ -6,11 +6,21 @@
 /*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:32:35 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/15 12:46:25 by jlarrieu         ###   ########.fr       */
+/*   Updated: 2023/02/16 14:33:40 by jlarrieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+int	get_at_map(t_game *game, float x, float y)
+{
+	int	x_index;
+	int	y_index;
+
+	x_index = floor(x / MAP_TILE);
+	y_index = floor(y / MAP_TILE);
+	return (game->map->map[y_index][x_index]);
+}
 
 void	horizontal_wall_hits(t_game *game)
 {
@@ -25,6 +35,7 @@ void	horizontal_wall_hits(t_game *game)
 		{
 			game->ray_inter_h.wall_hit_x = game->ray_inter_h.next_touch->x;
 			game->ray_inter_h.wall_hit_y = game->ray_inter_h.next_touch->y;
+			game->ray_inter_h.wall_content = get_at_map(game, game->ray_inter_h.to_check->x, game->ray_inter_h.to_check->y);
 			game->ray_inter_h.found_wall_hit = TRUE;
 			break ;
 		}

@@ -52,6 +52,7 @@ typedef struct s_wall
 	t_texture	*S;
 	t_texture	*E;
 	t_texture	*W;
+	t_texture	*DOOR;
 }	t_wall;
 
 typedef struct s_color
@@ -192,6 +193,9 @@ void			vertical_interc(t_game *game, float ray_angle);
 void			reset_ray(t_interc *hv);
 void			put_on_rays_struct(t_interc hv, t_game *game, int was_hit_v, int ray_id);
 void			take_smallest_r_infos(t_game *game, float ray_angle, int ray_id);
+int				get_at_map(t_game *game, float x, float y);
+int				get_collision_door(t_game *game, t_vec pos);
+
 
 // ------------------------- PARSING ------------------------ //
 int				get_height(char **map);
