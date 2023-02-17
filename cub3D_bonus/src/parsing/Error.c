@@ -14,6 +14,7 @@ void	ft_free(t_game *game)
 	free(game->map->wall_texture->N);
 	free(game->map->wall_texture->E);
 	free(game->map->wall_texture->W);
+	free(game->map->wall_texture->DOOR);
 	free(game->map->wall_texture);
 	free(game->map->map);
 	free(game->map->floor);
@@ -24,6 +25,7 @@ void	ft_free(t_game *game)
 
 void	ft_free2(t_game *game)
 {
+	mlx_delete_texture(game->map->wall_texture->DOOR->tex_img);
 	if (game->map->wall_texture->N->path)
 		free(game->map->wall_texture->N->path);
 	if (game->map->wall_texture->S->path)
@@ -59,10 +61,16 @@ void	ft_free_split(char **strs)
 
 void	ft_free3(t_game *game)
 {
+	int	i;
+
+	i = 0;
+	while (i < 4)
+		mlx_delete_texture(game->player->weapon[i++].tex_img);
 	free(game->player->position);
 	free(game->player->rays);
 	free(game->player->turn_dir);
 	free(game->player->walk_dir);
+	free(game->player->weapon);
 	free(game->player);
 	ft_free_split(game->map->map);
 	ft_free2(game);

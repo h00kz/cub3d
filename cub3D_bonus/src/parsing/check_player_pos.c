@@ -22,27 +22,8 @@ void	check_player_pos(t_game *game)
 	}
 	if (count == 1)
 		return ;
-	printf("Error\n");
-	exit(0);
-}
-
-void	get_door_pos(t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (game->map->map[i])
-	{
-		j = 0;
-		while (game->map->map[i][j])
-		{
-			if (game->map->map[i][j] == 'D')
-				//coucouijxdhfjhd
-			j++;
-		}
-		i++;
-	}
+	ft_free_split(game->map->map);
+	ft_error(7, game);
 }
 
 int	count_door_pos(t_game *game)

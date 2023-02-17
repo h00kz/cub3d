@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:32:16 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/16 18:24:10 by jlarrieu         ###   ########.fr       */
+/*   Updated: 2023/02/17 10:57:35 by pdubacqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ t_map	*init_map(void)
 	map->wall_texture->DOOR = ft_calloc(sizeof(t_texture), 1);
 	map->map = ft_calloc(sizeof(char), 1);
 	map->floor = ft_calloc(sizeof(t_color), 1);
+	map->floor->r = -1;
 	map->cell = ft_calloc(sizeof(t_color), 1);
+	map->cell->r = -1;
 	return (map);
 }
 

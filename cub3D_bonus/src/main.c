@@ -25,7 +25,6 @@ int	main(int argc, char **argv)
 	t_game	*game;
 
 	game = init_game(argc, argv);
-	printf("h%d\n", game->player->weapon->tex_img->height);
 	mlx_draw_texture(game->weapon, game->player->weapon[0].tex_img, 0, 0);
 	mlx_loop_hook(game->mlx, &game_routine, game);
 	mlx_key_hook(game->mlx, key_hook, game);

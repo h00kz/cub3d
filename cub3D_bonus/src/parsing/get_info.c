@@ -57,6 +57,8 @@ void	ft_get_info_map(char *file, t_game *game)
 
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
+	if (!line)
+		ft_error(0, game);
 	while (line)
 	{
 		i = 0;

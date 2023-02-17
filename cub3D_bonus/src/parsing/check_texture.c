@@ -126,4 +126,8 @@ void	ft_check_empty_args(t_game *game)
 		ft_error(6, game);
 	if (!(game->map->wall_texture->W->path))
 		ft_error(6, game);
+	if (game->map->cell->r == -1)
+		ft_error(6, game);
+	if (game->map->floor->r == -1)
+		ft_error(6, game);
 }
