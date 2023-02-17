@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_logic.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: h00kz <h00kz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:39:54 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/17 09:19:57 by h00kz            ###   ########.fr       */
+/*   Updated: 2023/02/17 11:55:30 by jlarrieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	input_handler(t_game *game)
 		game->player->turn_dir->x = 0;
 }
 
+
+
 void	render(t_game *game)
 {
 	static int	frame = 0;
@@ -70,31 +72,13 @@ void	render(t_game *game)
 			rgba2int(game->map->floor->r, game->map->floor->g, \
 			game->map->floor->b, 255));
 	render_3d(game);
-	draw_rect(game, (t_vec){0, 0}, (t_vec){MINIMAP_SIZE + 20, MINIMAP_SIZE + 20}, rgba2int(40,40,40,255));
+	draw_rect(game, (t_vec){0, 0}, (t_vec){MINIMAP_SIZE + 20, MINIMAP_SIZE + 20}, \
+			rgba2int(40,40,40,255));
 	render_minimap(game);
 	render_minimap_player(game);
 	game->current_time = mlx_get_time();
-	if (game->player->fire)
-	{
-		if (!(frame % 2))
-		{
-			mlx_draw_texture(game->weapon, game->player->weapon[i_frame].tex_img, 0, 0);
-			i_frame++;
-		}
-		if (i_frame == 4)
-		{
-			i_frame = 0;
-			mlx_draw_texture(game->weapon, game->player->weapon[i_frame].tex_img, 0, 0);
-			game->player->fire = false;
-		}
-	}
+	weapon_fire(game, frame, &i_frame);
 	frame++;
-	if (game->current_time - game->last_time >= 1.0)
-	{
-		printf("FPS:%d\n", frame);
-		frame = 0;
-		game->last_time = game->current_time;
-	}
 }
 
 void	key_hook(mlx_key_data_t keydata, void* param)

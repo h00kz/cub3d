@@ -162,7 +162,8 @@ void			render_minimap(t_game *game);
 void			render_3d(t_game *game);
 void			draw_walls(t_game *game, int pos_xy[2], t_vec wall_pixels);
 mlx_texture_t	*get_wall_texture(t_game *game, t_ray *ray);
-int				get_wall_texture_y(t_vec wall_pixels, int pos_y, mlx_texture_t *texture);
+int				get_wall_texture_y(t_vec wall_pixels, \
+							int pos_y, mlx_texture_t *texture);
 int				get_wall_texture_x(t_ray *ray, mlx_texture_t *texture);
 t_vec			get_wall_position_pixels(float h_proj_wall);
 void			draw_vertical_strip(t_game *game, int pos_xy[2], t_vec wall_pixels);
@@ -184,6 +185,7 @@ void 			look_mouse(t_game *game);
 void			key_hook(mlx_key_data_t keydata, void* param);
 void			mouse_hook(mouse_key_t button, action_t action, \
 					modifier_key_t mods, void* param);
+void			weapon_fire(t_game *game, int frame, int *i_frame);
 
 
 // ------------------------ RAYS ----------------------- //
