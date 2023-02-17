@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/17 14:59:56 by pdubacqu          #+#    #+#             */
+/*   Updated: 2023/02/17 14:59:57 by pdubacqu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3D.h"
 
 void	ft_free(t_game *game)
@@ -10,7 +22,7 @@ void	ft_free(t_game *game)
 	free(game->ray_inter_h.next_touch);
 	free(game->ray_inter_h.to_check);
 	free(game->ray_inter_h.step);
-	free(game->game->map->wall_texture->s);
+	free(game->map->wall_texture->s);
 	free(game->map->wall_texture->n);
 	free(game->map->wall_texture->e);
 	free(game->map->wall_texture->w);
@@ -26,8 +38,8 @@ void	ft_free2(t_game *game)
 {
 	if (game->map->wall_texture->n->path)
 		free(game->map->wall_texture->n->path);
-	if (game->game->map->wall_texture->s->path)
-		free(game->game->map->wall_texture->s->path);
+	if (game->map->wall_texture->s->path)
+		free(game->map->wall_texture->s->path);
 	if (game->map->wall_texture->e->path)
 		free(game->map->wall_texture->e->path);
 	if (game->map->wall_texture->w->path)

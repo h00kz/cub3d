@@ -6,7 +6,7 @@
 /*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 12:32:12 by pdubacqu          #+#    #+#             */
-/*   Updated: 2023/02/17 12:47:53 by pdubacqu         ###   ########.fr       */
+/*   Updated: 2023/02/17 13:08:10 by pdubacqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,8 @@ char			get_player_pos(char **map, t_vec *pos);
 // ------------------------- RENDERS ------------------------ //
 void			render_minimap_player(t_game *game);
 void			render_3d(t_game *game);
-void			draw_walls(t_game *game, int pos_xy[2], t_vec wall_pixels);
+void			draw_walls(t_game *game, int pos_xy[2], \
+					t_vec wall_pixels);
 mlx_texture_t	*get_wall_texture(t_game *game, t_ray *ray);
 int				get_wall_texture_y(t_vec wall_pixels, int pos_y, \
 					mlx_texture_t *texture);

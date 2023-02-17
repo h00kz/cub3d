@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_texture.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/17 14:59:32 by pdubacqu          #+#    #+#             */
+/*   Updated: 2023/02/17 14:59:38 by pdubacqu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3D.h"
 
 void	ft_check_n(char *line, t_game *game)
@@ -36,7 +48,7 @@ void	ft_check_s(char *line, t_game *game)
 	i = 0;
 	if (line[i + 1] == 'O')
 	{
-		if (game->game->map->wall_texture->s->path)
+		if (game->map->wall_texture->s->path)
 		{
 			free(line);
 			ft_error(2, game);
@@ -49,7 +61,7 @@ void	ft_check_s(char *line, t_game *game)
 			free(line);
 			ft_error(3, game);
 		}
-		game->game->map->wall_texture->s->path = ft_strtrim(&line[i], " \n");
+		game->map->wall_texture->s->path = ft_strtrim(&line[i], " \n");
 	}	
 	else
 	{
@@ -122,7 +134,7 @@ void	ft_check_empty_args(t_game *game)
 		ft_error(6, game);
 	if (!(game->map->wall_texture->n->path))
 		ft_error(6, game);
-	if (!(game->game->map->wall_texture->s->path))
+	if (!(game->map->wall_texture->s->path))
 		ft_error(6, game);
 	if (!(game->map->wall_texture->w->path))
 		ft_error(6, game);

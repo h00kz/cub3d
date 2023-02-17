@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_init.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/17 15:00:36 by pdubacqu          #+#    #+#             */
+/*   Updated: 2023/02/17 15:00:36 by pdubacqu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3D.h"
 
 static void	error_png(char *msg, t_game *game)
@@ -27,7 +39,7 @@ static void	load_n_check_texture(t_game *game)
 	if (!game->map->wall_texture->n->tex_img)
 		error_png("Error\nError on load North png texture.", game);
 	game->map->wall_texture->s->tex_img = \
-				mlx_load_png(game->game->map->wall_texture->s->path);
+				mlx_load_png(game->map->wall_texture->s->path);
 	if (!game->map->wall_texture->s->tex_img)
 		error_png("Error\nError on load South png texture.", game);
 	game->map->wall_texture->e->tex_img = \

@@ -6,7 +6,7 @@
 /*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 12:50:34 by pdubacqu          #+#    #+#             */
-/*   Updated: 2023/02/17 12:55:52 by pdubacqu         ###   ########.fr       */
+/*   Updated: 2023/02/17 15:05:42 by pdubacqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,14 +171,15 @@ char			get_player_pos(char **map, t_vec *pos);
 void			render_minimap_player(t_game *game);
 void			render_minimap(t_game *game);
 void			render_3d(t_game *game);
-void			draw_walls(t_game *game, int pos_xy[2], t_vec wall_pixels);
+void			draw_walls(t_game *game, int pos_xy[2], \
+				float perp_dist, t_vec wall_pixels);
 mlx_texture_t	*get_wall_texture(t_game *game, t_ray *ray);
 int				get_wall_texture_y(t_vec wall_pixels, \
 					int pos_y, mlx_texture_t *texture);
 int				get_wall_texture_x(t_ray *ray, mlx_texture_t *texture);
 t_vec			get_wall_position_pixels(float h_proj_wall);
 void			draw_vertical_strip(t_game *game, int pos_xy[2], \
-					t_vec wall_pixels);
+					float perp_dist, t_vec wall_pixels);
 uint32_t		get_pixel(mlx_texture_t *texture, uint32_t x, \
 					uint32_t y);
 void			put_pixel(mlx_image_t *image, uint32_t x, \
@@ -260,5 +261,6 @@ void			ft_free2(t_game *game);
 void			ft_free3(t_game *game);
 void			ft_free_split(char **strs);
 void			ft_error_file(t_game *game);
+void			error_png2(char *msg, t_game *game);
 
 #endif

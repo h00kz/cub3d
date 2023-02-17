@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/17 15:03:41 by pdubacqu          #+#    #+#             */
+/*   Updated: 2023/02/17 15:03:41 by pdubacqu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3D.h"
 
 void	ft_free(t_game *game)
@@ -25,7 +37,8 @@ void	ft_free(t_game *game)
 
 void	ft_free2(t_game *game)
 {
-	mlx_delete_texture(game->map->wall_texture->door->tex_img);
+	if (game->map->wall_texture->door->tex_img)
+		mlx_delete_texture(game->map->wall_texture->door->tex_img);
 	if (game->map->wall_texture->n->path)
 		free(game->map->wall_texture->n->path);
 	if (game->map->wall_texture->s->path)
@@ -65,7 +78,11 @@ void	ft_free3(t_game *game)
 
 	i = 0;
 	while (i < 4)
-		mlx_delete_texture(game->player->weapon[i++].tex_img);
+	{
+		if (game->player->weapon[i].tex_img)
+			mlx_delete_texture(game->player->weapon[i].tex_img);
+		i++;
+	}
 	free(game->player->position);
 	free(game->player->rays);
 	free(game->player->turn_dir);

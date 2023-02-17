@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Error2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/17 15:03:44 by pdubacqu          #+#    #+#             */
+/*   Updated: 2023/02/17 15:05:52 by pdubacqu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3D.h"
 
 void	ft_error_next(int msg, t_game *game)
@@ -61,5 +73,13 @@ void	ft_error_file(t_game *game)
 {
 	printf("Error\nInvalid file\n");
 	ft_free(game);
+	exit(1);
+}
+
+void	error_png2(char *msg, t_game *game)
+{
+	ft_putendl_fd(msg, 2);
+	mlx_terminate(game->mlx);
+	ft_free3(game);
 	exit(1);
 }
