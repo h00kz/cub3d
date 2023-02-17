@@ -13,13 +13,13 @@ int	ft_check_map_close(char **map)
 		{
 			if (map[i][j] == ' ')
 			{
-				if (map[i + 1][j] != '1' && map[i + 1][j] != ' ')
+				if (map[i + 1][j] == '0')
 					return (0);
-				if (map[i - 1][j] != '1' && map[i - 1][j] != ' ')
+				if (map[i - 1][j] == '0')
 					return (0);
-				if (map[i][j + 1] != '1' && map[i][j + 1] != ' ')
+				if (map[i][j + 1] == '0')
 					return (0);
-				if (map[i][j - 1] != '1' && map[i][j - 1] != ' ')
+				if (map[i][j - 1] == '0')
 					return (0);
 			}
 			j++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vertical.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:32:46 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/15 12:46:20 by jlarrieu         ###   ########.fr       */
+/*   Updated: 2023/02/17 11:27:00 by pdubacqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void	vertical_wall_hits(t_game *game)
 		{
 			game->ray_inter_v.wall_hit_x = game->ray_inter_v.next_touch->x;
 			game->ray_inter_v.wall_hit_y = game->ray_inter_v.next_touch->y;
+			game->ray_inter_v.wall_content = \
+				get_at_map(game, game->ray_inter_v.to_check->x, \
+					game->ray_inter_v.to_check->y);
 			game->ray_inter_v.found_wall_hit = TRUE;
 			break ;
 		}

@@ -40,6 +40,17 @@ static void	load_n_check_texture(t_game *game)
 		error_png("Error\nError on load West png texture.", game);
 }
 
+static t_game	*game_init_next(t_game *game)
+{
+	game->player->weapon[0].tex_img = mlx_load_png("weapon00.png");
+	game->player->weapon[1].tex_img = mlx_load_png("weapon01.png");
+	game->player->weapon[2].tex_img = mlx_load_png("weapon02.png");
+	game->player->weapon[3].tex_img = mlx_load_png("weapon03.png");
+	game->last_time = mlx_get_time();
+	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
+	return (game);
+}
+
 t_game	*init_game(int ac, char **av)
 {
 	t_game		*game;
@@ -48,6 +59,7 @@ t_game	*init_game(int ac, char **av)
 	game->map = init_map();
 	game->map->map = parse(ac, av, game);
 	game->map->map = ft_verif_map(game->map->map);
+	game->map->wall_texture->DOOR->tex_img = mlx_load_png("DOOR.png");
 	if (!game->map->map)
 		ft_error(7, game);
 	load_n_check_texture(game);
@@ -57,8 +69,11 @@ t_game	*init_game(int ac, char **av)
 	game->map->height = get_height(game->map->map);
 	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cub3d", FALSE);
 	game->mlx_img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	game->minimap = mlx_new_image(game->mlx, \
+		MINIMAP_SIZE + 10, MINIMAP_SIZE + 10);
+	game->weapon = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->player = init_player(game);
-	game->last_time = mlx_get_time();
-	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
+	game->player->fire = FALSE;
+	game = game_init_next(game);
 	return (game);
 }

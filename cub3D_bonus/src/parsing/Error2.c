@@ -19,7 +19,7 @@ void	ft_error_next(int msg, t_game *game)
 	}
 	else if (msg == 6)
 	{
-		printf("Missing a texture\n");
+		printf("Missing a map argument\n");
 		ft_free2(game);
 	}
 	else if (msg == 7)

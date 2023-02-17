@@ -21,6 +21,7 @@
 # define WIN_HEIGHT 900
 # define WIN_HALF_H (WIN_HEIGHT / 2)
 # define MAP_TILE 64
+# define MINIMAP_SIZE 200
 # define FOV_ANGLE (60 * (PI / 180.0))
 # define HALF_FOV (FOV_ANGLE / 2)
 # define NB_RAYS WIN_WIDTH
@@ -51,6 +52,7 @@ typedef struct s_wall
 	t_texture	*S;
 	t_texture	*E;
 	t_texture	*W;
+	t_texture	*DOOR;
 }	t_wall;
 
 typedef struct s_color
@@ -117,15 +119,17 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	t_vec	*position;
-	t_vec	*walk_dir;
-	t_vec	*turn_dir;
-	t_ray	*rays;
-	char	dir;
-	float	fov_angle;
-	float	rot_angle;
-	float	walk_speed;
-	float	turn_speed;
+	t_vec		*position;
+	t_vec		*walk_dir;
+	t_vec		*turn_dir;
+	t_texture	*weapon;
+	t_ray		*rays;
+	int			fire;
+	char		dir;
+	float		fov_angle;
+	float		rot_angle;
+	float		walk_speed;
+	float		turn_speed;
 }	t_player;
 
 typedef struct s_game
@@ -134,6 +138,7 @@ typedef struct s_game
 	mlx_t		*mlx;
 	mlx_image_t	*mlx_img;
 	mlx_image_t	*minimap;
+	mlx_image_t	*weapon;
 	t_player	*player;
 	t_interc	interct;
 	t_interc	ray_inter_v;
@@ -153,6 +158,7 @@ char			get_player_pos(char **map, t_vec *pos);
 
 // ------------------------- RENDERS ------------------------ //
 void			render_minimap_player(t_game *game);
+void			render_minimap(t_game *game);
 void			render_3d(t_game *game);
 void			draw_walls(t_game *game, int pos_xy[2], t_vec wall_pixels);
 mlx_texture_t	*get_wall_texture(t_game *game, t_ray *ray);
@@ -163,7 +169,9 @@ void			draw_vertical_strip(t_game *game, int pos_xy[2], t_vec wall_pixels);
 uint32_t		get_pixel(mlx_texture_t* texture, uint32_t x, uint32_t y);
 void			put_pixel(mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color);
 void			draw_line(t_game *game, t_vec *start, t_vec *end, int color);
+void			draw_line_mipmap(t_game *game, t_vec *start, t_vec *end, int color);
 void			draw_rect(t_game *game, t_vec pos, t_vec size, int color);
+void			draw_rect_mipmap(t_game *game, t_vec pos, t_vec size, int color);
 int32_t			average_color(int start_color, int end_color, float f);
 
 // ------------------------ GAMELGCS ----------------------- //
@@ -172,6 +180,10 @@ void			input_handler(t_game *game);
 void			move_player(t_game *game);
 void			render(t_game *game);
 void 			look_mouse(t_game *game);
+void			key_hook(mlx_key_data_t keydata, void* param);
+void			mouse_hook(mouse_key_t button, action_t action, \
+					modifier_key_t mods, void* param);
+
 
 // ------------------------ RAYS ----------------------- //
 void			cast_all_rays(t_game *game);
@@ -188,6 +200,9 @@ void			vertical_interc(t_game *game, float ray_angle);
 void			reset_ray(t_interc *hv);
 void			put_on_rays_struct(t_interc hv, t_game *game, int was_hit_v, int ray_id);
 void			take_smallest_r_infos(t_game *game, float ray_angle, int ray_id);
+int				get_at_map(t_game *game, float x, float y);
+int				get_collision_door(t_game *game, t_vec pos);
+
 
 // ------------------------- PARSING ------------------------ //
 int				get_height(char **map);
