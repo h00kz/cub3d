@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horizontal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:32:35 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/16 14:33:40 by jlarrieu         ###   ########.fr       */
+/*   Updated: 2023/02/17 11:26:30 by pdubacqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ void	horizontal_wall_hits(t_game *game)
 		{
 			game->ray_inter_h.wall_hit_x = game->ray_inter_h.next_touch->x;
 			game->ray_inter_h.wall_hit_y = game->ray_inter_h.next_touch->y;
-			game->ray_inter_h.wall_content = get_at_map(game, game->ray_inter_h.to_check->x, game->ray_inter_h.to_check->y);
+			game->ray_inter_h.wall_content = \
+				get_at_map(game, game->ray_inter_h.to_check->x, \
+					game->ray_inter_h.to_check->y);
 			game->ray_inter_h.found_wall_hit = TRUE;
 			break ;
 		}

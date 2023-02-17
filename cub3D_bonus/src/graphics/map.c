@@ -6,7 +6,7 @@
 /*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:32:16 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/17 10:57:35 by pdubacqu         ###   ########.fr       */
+/*   Updated: 2023/02/17 11:20:14 by pdubacqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,13 @@ int	is_in_map(t_game *game, t_vec pos)
 void	render_minimap(t_game *game)
 {
 	int	x;
-	int y;
-	int tilec;
-	int tilex = 0;
-	int tiley = 0;
+	int	y;
+	int	tilec;
+	int	tilex;
+	int	tiley;
 
+	tilex = 0;
+	tiley = 0;
 	y = ((int)(game->player->position->y) / MAP_TILE) - 3;
 	while (y < ((int)(game->player->position->y) / MAP_TILE) + 4)
 	{

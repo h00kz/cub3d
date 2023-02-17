@@ -14,7 +14,9 @@ void	check_player_pos(t_game *game)
 		while (game->map->map[i][j])
 		{
 			if (game->map->map[i][j] != ' ' \
-				&& game->map->map[i][j] != '1' && game->map->map[i][j] != '0' && game->map->map[i][j] != '2')
+				&& game->map->map[i][j] != '1' \
+					&& game->map->map[i][j] != '0' \
+						&& game->map->map[i][j] != '2')
 				count++;
 			j++;
 		}

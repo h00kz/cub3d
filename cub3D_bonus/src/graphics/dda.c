@@ -6,7 +6,7 @@
 /*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:31:50 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/17 10:34:48 by pdubacqu         ###   ########.fr       */
+/*   Updated: 2023/02/17 11:18:16 by pdubacqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ void	draw_line_mipmap(t_game *game, t_vec *start, t_vec *end, int color)
 	current_pos.y = start->y;
 	while (i < longest_side_len)
 	{
-		if (current_pos.x >= 0 && current_pos.x < WIN_WIDTH / 5 && current_pos.y >= 0 && current_pos.y < WIN_HEIGHT / 5)
+		if (current_pos.x >= 0 && current_pos.x < WIN_WIDTH \
+			/ 5 && current_pos.y >= 0 && current_pos.y < WIN_HEIGHT / 5)
 			put_pixel(game->minimap, current_pos.x, current_pos.y, color);
 		current_pos.x += pos_inc.x;
 		current_pos.y += pos_inc.y;
 		i++;
 	}
 }
-
