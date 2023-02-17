@@ -173,6 +173,7 @@ void			draw_line_mipmap(t_game *game, t_vec *start, t_vec *end, int color);
 void			draw_rect(t_game *game, t_vec pos, t_vec size, int color);
 void			draw_rect_mipmap(t_game *game, t_vec pos, t_vec size, int color);
 int32_t			average_color(int start_color, int end_color, float f);
+void			invert_color_mipmap(t_game *game, int x, int y, int *tilec);
 
 // ------------------------ GAMELGCS ----------------------- //
 void			game_routine(void *param);

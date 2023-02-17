@@ -6,7 +6,7 @@
 /*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:36:00 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/15 11:36:13 by jlarrieu         ###   ########.fr       */
+/*   Updated: 2023/02/17 11:26:21 by jlarrieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,15 @@ int32_t	average_color(int start_color, int end_color, float f)
 float	distance_ab(t_vec a, t_vec b)
 {
 	return (sqrtf((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y)));
+}
+
+void	invert_color_mipmap(t_game *game, int x, int y, int *tilec)
+{
+	if (y > 0 && x > 0 && y < game->map->height && \
+			x < game->map->width && game->map->map[y][x] != '1')
+		*tilec = rgba2int(game->map->floor->r, game->map->floor->g, \
+			game->map->floor->b, 255);
+	else
+		*tilec = ~rgba2int(game->map->floor->r, game->map->floor->g, \
+			game->map->floor->b, 0);
 }

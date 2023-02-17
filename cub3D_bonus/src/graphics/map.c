@@ -6,7 +6,7 @@
 /*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:32:16 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/16 18:24:10 by jlarrieu         ###   ########.fr       */
+/*   Updated: 2023/02/17 11:26:51 by jlarrieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,12 @@ int	is_in_map(t_game *game, t_vec pos)
 void	render_minimap(t_game *game)
 {
 	int	x;
-	int y;
-	int tilec;
-	int tilex = 0;
-	int tiley = 0;
+	int	y;
+	int	tilec;
+	int	tilex;
+	int	tiley;
 
+	tiley = 0;
 	y = ((int)(game->player->position->y) / MAP_TILE) - 3;
 	while (y < ((int)(game->player->position->y) / MAP_TILE) + 4)
 	{
@@ -77,10 +78,7 @@ void	render_minimap(t_game *game)
 		x = ((int)(game->player->position->x) / MAP_TILE) - 3;
 		while (x < ((int)(game->player->position->x) / MAP_TILE) + 4)
 		{
-			if (y > 0 && x > 0 && y < game->map->height && x < game->map->width && game->map->map[y][x] != '1')
-				tilec = rgba2int(game->map->floor->r, game->map->floor->g, game->map->floor->b, 255);
-			else
-				tilec = ~rgba2int(game->map->floor->r, game->map->floor->g, game->map->floor->b, 0);
+			invert_color_mipmap(game, x, y, &tilec);
 			draw_rect_mipmap(game, (t_vec){tilex, tiley}, \
 							(t_vec){MINIMAP_SIZE / 7, MINIMAP_SIZE / 7}, tilec);
 			x++;
