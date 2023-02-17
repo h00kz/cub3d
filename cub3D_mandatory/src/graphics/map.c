@@ -6,7 +6,7 @@
 /*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:32:16 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/17 10:55:26 by pdubacqu         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:54:49 by pdubacqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_map	*init_map(void)
 
 	map = ft_calloc(1, sizeof(t_map));
 	map->wall_texture = malloc(sizeof(t_wall) * 1);
-	map->wall_texture->S = ft_calloc(sizeof(t_texture), 1);
+	game->map->wall_texture->s = ft_calloc(sizeof(t_texture), 1);
 	map->wall_texture->N = ft_calloc(sizeof(t_texture), 1);
 	map->wall_texture->E = ft_calloc(sizeof(t_texture), 1);
 	map->wall_texture->W = ft_calloc(sizeof(t_texture), 1);

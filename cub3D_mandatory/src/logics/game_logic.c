@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_logic.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:39:54 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/15 14:23:15 by jlarrieu         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:28:11 by pdubacqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,4 @@ void	render(t_game *game)
 	render_3d(game);
 	game->current_time = mlx_get_time();
 	frame++;
-	if (game->current_time - game->last_time >= 1.0)
-	{
-		printf("FPS:%d\n", frame);
-		frame = 0;
-		game->last_time = game->current_time;
-	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pixel_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:34:31 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/15 11:35:37 by jlarrieu         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:14:55 by pdubacqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,24 @@ void	put_pixel(mlx_image_t *image, uint32_t x, uint32_t y, uint32_t color)
 uint32_t	get_pixel(mlx_texture_t *texture, uint32_t x, uint32_t y)
 {
 	return (((uint32_t *)texture->pixels)[(y * texture->width + x)]);
+}
+
+void	check_door(t_game *game, int player_y_tile, int player_x_tile)
+{
+	if (game->map->map[player_y_tile + 1][player_x_tile] == '2')
+		game->map->map[player_y_tile + 1][player_x_tile] = '3';
+	else if (game->map->map[player_y_tile - 1][player_x_tile] == '2')
+		game->map->map[player_y_tile - 1][player_x_tile] = '3';
+	else if (game->map->map[player_y_tile][player_x_tile + 1] == '2')
+		game->map->map[player_y_tile][player_x_tile + 1] = '3';
+	else if (game->map->map[player_y_tile][player_x_tile - 1] == '2')
+		game->map->map[player_y_tile][player_x_tile - 1] = '3';
+	else if (game->map->map[player_y_tile + 1][player_x_tile] == '3')
+		game->map->map[player_y_tile + 1][player_x_tile] = '2';
+	else if (game->map->map[player_y_tile - 1][player_x_tile] == '3')
+		game->map->map[player_y_tile - 1][player_x_tile] = '2';
+	else if (game->map->map[player_y_tile][player_x_tile + 1] == '3')
+		game->map->map[player_y_tile][player_x_tile + 1] = '2';
+	else if (game->map->map[player_y_tile][player_x_tile - 1] == '3')
+		game->map->map[player_y_tile][player_x_tile - 1] = '2';
 }

@@ -6,7 +6,7 @@
 /*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:39:54 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/17 11:47:47 by pdubacqu         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:15:37 by pdubacqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ void	game_routine(void *param)
 	render(game);
 }
 
-void mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void* param)
+void	mouse_hook(mouse_key_t button, action_t action, \
+	modifier_key_t mods, void *param)
 {
-	t_game *game;
-	
+	t_game	*game;
+
 	game = param;
 	(void)mods;
 	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
@@ -70,59 +71,26 @@ void	render(t_game *game)
 			rgba2int(game->map->floor->r, game->map->floor->g, \
 			game->map->floor->b, 255));
 	render_3d(game);
-	draw_rect(game, (t_vec){0, 0}, (t_vec){MINIMAP_SIZE + 20, MINIMAP_SIZE + 20}, rgba2int(40,40,40,255));
+	draw_rect(game, (t_vec){0, 0}, (t_vec){MINIMAP_SIZE + 20, \
+		MINIMAP_SIZE + 20}, rgba2int(40, 40, 40, 255));
 	render_minimap(game);
 	render_minimap_player(game);
 	game->current_time = mlx_get_time();
-	if (game->player->fire)
-	{
-		if (!(frame % 2))
-		{
-			mlx_draw_texture(game->weapon, game->player->weapon[i_frame].tex_img, 0, 0);
-			i_frame++;
-		}
-		if (i_frame == 4)
-		{
-			i_frame = 0;
-			mlx_draw_texture(game->weapon, game->player->weapon[i_frame].tex_img, 0, 0);
-			game->player->fire = false;
-		}
-	}
+	weapon_fire(game, frame, &i_frame);
 	frame++;
-	if (game->current_time - game->last_time >= 1.0)
-	{
-		printf("FPS:%d\n", frame);
-		frame = 0;
-		game->last_time = game->current_time;
-	}
 }
 
-void	key_hook(mlx_key_data_t keydata, void* param)
+void	key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_game	*game;
 	int		player_x_tile;
 	int		player_y_tile;
-	
+
 	game = param;
 	player_x_tile = (int)(game->player->position->x) / MAP_TILE;
 	player_y_tile = (int)(game->player->position->y) / MAP_TILE;
 	if (keydata.key == MLX_KEY_F && keydata.action == MLX_RELEASE)
 	{
-		if (game->map->map[player_y_tile + 1][player_x_tile] == '2')
-			game->map->map[player_y_tile + 1][player_x_tile] = '3';
-		else if (game->map->map[player_y_tile - 1][player_x_tile] == '2')
-			game->map->map[player_y_tile - 1][player_x_tile] = '3';
-		else if (game->map->map[player_y_tile][player_x_tile + 1] == '2')
-			game->map->map[player_y_tile][player_x_tile + 1] = '3';
-		else if (game->map->map[player_y_tile][player_x_tile - 1] == '2')
-			game->map->map[player_y_tile][player_x_tile - 1] = '3';
-		else if (game->map->map[player_y_tile + 1][player_x_tile] == '3')
-			game->map->map[player_y_tile + 1][player_x_tile] = '2';
-		else if (game->map->map[player_y_tile - 1][player_x_tile] == '3')
-			game->map->map[player_y_tile - 1][player_x_tile] = '2';
-		else if (game->map->map[player_y_tile][player_x_tile + 1] == '3')
-			game->map->map[player_y_tile][player_x_tile + 1] = '2';
-		else if (game->map->map[player_y_tile][player_x_tile - 1] == '3')
-			game->map->map[player_y_tile][player_x_tile - 1] = '2';
+		check_door(game, player_y_tile, player_x_tile);
 	}
 }

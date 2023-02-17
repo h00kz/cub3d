@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:32:01 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/15 15:22:54 by jlarrieu         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:56:16 by pdubacqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ mlx_texture_t	*get_wall_texture(t_game *game, t_ray *ray)
 	if (!ray->was_hit_vertical)
 	{
 		if (ray->ray_face_up)
-			return (game->map->wall_texture->N->tex_img);
+			return (game->map->wall_texture->n->tex_img);
 		else
-			return (game->map->wall_texture->S->tex_img);
+			return (game->map->wall_texture->s->tex_img);
 	}
 	else
 	{
 		if (ray->ray_face_right)
-			return (game->map->wall_texture->E->tex_img);
+			return (game->map->wall_texture->e->tex_img);
 		else
-			return (game->map->wall_texture->W->tex_img);
+			return (game->map->wall_texture->w->tex_img);
 	}
 }
 

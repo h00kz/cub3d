@@ -22,21 +22,21 @@ static void	ray_interc_init(t_interc *v, t_interc *h)
 
 static void	load_n_check_texture(t_game *game)
 {
-	game->map->wall_texture->N->tex_img = \
-				mlx_load_png(game->map->wall_texture->N->path);
-	if (!game->map->wall_texture->N->tex_img)
+	game->map->wall_texture->n->tex_img = \
+				mlx_load_png(game->map->wall_texture->n->path);
+	if (!game->map->wall_texture->n->tex_img)
 		error_png("Error\nError on load North png texture.", game);
-	game->map->wall_texture->S->tex_img = \
-				mlx_load_png(game->map->wall_texture->S->path);
-	if (!game->map->wall_texture->S->tex_img)
+	game->map->wall_texture->s->tex_img = \
+				mlx_load_png(game->game->map->wall_texture->s->path);
+	if (!game->map->wall_texture->s->tex_img)
 		error_png("Error\nError on load South png texture.", game);
-	game->map->wall_texture->E->tex_img = \
-				mlx_load_png(game->map->wall_texture->E->path);
-	if (!game->map->wall_texture->E->tex_img)
+	game->map->wall_texture->e->tex_img = \
+				mlx_load_png(game->map->wall_texture->e->path);
+	if (!game->map->wall_texture->e->tex_img)
 		error_png("Error\nError on load East png texture.", game);
-	game->map->wall_texture->W->tex_img = \
-				mlx_load_png(game->map->wall_texture->W->path);
-	if (!game->map->wall_texture->W->tex_img)
+	game->map->wall_texture->w->tex_img = \
+				mlx_load_png(game->map->wall_texture->w->path);
+	if (!game->map->wall_texture->w->tex_img)
 		error_png("Error\nError on load West png texture.", game);
 }
 

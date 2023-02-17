@@ -7,7 +7,7 @@ void	ft_check_n(char *line, t_game *game)
 	i = 0;
 	if (line[i + 1] == 'O')
 	{
-		if (game->map->wall_texture->N->path)
+		if (game->map->wall_texture->n->path)
 		{
 			free(line);
 			ft_error(2, game);
@@ -20,7 +20,7 @@ void	ft_check_n(char *line, t_game *game)
 			free(line);
 			ft_error(3, game);
 		}
-		game->map->wall_texture->N->path = ft_strtrim(&line[i], " \n");
+		game->map->wall_texture->n->path = ft_strtrim(&line[i], " \n");
 	}	
 	else
 	{
@@ -36,7 +36,7 @@ void	ft_check_s(char *line, t_game *game)
 	i = 0;
 	if (line[i + 1] == 'O')
 	{
-		if (game->map->wall_texture->S->path)
+		if (game->game->map->wall_texture->s->path)
 		{
 			free(line);
 			ft_error(2, game);
@@ -49,7 +49,7 @@ void	ft_check_s(char *line, t_game *game)
 			free(line);
 			ft_error(3, game);
 		}
-		game->map->wall_texture->S->path = ft_strtrim(&line[i], " \n");
+		game->game->map->wall_texture->s->path = ft_strtrim(&line[i], " \n");
 	}	
 	else
 	{
@@ -65,7 +65,7 @@ void	ft_check_w(char *line, t_game *game)
 	i = 0;
 	if (line[i + 1] == 'E')
 	{
-		if (game->map->wall_texture->W->path)
+		if (game->map->wall_texture->w->path)
 		{
 			free(line);
 			ft_error(2, game);
@@ -78,7 +78,7 @@ void	ft_check_w(char *line, t_game *game)
 			free(line);
 			ft_error(3, game);
 		}
-		game->map->wall_texture->W->path = ft_strtrim(&line[i], " \n");
+		game->map->wall_texture->w->path = ft_strtrim(&line[i], " \n");
 	}	
 	else
 	{
@@ -94,7 +94,7 @@ void	ft_check_e(char *line, t_game *game)
 	i = 0;
 	if (line[i + 1] == 'A')
 	{
-		if (game->map->wall_texture->E->path)
+		if (game->map->wall_texture->e->path)
 		{
 			free(line);
 			ft_error(2, game);
@@ -107,7 +107,7 @@ void	ft_check_e(char *line, t_game *game)
 			free(line);
 			ft_error(3, game);
 		}
-		game->map->wall_texture->E->path = ft_strtrim(&line[i], " \n");
+		game->map->wall_texture->e->path = ft_strtrim(&line[i], " \n");
 	}	
 	else
 	{
@@ -118,13 +118,13 @@ void	ft_check_e(char *line, t_game *game)
 
 void	ft_check_empty_args(t_game *game)
 {
-	if (!(game->map->wall_texture->E->path))
+	if (!(game->map->wall_texture->e->path))
 		ft_error(6, game);
-	if (!(game->map->wall_texture->N->path))
+	if (!(game->map->wall_texture->n->path))
 		ft_error(6, game);
-	if (!(game->map->wall_texture->S->path))
+	if (!(game->game->map->wall_texture->s->path))
 		ft_error(6, game);
-	if (!(game->map->wall_texture->W->path))
+	if (!(game->map->wall_texture->w->path))
 		ft_error(6, game);
 	if (game->map->cell->r == -1)
 		ft_error(6, game);

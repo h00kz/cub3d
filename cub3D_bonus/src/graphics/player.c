@@ -75,3 +75,23 @@ void	look_mouse(t_game *game)
 	game->player->rot_angle += ((x - xoffset) * 0.001);
 	mlx_set_mouse_pos(game->mlx, xoffset, yoffset);
 }
+
+void	weapon_fire(t_game *game, int frame, int *i_frame)
+{
+	if (game->player->fire)
+	{
+		if (!(frame % 2))
+		{
+			mlx_draw_texture(game->weapon, \
+				game->player->weapon[*i_frame].tex_img, 0, 0);
+			(*i_frame)++;
+		}
+		if (*i_frame == 4)
+		{
+			*i_frame = 0;
+			mlx_draw_texture(game->weapon, \
+				game->player->weapon[*i_frame].tex_img, 0, 0);
+			game->player->fire = false;
+		}
+	}
+}

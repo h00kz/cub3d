@@ -1,5 +1,17 @@
-#ifndef CUB3D_HPP
-# define CUB3D_HPP
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/17 12:32:12 by pdubacqu          #+#    #+#             */
+/*   Updated: 2023/02/17 12:47:53 by pdubacqu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -17,27 +29,27 @@
 # define PI 3.14159265
 # define TWO_PI 6.28318530
 # define WIN_WIDTH 1600
-# define WIN_HALF_W (WIN_WIDTH / 2)
+# define WIN_HALF_W 800
 # define WIN_HEIGHT 900
-# define WIN_HALF_H (WIN_HEIGHT / 2)
+# define WIN_HALF_H 450
 # define MAP_TILE 64
-# define FOV_ANGLE (60 * (PI / 180.0))
-# define HALF_FOV (FOV_ANGLE / 2)
-# define NB_RAYS WIN_WIDTH
-# define DELTA_ANGLE (FOV_ANGLE / NB_RAYS)
-# define SCREEN_DIST (WIN_HALF_W / tan(HALF_FOV))
+# define FOV_ANGLE 1.04719755
+# define HALF_FOV 0.523598775
+# define NB_RAYS 1600
+# define DELTA_ANGLE 0.000654498
+# define SCREEN_DIST 1385.64064797
 
 // ----------------------- STRUCTS ------------------------- //
-typedef struct s_game t_game;
-typedef struct s_ray t_ray;
-typedef struct s_interc t_interc;
-typedef struct s_map t_map;
-typedef struct s_player t_player;
-typedef struct s_vec t_vec;
-typedef struct s_rect t_rect;
-typedef struct s_texture t_texture;
-typedef struct s_wall t_wall;
-typedef struct s_color t_color;
+typedef struct s_game		t_game;
+typedef struct s_ray		t_ray;
+typedef struct s_interc		t_interc;
+typedef struct s_map		t_map;
+typedef struct s_player		t_player;
+typedef struct s_vec		t_vec;
+typedef struct s_rect		t_rect;
+typedef struct s_texture	t_texture;
+typedef struct s_wall		t_wall;
+typedef struct s_color		t_color;
 
 typedef struct s_texture
 {
@@ -47,10 +59,10 @@ typedef struct s_texture
 
 typedef struct s_wall
 {
-	t_texture	*N;
-	t_texture	*S;
-	t_texture	*E;
-	t_texture	*W;
+	t_texture	*n;
+	t_texture	*s;
+	t_texture	*e;
+	t_texture	*w;
 }	t_wall;
 
 typedef struct s_color
@@ -71,7 +83,7 @@ typedef struct s_rect
 {
 	t_vec	position;
 	t_vec	size;
-	t_color color;
+	t_color	color;
 }	t_rect;
 
 typedef struct s_ray
@@ -144,24 +156,26 @@ typedef struct s_game
 
 // -------------------------- INITS ------------------------- //
 t_game			*init_game(int ac, char **av);
-t_map			*init_map();
+t_map			*init_map(void);
 t_player		*init_player(t_game *game);
 t_ray			*init_rays(int nb_rays);
 float			set_player_dir(char dir);
 char			get_player_pos(char **map, t_vec *pos);
-
 
 // ------------------------- RENDERS ------------------------ //
 void			render_minimap_player(t_game *game);
 void			render_3d(t_game *game);
 void			draw_walls(t_game *game, int pos_xy[2], t_vec wall_pixels);
 mlx_texture_t	*get_wall_texture(t_game *game, t_ray *ray);
-int				get_wall_texture_y(t_vec wall_pixels, int pos_y, mlx_texture_t *texture);
+int				get_wall_texture_y(t_vec wall_pixels, int pos_y, \
+					mlx_texture_t *texture);
 int				get_wall_texture_x(t_ray *ray, mlx_texture_t *texture);
 t_vec			get_wall_position_pixels(float h_proj_wall);
-void			draw_vertical_strip(t_game *game, int pos_xy[2], t_vec wall_pixels);
-uint32_t		get_pixel(mlx_texture_t* texture, uint32_t x, uint32_t y);
-void			put_pixel(mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color);
+void			draw_vertical_strip(t_game *game, int pos_xy[2], \
+					t_vec wall_pixels);
+uint32_t		get_pixel(mlx_texture_t *texture, uint32_t x, uint32_t y);
+void			put_pixel(mlx_image_t *image, uint32_t x, uint32_t y, \
+					uint32_t color);
 void			draw_line(t_game *game, t_vec *start, t_vec *end, int color);
 void			draw_rect(t_game *game, t_vec pos, t_vec size, int color);
 int32_t			average_color(int start_color, int end_color, float f);
@@ -185,8 +199,10 @@ void			horizontal_interc(t_game *game, float ray_angle);
 void			vertical_wall_hits(t_game *game);
 void			vertical_interc(t_game *game, float ray_angle);
 void			reset_ray(t_interc *hv);
-void			put_on_rays_struct(t_interc hv, t_game *game, int was_hit_v, int ray_id);
-void			take_smallest_r_infos(t_game *game, float ray_angle, int ray_id);
+void			put_on_rays_struct(t_interc hv, t_game *game, \
+					int was_hit_v, int ray_id);
+void			take_smallest_r_infos(t_game *game, \
+					float ray_angle, int ray_id);
 
 // ------------------------- PARSING ------------------------ //
 int				get_height(char **map);

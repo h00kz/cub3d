@@ -56,3 +56,10 @@ void	ft_error(int msg, t_game *game)
 		ft_error_next(msg, game);
 	exit(1);
 }
+
+void	ft_error_file(t_game *game)
+{
+	printf("Error\nInvalid file\n");
+	ft_free(game);
+	exit(1);
+}

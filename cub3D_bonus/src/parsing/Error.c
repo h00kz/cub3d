@@ -10,11 +10,11 @@ void	ft_free(t_game *game)
 	free(game->ray_inter_h.next_touch);
 	free(game->ray_inter_h.to_check);
 	free(game->ray_inter_h.step);
-	free(game->map->wall_texture->S);
-	free(game->map->wall_texture->N);
-	free(game->map->wall_texture->E);
-	free(game->map->wall_texture->W);
-	free(game->map->wall_texture->DOOR);
+	free(game->map->wall_texture->s);
+	free(game->map->wall_texture->n);
+	free(game->map->wall_texture->e);
+	free(game->map->wall_texture->w);
+	free(game->map->wall_texture->door);
 	free(game->map->wall_texture);
 	free(game->map->map);
 	free(game->map->floor);
@@ -25,23 +25,23 @@ void	ft_free(t_game *game)
 
 void	ft_free2(t_game *game)
 {
-	mlx_delete_texture(game->map->wall_texture->DOOR->tex_img);
-	if (game->map->wall_texture->N->path)
-		free(game->map->wall_texture->N->path);
-	if (game->map->wall_texture->S->path)
-		free(game->map->wall_texture->S->path);
-	if (game->map->wall_texture->E->path)
-		free(game->map->wall_texture->E->path);
-	if (game->map->wall_texture->W->path)
-		free(game->map->wall_texture->W->path);
-	if (game->map->wall_texture->N->tex_img)
-		mlx_delete_texture(game->map->wall_texture->N->tex_img);
-	if (game->map->wall_texture->S->tex_img)
-		mlx_delete_texture(game->map->wall_texture->S->tex_img);
-	if (game->map->wall_texture->E->tex_img)
-		mlx_delete_texture(game->map->wall_texture->E->tex_img);
-	if (game->map->wall_texture->W->tex_img)
-		mlx_delete_texture(game->map->wall_texture->W->tex_img);
+	mlx_delete_texture(game->map->wall_texture->door->tex_img);
+	if (game->map->wall_texture->n->path)
+		free(game->map->wall_texture->n->path);
+	if (game->map->wall_texture->s->path)
+		free(game->map->wall_texture->s->path);
+	if (game->map->wall_texture->e->path)
+		free(game->map->wall_texture->e->path);
+	if (game->map->wall_texture->w->path)
+		free(game->map->wall_texture->w->path);
+	if (game->map->wall_texture->n->tex_img)
+		mlx_delete_texture(game->map->wall_texture->n->tex_img);
+	if (game->map->wall_texture->s->tex_img)
+		mlx_delete_texture(game->map->wall_texture->s->tex_img);
+	if (game->map->wall_texture->e->tex_img)
+		mlx_delete_texture(game->map->wall_texture->e->tex_img);
+	if (game->map->wall_texture->w->tex_img)
+		mlx_delete_texture(game->map->wall_texture->w->tex_img);
 	ft_free(game);
 }
 
