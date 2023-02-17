@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_init.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/17 15:05:58 by pdubacqu          #+#    #+#             */
+/*   Updated: 2023/02/17 15:05:58 by pdubacqu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3D.h"
 
 static void	error_png(char *msg, t_game *game)
@@ -22,30 +34,38 @@ static void	ray_interc_init(t_interc *v, t_interc *h)
 
 static void	load_n_check_texture(t_game *game)
 {
-	game->map->wall_texture->N->tex_img = \
-				mlx_load_png(game->map->wall_texture->N->path);
-	if (!game->map->wall_texture->N->tex_img)
+	game->map->wall_texture->n->tex_img = \
+				mlx_load_png(game->map->wall_texture->n->path);
+	if (!game->map->wall_texture->n->tex_img)
 		error_png("Error\nError on load North png texture.", game);
-	game->map->wall_texture->S->tex_img = \
-				mlx_load_png(game->map->wall_texture->S->path);
-	if (!game->map->wall_texture->S->tex_img)
+	game->map->wall_texture->s->tex_img = \
+				mlx_load_png(game->map->wall_texture->s->path);
+	if (!game->map->wall_texture->s->tex_img)
 		error_png("Error\nError on load South png texture.", game);
-	game->map->wall_texture->E->tex_img = \
-				mlx_load_png(game->map->wall_texture->E->path);
-	if (!game->map->wall_texture->E->tex_img)
+	game->map->wall_texture->e->tex_img = \
+				mlx_load_png(game->map->wall_texture->e->path);
+	if (!game->map->wall_texture->e->tex_img)
 		error_png("Error\nError on load East png texture.", game);
-	game->map->wall_texture->W->tex_img = \
-				mlx_load_png(game->map->wall_texture->W->path);
-	if (!game->map->wall_texture->W->tex_img)
+	game->map->wall_texture->w->tex_img = \
+				mlx_load_png(game->map->wall_texture->w->path);
+	if (!game->map->wall_texture->w->tex_img)
 		error_png("Error\nError on load West png texture.", game);
 }
 
 static t_game	*game_init_next(t_game *game)
 {
 	game->player->weapon[0].tex_img = mlx_load_png("weapon00.png");
+	if (!game->player->weapon[0].tex_img)
+		error_png2("Error\nError on load weapon png texture.", game);
 	game->player->weapon[1].tex_img = mlx_load_png("weapon01.png");
+	if (!game->player->weapon[1].tex_img)
+		error_png2("Error\nError on load weapon png texture.", game);
 	game->player->weapon[2].tex_img = mlx_load_png("weapon02.png");
+	if (!game->player->weapon[2].tex_img)
+		error_png2("Error\nError on load weapon png texture.", game);
 	game->player->weapon[3].tex_img = mlx_load_png("weapon03.png");
+	if (!game->player->weapon[3].tex_img)
+		error_png2("Error\nError on load weapon png texture.", game);
 	game->last_time = mlx_get_time();
 	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	return (game);
@@ -59,7 +79,9 @@ t_game	*init_game(int ac, char **av)
 	game->map = init_map();
 	game->map->map = parse(ac, av, game);
 	game->map->map = ft_verif_map(game->map->map);
-	game->map->wall_texture->DOOR->tex_img = mlx_load_png("DOOR.png");
+	game->map->wall_texture->door->tex_img = mlx_load_png("DOOR.png");
+	if (!game->map->wall_texture->door->tex_img)
+		error_png("Error\nError on load DOOR.png texture.", game);
 	if (!game->map->map)
 		ft_error(7, game);
 	load_n_check_texture(game);

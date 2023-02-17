@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/17 15:04:19 by pdubacqu          #+#    #+#             */
+/*   Updated: 2023/02/17 15:04:19 by pdubacqu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3D.h"
 
 t_player	*init_player(t_game *game)
@@ -74,4 +86,24 @@ void	look_mouse(t_game *game)
 	normalize_angle(&(game->player->rot_angle));
 	game->player->rot_angle += ((x - xoffset) * 0.001);
 	mlx_set_mouse_pos(game->mlx, xoffset, yoffset);
+}
+
+void	weapon_fire(t_game *game, int frame, int *i_frame)
+{
+	if (game->player->fire)
+	{
+		if (!(frame % 2))
+		{
+			mlx_draw_texture(game->weapon, \
+				game->player->weapon[*i_frame].tex_img, 0, 0);
+			(*i_frame)++;
+		}
+		if (*i_frame == 4)
+		{
+			*i_frame = 0;
+			mlx_draw_texture(game->weapon, \
+				game->player->weapon[*i_frame].tex_img, 0, 0);
+			game->player->fire = false;
+		}
+	}
 }

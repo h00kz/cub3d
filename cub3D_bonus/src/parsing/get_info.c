@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_info.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdubacqu <pdubacqu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/17 15:03:49 by pdubacqu          #+#    #+#             */
+/*   Updated: 2023/02/17 15:03:49 by pdubacqu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3D.h"
 
 static void	check_rgb(t_game *game, char *line, t_color *color, int *i)
@@ -57,11 +69,7 @@ void	ft_get_info_map(char *file, t_game *game)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-	{
-		printf("Error\nInvalid file\n");
-		ft_free(game);
-		exit(0);
-	}
+		ft_error_file(game);
 	line = get_next_line(fd);
 	if (!line)
 		ft_error(0, game);
