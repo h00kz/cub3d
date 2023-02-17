@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_logic.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlarrieu <jlarrieu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: h00kz <h00kz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:39:54 by jlarrieu          #+#    #+#             */
-/*   Updated: 2023/02/16 18:23:41 by jlarrieu         ###   ########.fr       */
+/*   Updated: 2023/02/17 09:19:57 by h00kz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,26 +99,30 @@ void	render(t_game *game)
 
 void	key_hook(mlx_key_data_t keydata, void* param)
 {
-	t_game *game;
+	t_game	*game;
+	int		player_x_tile;
+	int		player_y_tile;
 	
 	game = param;
+	player_x_tile = (int)(game->player->position->x) / MAP_TILE;
+	player_y_tile = (int)(game->player->position->y) / MAP_TILE;
 	if (keydata.key == MLX_KEY_F && keydata.action == MLX_RELEASE)
 	{
-		if (game->map->map[((int)(game->player->position->y) / MAP_TILE) + 1][((int)(game->player->position->x) / MAP_TILE)] == '2')
-			game->map->map[((int)(game->player->position->y) / MAP_TILE) + 1][((int)(game->player->position->x) / MAP_TILE)] = '3';
-		else if (game->map->map[((int)(game->player->position->y) / MAP_TILE) - 1][((int)(game->player->position->x) / MAP_TILE)] == '2')
-			game->map->map[((int)(game->player->position->y) / MAP_TILE) - 1][((int)(game->player->position->x) / MAP_TILE)] = '3';
-		else if (game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) + 1] == '2')
-			game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) + 1] = '3';
-		else if (game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) - 1] == '2')
-			game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) - 1] = '3';
-		else if (game->map->map[((int)(game->player->position->y) / MAP_TILE) + 1][((int)(game->player->position->x) / MAP_TILE)] == '3')
-			game->map->map[((int)(game->player->position->y) / MAP_TILE) + 1][((int)(game->player->position->x) / MAP_TILE)] = '2';
-		else if (game->map->map[((int)(game->player->position->y) / MAP_TILE) - 1][((int)(game->player->position->x) / MAP_TILE)] == '3')
-			game->map->map[((int)(game->player->position->y) / MAP_TILE) - 1][((int)(game->player->position->x) / MAP_TILE)] = '2';
-		else if (game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) + 1] == '3')
-			game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) + 1] = '2';
-		else if (game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) - 1] == '3')
-			game->map->map[((int)(game->player->position->y) / MAP_TILE)][((int)(game->player->position->x) / MAP_TILE) - 1] = '2';
+		if (game->map->map[player_y_tile + 1][player_x_tile] == '2')
+			game->map->map[player_y_tile + 1][player_x_tile] = '3';
+		else if (game->map->map[player_y_tile - 1][player_x_tile] == '2')
+			game->map->map[player_y_tile - 1][player_x_tile] = '3';
+		else if (game->map->map[player_y_tile][player_x_tile + 1] == '2')
+			game->map->map[player_y_tile][player_x_tile + 1] = '3';
+		else if (game->map->map[player_y_tile][player_x_tile - 1] == '2')
+			game->map->map[player_y_tile][player_x_tile - 1] = '3';
+		else if (game->map->map[player_y_tile + 1][player_x_tile] == '3')
+			game->map->map[player_y_tile + 1][player_x_tile] = '2';
+		else if (game->map->map[player_y_tile - 1][player_x_tile] == '3')
+			game->map->map[player_y_tile - 1][player_x_tile] = '2';
+		else if (game->map->map[player_y_tile][player_x_tile + 1] == '3')
+			game->map->map[player_y_tile][player_x_tile + 1] = '2';
+		else if (game->map->map[player_y_tile][player_x_tile - 1] == '3')
+			game->map->map[player_y_tile][player_x_tile - 1] = '2';
 	}
 }
